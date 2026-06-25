@@ -14,7 +14,10 @@ export function LatestUpdates() {
 
         <div className="grid gap-5 lg:grid-cols-3">
           {updates.map((update) => (
-            <UpdateCard key={`${update.project}-${update.title}`} update={update} />
+            <UpdateCard
+              key={`${update.date}-${update.area}-${update.title}`}
+              update={update}
+            />
           ))}
         </div>
       </div>

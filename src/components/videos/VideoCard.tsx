@@ -1,85 +1,139 @@
 import { GlowButton, MetallicCard } from "@/components/ui";
 
-type VideoCardProps = {
-  title: string;
+type VideoCardData = {
+  slug?: string;
+  title?: string;
   description?: string;
+  youtubeId?: string;
   videoId?: string;
-  embedUrl?: string;
-  watchUrl?: string;
-  url?: string;
   youtubeUrl?: string;
-  className?: string;
+  url?: string;
+  status?: string;
+  programName?: string;
+  programTitle?: string;
 };
 
-function resolveVideoId(value?: string) {
-  if (!value) return "";
+type VideoCardProps = VideoCardData & {
+  video?: VideoCardData;
+  featured?: boolean;
+};
 
-  if (!value.includes("http") && !value.includes("/")) {
-    return value;
+function extractYoutubeId(url?: string) {
+  if (!url) {
+    return "";
   }
 
-  try {
-    const parsed = new URL(value);
-
-    if (parsed.hostname.includes("youtu.be")) {
-      return parsed.pathname.replace("/", "");
-    }
-
-    if (parsed.hostname.includes("youtube.com")) {
-      return parsed.searchParams.get("v") ?? parsed.pathname.split("/").pop() ?? "";
-    }
-  } catch {
-    return value;
+  const watchMatch = url.match(/[?&]v=([^&]+)/);
+  if (watchMatch?.[1]) {
+    return watchMatch[1];
   }
 
-  return value;
+  const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
+  if (shortMatch?.[1]) {
+    return shortMatch[1];
+  }
+
+  return "";
+}
+
+function isExternalUrl(url?: string) {
+  return Boolean(url && /^https?:\/\//i.test(url));
 }
 
 export function VideoCard({
+  video,
   title,
   description,
+  youtubeId,
   videoId,
-  embedUrl,
-  watchUrl,
-  url,
   youtubeUrl,
-  className = "",
+  url,
+  status,
+  programName,
+  programTitle,
+  featured = false,
 }: VideoCardProps) {
-  const sourceUrl = watchUrl ?? youtubeUrl ?? url;
-  const resolvedVideoId = videoId ?? resolveVideoId(embedUrl ?? sourceUrl);
-  const finalEmbedUrl = embedUrl ?? `https://www.youtube.com/embed/${resolvedVideoId}`;
-  const finalWatchUrl = sourceUrl ?? `https://youtu.be/${resolvedVideoId}`;
+  const videoTitle = title ?? video?.title ?? "Vídeo";
+  const videoDescription = description ?? video?.description ?? "";
+
+  const currentYoutubeUrl =
+    youtubeUrl ?? url ?? video?.youtubeUrl ?? video?.url ?? "#";
+
+  const currentYoutubeId =
+    youtubeId ??
+    videoId ??
+    video?.youtubeId ??
+    video?.videoId ??
+    extractYoutubeId(currentYoutubeUrl);
+
+  const currentStatus = status ?? video?.status ?? "Previsto";
+
+  const currentProgramName =
+    programName ?? programTitle ?? video?.programName ?? video?.programTitle ?? "";
+
+  const isPublished =
+    currentStatus.toLowerCase() === "publicado" &&
+    currentYoutubeUrl !== "#" &&
+    currentYoutubeId.length > 0;
 
   return (
     <MetallicCard
-      className={[
-        "min-w-[320px] max-w-[420px] flex-1 border-electric/70 p-4 shadow-[0_0_35px_rgba(37,150,255,0.28)]",
-        className,
-      ].join(" ")}
+      variant={featured ? "featured" : "default"}
+      className="flex h-full flex-col overflow-hidden"
     >
-      <div className="aspect-video overflow-hidden rounded-2xl border border-borderSoft bg-background">
-        <iframe
-          src={finalEmbedUrl}
-          title={title}
-          className="h-full w-full"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        />
+      <div className="overflow-hidden rounded-2xl border border-borderSoft bg-background/70">
+        {isPublished ? (
+          <iframe
+            className="aspect-video w-full"
+            src={`https://www.youtube.com/embed/${currentYoutubeId}`}
+            title={videoTitle}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <div className="flex aspect-video items-center justify-center bg-white/[0.03] px-6 text-center">
+            <p className="text-sm font-semibold text-muted">
+              Vídeo em preparação
+            </p>
+          </div>
+        )}
       </div>
 
-      <h3 className="mt-5 text-xl font-black leading-tight text-text">{title}</h3>
+      <div className="flex flex-1 flex-col pt-5">
+        <div className="mb-4 flex flex-wrap gap-2">
+          <span className="rounded-full border border-electric/45 bg-electric/10 px-3 py-1 text-xs font-bold text-electricLight">
+            {currentStatus}
+          </span>
 
-      {description ? (
-        <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
-      ) : null}
+          {currentProgramName ? (
+            <span className="rounded-full border border-borderSoft bg-white/5 px-3 py-1 text-xs font-bold text-muted">
+              {currentProgramName}
+            </span>
+          ) : null}
+        </div>
 
-      <div className="mt-5">
-        <GlowButton href={finalWatchUrl} external variant="secondary">
-          Abrir no YouTube
-        </GlowButton>
+        <h3 className="text-xl font-black leading-tight text-text">
+          {videoTitle}
+        </h3>
+
+        {videoDescription ? (
+          <p className="mt-3 text-sm leading-7 text-muted">
+            {videoDescription}
+          </p>
+        ) : null}
+
+        <div className="mt-auto pt-6">
+          <GlowButton
+            href={currentYoutubeUrl}
+            external={isExternalUrl(currentYoutubeUrl)}
+            variant={isPublished ? "primary" : "secondary"}
+          >
+            {isPublished ? "Assistir no YouTube" : "Vídeo em preparação"}
+          </GlowButton>
+        </div>
       </div>
     </MetallicCard>
   );
 }
+
+export default VideoCard;

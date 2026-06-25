@@ -1,5 +1,5 @@
 import { GptCard } from "@/components/gpts";
-import { SecurityNotice } from "@/components/notices";
+
 import { MetallicCard, PageHeader } from "@/components/ui";
 import { createPageMetadata } from "@/lib/seo";
 import { customGpts } from "@/data";
