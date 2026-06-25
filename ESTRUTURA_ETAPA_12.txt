@@ -1,0 +1,40 @@
+ETAPA 12 — SEO, Metadata, Sitemap, Robots e Open Graph
+
+Arquivos criados ou alterados:
+
+src/lib/seo.ts
+src/app/layout.tsx
+src/app/page.tsx
+src/app/programas/page.tsx
+src/app/programas/dama-gerador-fcc/page.tsx
+src/app/downloads/page.tsx
+src/app/blog/page.tsx
+src/app/blog/[slug]/page.tsx
+src/app/referencias/page.tsx
+src/app/apoie/page.tsx
+src/app/sobre/page.tsx
+src/app/contato/page.tsx
+src/app/termos-de-uso/page.tsx
+src/app/politica-de-privacidade/page.tsx
+src/app/politica-de-comentarios/page.tsx
+src/app/changelog/dama-gerador-fcc/v1.0.0/page.tsx
+src/app/sitemap.ts
+src/app/robots.ts
+public/images/og/dama-universe-og.svg
+README.md
+
+Recursos implementados:
+- Metadata base global no layout.
+- Metadata específica nas páginas principais.
+- Open Graph padrão com siteName, locale, type, title, description e imagem.
+- Twitter Card do tipo summary_large_image.
+- Sitemap via rota /sitemap.xml.
+- Robots via rota /robots.txt.
+- Imagem placeholder segura para compartilhamento social.
+
+Regras mantidas:
+- Sem dados sensíveis.
+- Sem links privados.
+- Sem tokens, senhas ou arquivos .env.
+- Sem dados reais de ocorrências.
+- Sem código-fonte dos programas privados.

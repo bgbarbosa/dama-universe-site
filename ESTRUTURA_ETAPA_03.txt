@@ -1,0 +1,27 @@
+ETAPA 03 — Header, Footer e Layout Base
+
+Implementado:
+- src/components/layout/Header.tsx
+- src/components/layout/Footer.tsx
+- src/components/layout/index.ts
+- app/layout.tsx atualizado para aplicar Header e Footer globalmente
+- app/page.tsx atualizado para demonstrar a Etapa 03
+- GlowButton ajustado para aceitar onClick em links internos e externos
+
+Características:
+- Header com logo provisório em letra D
+- Nome Dama Universe
+- Menu principal desktop
+- Menu mobile tipo hamburguer
+- Botão Ver Programas
+- Footer institucional com links rápidos
+- Links sociais previstos com # temporário
+- Aviso de responsabilidade no rodapé
+- Direitos reservados
+
+Regras preservadas:
+- Sem dados sensíveis
+- Sem senhas, tokens ou chaves
+- Sem arquivo .env
+- Sem dados reais de ocorrências
+- Sem código-fonte privado dos programas

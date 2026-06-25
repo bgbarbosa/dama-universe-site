@@ -1,0 +1,25 @@
+ETAPA 02 — Design System e Identidade Visual
+
+Implementado:
+- Paleta oficial completa no Tailwind.
+- Utilitários globais para texto cromado, borda metálica e foco acessível.
+- Componentes em src/components/ui:
+  - ChromeTitle
+  - GlowButton
+  - MetallicCard
+  - SectionTitle
+  - PageHeader
+- Componentes em src/components/notices:
+  - InfoNotice
+  - WarningNotice
+  - ResponsibilityNotice
+  - SecurityNotice
+  - ExternalLinkNotice
+- Helper src/lib/cn.ts para composição simples de classes.
+- Página inicial provisória atualizada para demonstrar componentes.
+
+Regras mantidas:
+- Sem dados sensíveis.
+- Sem senhas, tokens, chaves ou arquivos .env.
+- Sem código-fonte privado.
+- Sem dados reais de ocorrências.

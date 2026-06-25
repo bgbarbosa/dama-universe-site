@@ -1,0 +1,24 @@
+ETAPA 06 — Componentes de Cards e Listagens
+
+Implementado:
+- src/components/programs/ProgramCard.tsx
+- src/components/programs/DownloadCard.tsx
+- src/components/blog/BlogCard.tsx
+- src/components/references/ReferenceCard.tsx
+- src/components/support/SupportCard.tsx
+- src/components/updates/UpdateCard.tsx
+- arquivos index.ts para exportação dos novos componentes
+
+Padrão aplicado:
+- cards genéricos e reutilizáveis
+- dados recebidos por props
+- compatibilidade com objetos vindos de src/data quando aplicável
+- fundo grafite
+- borda metálica discreta
+- hover suave com destaque azul elétrico
+- badges para categoria, status, versão, tipo ou data
+- botões com GlowButton
+- links externos com target _blank e rel noopener noreferrer por meio do GlowButton
+- sem dados sensíveis
+- sem dados reais
+- sem links privados

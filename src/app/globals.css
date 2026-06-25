@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: #05070a;
+  color: #f5f7fa;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+::selection {
+  background: rgba(30, 140, 255, 0.35);
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-6 lg:px-8;
+  }
+
+  .page-section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .page-section-tight {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.38em] text-electricLight;
+  }
+
+  .title-chrome {
+    @apply bg-chrome-text bg-clip-text text-transparent;
+  }
+
+  .body-text {
+    @apply text-base leading-8 text-muted sm:text-lg;
+  }
+
+  .body-text-sm {
+    @apply text-sm leading-7 text-muted;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electricLight focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+}
