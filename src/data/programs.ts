@@ -45,6 +45,22 @@ export const programs: Program[] = [
     featured: true,
   },
   {
+    name: "Dama Cleaner - SIGO Desktop",
+    slug: "dama-cleaner-sigo-desktop",
+    category: "Utilitário desktop",
+    shortDescription:
+      "Utilitário Windows para limpeza local de cache, arquivos temporários, logs e dados de sessão do SIGO Desktop, com execução simples, resultado conferível e preservação de configurações sensíveis.",
+    fullDescription:
+      "O Dama Cleaner - SIGO Desktop é uma ferramenta auxiliar para Windows criada para limpar arquivos temporários, cache, logs e dados de sessão do SIGO Desktop quando houver lentidão, dificuldade no carregamento de arquivos ou comportamento instável relacionado ao armazenamento local. A versão 1.7.0 foi validada como estável, utiliza base em BAT puro, não força o encerramento do SIGO, preserva arquivos de configuração sensíveis e registra log local para conferência técnica posterior.",
+    version: "1.7.0",
+    status: "Disponível",
+    updatedAt: "2026-07-04",
+    detailsUrl: "/programas/dama-cleaner-sigo-desktop",
+    downloadUrl: "https://drive.google.com/file/d/1cLprfcL_ZfLixQvXguYGuNo_tas6t_vI/view?usp=sharing",
+    iconUrl: "/images/programs/dama-cleaner-sigo.png",
+    featured: true,
+  },
+  {
     name: "Dama Gerador FCC Universal",
     slug: "dama-gerador-fcc-universal",
     category: "Automação documental avançada",

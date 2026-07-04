@@ -19,6 +19,15 @@ export type UpdateItem = {
 
 export const updates: UpdateItem[] = [
   {
+    title: "Dama Cleaner - SIGO Desktop v1.7.0 publicado",
+    area: "Programas",
+    type: "Programa",
+    date: "2026-07-04",
+    summary:
+      "Nova ferramenta disponibilizada no Dama Universe para apoiar a limpeza local de cache, arquivos temporários, logs e dados de sessão do SIGO Desktop, com foco em uso simples, seguro e rastreável.",
+    url: "/programas/dama-cleaner-sigo-desktop",
+  },
+  {
     title: "Tutoriais do Dama Gerador FCC 3.0 publicados",
     area: "Vídeos",
     type: "Vídeo",
