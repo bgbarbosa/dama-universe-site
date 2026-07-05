@@ -56,7 +56,7 @@ export const programs: Program[] = [
     status: "Disponível",
     updatedAt: "2026-07-04",
     detailsUrl: "/programas/dama-cleaner-sigo-desktop",
-    downloadUrl: "https://drive.google.com/file/d/1cLprfcL_ZfLixQvXguYGuNo_tas6t_vI/view?usp=sharing",
+    downloadUrl: "https://drive.usercontent.google.com/download?id=1cLprfcL_ZfLixQvXguYGuNo_tas6t_vI&export=download",
     iconUrl: "/images/programs/dama-cleaner-sigo.png",
     featured: true,
   },
