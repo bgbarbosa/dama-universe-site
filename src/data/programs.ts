@@ -61,6 +61,22 @@ export const programs: Program[] = [
     featured: true,
   },
   {
+    name: "Dama Biometria SIGO Fix",
+    slug: "dama-biometria-sigo-fix",
+    category: "Correção de ambiente SIGO",
+    shortDescription:
+      "Ferramenta Windows independente para auxiliar na correção de falhas locais de biometria, assinatura, Java, bibliotecas Nitgen e componentes relacionados ao uso do SIGO Desktop.",
+    fullDescription:
+      "O Dama Biometria SIGO Fix é uma ferramenta Windows independente, criada para auxiliar usuários do SIGO Desktop quando ocorrem falhas locais ligadas à biometria, assinatura, Java, bibliotecas Nitgen e reconhecimento do leitor biométrico. O programa oferece uma correção automática recomendada, opções avançadas para casos específicos, painel de log e orientação para que o usuário abra o SIGO pelo atalho normal/original após a correção. A ferramenta não é oficial do SIGO, não substitui suporte institucional e atua apenas como apoio para problemas locais recorrentes.",
+    version: "1.0.0",
+    status: "Disponível",
+    updatedAt: "2026-07-04",
+    detailsUrl: "/programas/dama-biometria-sigo-fix",
+    downloadUrl: "https://drive.usercontent.google.com/download?id=1y0pRu7YeazLrSYFq2Sf0rgtrgMkh48rh&export=download",
+    iconUrl: "/images/programs/dama-biometria-sigo-fix.png",
+    featured: true,
+  },
+  {
     name: "Dama Gerador FCC Universal",
     slug: "dama-gerador-fcc-universal",
     category: "Automação documental avançada",
