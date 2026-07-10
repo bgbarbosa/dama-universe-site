@@ -77,6 +77,22 @@ export const programs: Program[] = [
     featured: true,
   },
   {
+    name: "Dama Token SIGO Fix",
+    slug: "dama-token-sigo-fix",
+    category: "Correção de ambiente SIGO",
+    shortDescription:
+      "Ferramenta Windows independente para auxiliar na correção guiada de falhas locais relacionadas à assinatura por token no SIGO Desktop, Java, drivers e providers PKCS#11.",
+    fullDescription:
+      "O Dama Token SIGO Fix é uma ferramenta desktop Windows independente, criada para auxiliar usuários do SIGO Desktop quando ocorrem falhas locais ligadas à assinatura por token. O programa prepara o ambiente local, verifica Java, drivers, providers PKCS#11, SafeSign/StarSign, SafeNet/eToken/Aladdin, processos que podem prender o token e, quando o ambiente está aprovado, cria um atalho corrigido para abrir o SIGO de forma mais estável. A ferramenta não é oficial do SIGO, não salva PIN, não copia certificados, não exporta chaves privadas, não assina documentos por conta própria e não altera o token.",
+    version: "1.0.0",
+    status: "Disponível",
+    updatedAt: "2026-07-10",
+    detailsUrl: "/programas/dama-token-sigo-fix",
+    downloadUrl: "https://drive.usercontent.google.com/download?id=15g2KC03fdVtbqtpsFBX-4RyEfRXgYAhK&export=download",
+    iconUrl: "/images/programs/dama-token-sigo-fix.png",
+    featured: true,
+  },
+  {
     name: "Dama Gerador FCC Universal",
     slug: "dama-gerador-fcc-universal",
     category: "Automação documental avançada",

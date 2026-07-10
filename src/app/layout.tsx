@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Footer, Header } from "@/components/layout";
 import { createPageMetadata, siteConfig } from "@/lib/seo";
 import "./globals.css";
@@ -26,7 +27,7 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -38,6 +39,20 @@ export default function RootLayout({
           <div className="flex-1">{children}</div>
           <Footer />
         </div>
+
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-TJRDW9KBYX"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TJRDW9KBYX');
+          `}
+        </Script>
       </body>
     </html>
   );

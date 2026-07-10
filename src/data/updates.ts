@@ -19,6 +19,15 @@ export type UpdateItem = {
 
 export const updates: UpdateItem[] = [
   {
+    title: "Dama Token SIGO Fix 1.0.0 publicado",
+    area: "Programas",
+    type: "Programa",
+    date: "2026-07-10",
+    summary:
+      "Nova ferramenta independente disponibilizada no Dama Universe para auxiliar na correção guiada de falhas locais de assinatura por token no SIGO Desktop, com apoio a Java, drivers e providers PKCS#11.",
+    url: "/programas/dama-token-sigo-fix",
+  },
+  {
     title: "Dama Biometria SIGO Fix 1.0.0 publicado",
     area: "Programas",
     type: "Programa",
