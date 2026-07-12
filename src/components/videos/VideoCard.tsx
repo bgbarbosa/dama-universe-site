@@ -1,4 +1,5 @@
 import { GlowButton, MetallicCard } from "@/components/ui";
+import { YouTubeEmbed } from "@/components/privacy";
 
 type VideoCardData = {
   slug?: string;
@@ -83,12 +84,10 @@ export function VideoCard({
     >
       <div className="overflow-hidden rounded-2xl border border-borderSoft bg-background/70">
         {isPublished ? (
-          <iframe
+          <YouTubeEmbed
+            videoId={currentYoutubeId}
             className="aspect-video w-full"
-            src={`https://www.youtube.com/embed/${currentYoutubeId}`}
             title={videoTitle}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
           />
         ) : (
           <div className="flex aspect-video items-center justify-center bg-white/[0.03] px-6 text-center">

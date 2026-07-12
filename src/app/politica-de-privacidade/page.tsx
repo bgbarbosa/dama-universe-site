@@ -6,56 +6,61 @@ const sections = [
   {
     title: "Informações fornecidas voluntariamente",
     paragraphs: [
-      "O Dama Universe poderá coletar informações fornecidas voluntariamente pelo usuário por meio de formulário de contato, como nome, e-mail, assunto, tipo de contato e mensagem.",
-      "Essas informações serão utilizadas apenas para responder contatos, analisar sugestões, verificar relatos de erro, avaliar propostas de parceria ou tratar assuntos relacionados ao projeto."
-    ]
+      "O formulário de contato pode receber nome, e-mail, assunto, tipo de contato e mensagem. Esses dados são usados para responder ao contato e tratar a solicitação apresentada.",
+      "Não envie documentos sigilosos, senhas, dados de terceiros ou informações relacionadas a procedimentos restritos. Os campos possuem limites técnicos e passam por validação no servidor antes do encaminhamento ao serviço de formulário configurado pelo site.",
+    ],
   },
   {
-    title: "Dados que não devem ser enviados",
+    title: "Ferramentas de análise utilizadas",
     paragraphs: [
-      "O usuário não deve enviar dados sensíveis, documentos sigilosos, senhas, informações pessoais de terceiros ou conteúdo relacionado a procedimentos restritos.",
-      "O formulário de contato foi pensado para mensagens gerais, sugestões, dúvidas, relatos de erro e propostas relacionadas ao Dama Universe."
-    ]
+      "O Dama Universe utiliza Vercel Analytics, Google Analytics e Microsoft Clarity para produzir métricas de audiência, desempenho, navegação e interação. Dependendo da ferramenta e da configuração do navegador, podem ser tratados endereço IP, tipo de dispositivo e navegador, páginas visitadas, horários, origem aproximada do acesso, eventos de interação e identificadores técnicos.",
+      "Essas ferramentas são classificadas neste site como análises opcionais. Elas somente são carregadas depois que o visitante aceita essa categoria no painel de privacidade. A recusa não impede o uso das páginas e pode ser alterada posteriormente pelo botão Privacidade.",
+      "Os dados são enviados aos respectivos provedores, que possuem políticas e períodos de retenção próprios. A configuração e a base jurídica aplicável devem ser revisadas periodicamente e estão sujeitas a validação jurídica especializada.",
+    ],
   },
   {
-    title: "Comentários públicos",
+    title: "Vídeos e serviços externos",
     paragraphs: [
-      "Comentários públicos poderão ser realizados por meio de ferramentas externas, como Giscus e GitHub Discussions, sujeitas às políticas das respectivas plataformas.",
-      "Ao utilizar ferramentas externas, o usuário também se submete às regras, termos e políticas de privacidade desses serviços."
-    ]
+      "Vídeos incorporados utilizam o domínio de privacidade aprimorada youtube-nocookie.com. O iframe não é criado antes da permissão para conteúdo externo, evitando conexão antecipada desnecessária com o YouTube.",
+      "Downloads, GPTs e outros links podem direcionar a Google Drive, ChatGPT, YouTube ou outros serviços. Ao abrir esses endereços, o tratamento de dados passa a seguir também as políticas do serviço acessado.",
+    ],
   },
   {
-    title: "Serviços externos",
+    title: "Preferência de privacidade",
     paragraphs: [
-      "O site pode conter links para serviços externos, como Google Drive, GitHub, YouTube, Instagram e outros. Cada serviço possui suas próprias políticas de privacidade."
-    ]
+      "A escolha sobre análises e conteúdo externo é registrada somente no armazenamento local deste navegador. O registro contém a versão da preferência, as categorias aceitas e datas técnicas de atualização e expiração; não contém nome, e-mail ou conteúdo do formulário.",
+      "A preferência expira após 180 dias, quando o site volta a solicitar uma escolha. Ela também pode ser revista a qualquer momento pelo botão Privacidade ou apagada manualmente nas configurações do navegador.",
+    ],
   },
   {
-    title: "Ferramentas de análise",
+    title: "Controle e solicitações",
     paragraphs: [
-      "Caso sejam utilizadas ferramentas de análise de acesso no futuro, essa informação deverá ser acrescentada nesta política."
-    ]
-  }
+      "O visitante pode recusar categorias opcionais sem perder as funções essenciais do site. Para solicitar informações, correção ou exclusão relacionada a um contato enviado, quando aplicável, utilize a página de contato e descreva a solicitação sem incluir novos dados sensíveis.",
+      "A definição de prazos de retenção, bases legais e procedimentos de atendimento deve ser confirmada por avaliação jurídica e operacional especializada.",
+    ],
+  },
 ];
 
 export const metadata = createPageMetadata({
   title: "Política de Privacidade — Dama Universe",
-  description: "Política de privacidade do Dama Universe sobre formulário de contato, comentários públicos, serviços externos e dados que não devem ser enviados.",
+  description:
+    "Política de privacidade sobre contato, análises opcionais, vídeos externos e controle das preferências no Dama Universe.",
   path: "/politica-de-privacidade",
 });
 
 export default function PoliticaDePrivacidadePage() {
   return (
-    <main className="mx-auto w-full max-w-6xl px-6 pb-20">
+    <main className="mx-auto w-full max-w-6xl px-5 pb-20 sm:px-6">
       <PageHeader
         title="Política de Privacidade"
-        subtitle="Tratamento responsável de informações"
-        description="Informações iniciais sobre o uso de dados fornecidos voluntariamente em contatos, comentários e interações com serviços externos."
+        subtitle="Transparência e controle"
+        description="Como o Dama Universe trata informações de contato, métricas opcionais, conteúdo externo e preferências registradas no navegador."
       />
 
       <div className="space-y-8">
         <SecurityNotice>
-          Não envie dados sensíveis, documentos sigilosos, senhas, informações pessoais de terceiros ou conteúdo relacionado a procedimentos restritos.
+          Não envie dados sensíveis, documentos sigilosos, senhas, informações
+          pessoais de terceiros ou conteúdo relacionado a procedimentos restritos.
         </SecurityNotice>
 
         {sections.map((section) => (

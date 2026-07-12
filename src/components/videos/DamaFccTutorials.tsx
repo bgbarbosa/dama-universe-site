@@ -1,4 +1,5 @@
 import { GlowButton, MetallicCard, SectionTitle } from "@/components/ui";
+import { YouTubeEmbed } from "@/components/privacy";
 
 const tutorials = [
   {
@@ -6,21 +7,21 @@ const tutorials = [
     description:
       "Introdução ao Dama Gerador FCC 3.0 e visão geral do fluxo inicial de uso.",
     watchUrl: "https://youtu.be/CL-Q2iOYAJU",
-    embedUrl: "https://www.youtube.com/embed/CL-Q2iOYAJU",
+    videoId: "CL-Q2iOYAJU",
   },
   {
     title: "Parte 02 — Geração e conferência",
     description:
       "Continuação do tutorial com foco no uso operacional e na conferência dos dados.",
     watchUrl: "https://youtu.be/4vmzh-SOBEw",
-    embedUrl: "https://www.youtube.com/embed/4vmzh-SOBEw",
+    videoId: "4vmzh-SOBEw",
   },
   {
     title: "Parte 03 — Finalização do fluxo",
     description:
       "Etapa final do tutorial, com orientações complementares sobre o uso do programa.",
     watchUrl: "https://youtu.be/mkdPTsE6-KM",
-    embedUrl: "https://www.youtube.com/embed/mkdPTsE6-KM",
+    videoId: "mkdPTsE6-KM",
   },
 ];
 
@@ -60,18 +61,14 @@ export function DamaFccTutorials({
         <div className="flex min-w-full gap-5">
           {tutorials.map((video) => (
             <MetallicCard
-              key={video.embedUrl}
+              key={video.videoId}
               className="min-w-[320px] max-w-[420px] flex-1 border-electric/70 p-4 shadow-[0_0_35px_rgba(37,150,255,0.28)]"
             >
               <div className="aspect-video overflow-hidden rounded-2xl border border-borderSoft bg-background">
-                <iframe
-                  src={video.embedUrl}
+                <YouTubeEmbed
+                  videoId={video.videoId}
                   title={video.title}
                   className="h-full w-full"
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
                 />
               </div>
 
