@@ -11,12 +11,12 @@ const categories = [
   {
     title: "Análises opcionais",
     description:
-      "Vercel Analytics, Google Analytics e Microsoft Clarity são carregados apenas quando esta categoria é aceita. Esses provedores podem utilizar cookies, identificadores e tecnologias semelhantes conforme suas configurações e políticas.",
+      "Vercel Analytics, Google Analytics e Microsoft Clarity são carregados apenas quando esta categoria é aceita. O Vercel Analytics informa não usar cookies; Google Analytics e Microsoft Clarity podem gravar cookies próprios e usar identificadores técnicos conforme suas configurações e políticas.",
   },
   {
     title: "Conteúdo externo opcional",
     description:
-      "Os vídeos utilizam youtube-nocookie.com e só são incorporados após permissão. Ao reproduzir ou interagir com o vídeo, o YouTube pode tratar dados conforme sua própria política.",
+      "Vídeos em youtube-nocookie.com e comentários via Giscus/GitHub Discussions só são incorporados após permissão. Quando o conteúdo é liberado, esses provedores recebem a conexão e podem tratar dados conforme suas políticas.",
   },
 ];
 
@@ -38,8 +38,9 @@ export default function PoliticaDeCookiesPage() {
 
       <InfoNotice>
         O termo cookies é usado aqui também para tecnologias semelhantes, como
-        armazenamento local e identificadores técnicos. A classificação e a base
-        jurídica aplicável devem passar por validação jurídica especializada.
+        armazenamento local e identificadores técnicos. Última atualização: 12
+        de julho de 2026. A classificação e a base jurídica aplicável devem passar
+        por validação jurídica especializada.
       </InfoNotice>
 
       <div className="mt-8 grid gap-6">
@@ -59,7 +60,19 @@ export default function PoliticaDeCookiesPage() {
           Use o botão Privacidade, exibido no canto inferior da página depois da
           primeira escolha. Também é possível apagar o armazenamento local do
           domínio nas configurações do navegador; nesse caso, o painel será
-          apresentado novamente.
+          apresentado novamente. Ao revogar análises, a página é recarregada para
+          interromper os coletores já ativos na sessão.
+        </p>
+      </MetallicCard>
+
+      <MetallicCard className="mt-8">
+        <h2 className="text-xl font-black text-text">Conexões que não dependem do painel</h2>
+        <p className="mt-4 text-sm leading-7 text-muted">
+          Páginas e recursos do próprio domínio são essenciais para o funcionamento.
+          O formulário só envia dados ao servidor do Dama Universe quando o
+          visitante o submete; o servidor faz o encaminhamento ao serviço configurado.
+          Links para downloads, GPTs, redes sociais e outros sites externos somente
+          abrem o serviço de destino quando são acionados pelo visitante.
         </p>
       </MetallicCard>
     </main>

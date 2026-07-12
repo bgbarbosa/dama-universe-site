@@ -14,7 +14,7 @@ export function ChromeTitle({
   return (
     <Component
       className={[
-        "title-chrome font-black tracking-tight",
+        "title-chrome break-words font-black tracking-tight",
         className || "text-3xl sm:text-4xl lg:text-5xl"
       ].join(" ")}
     >

@@ -4,39 +4,49 @@ import { SecurityNotice } from "@/components/notices";
 
 const sections = [
   {
-    title: "Informações fornecidas voluntariamente",
+    title: "Responsável e escopo",
+    paragraphs: [
+      "Esta política descreve o tratamento de dados realizado no site Dama Universe. Para dúvidas ou solicitações sobre informações enviadas ao projeto, utilize a página de contato.",
+      "Última atualização: 12 de julho de 2026.",
+    ],
+  },
+  {
+    title: "Dados enviados pelo formulário de contato",
     paragraphs: [
       "O formulário de contato pode receber nome, e-mail, assunto, tipo de contato e mensagem. Esses dados são usados para responder ao contato e tratar a solicitação apresentada.",
-      "Não envie documentos sigilosos, senhas, dados de terceiros ou informações relacionadas a procedimentos restritos. Os campos possuem limites técnicos e passam por validação no servidor antes do encaminhamento ao serviço de formulário configurado pelo site.",
+      "O envio é uma ação iniciada pelo visitante. Os dados são validados novamente pelo servidor do Dama Universe e então encaminhados ao serviço de formulário definido em configuração privada. O provedor e os prazos de retenção dessa operação devem permanecer documentados e revisados pelo responsável pelo site.",
+      "Não envie documentos sigilosos, senhas, dados de terceiros ou informações relacionadas a procedimentos restritos.",
     ],
   },
   {
     title: "Ferramentas de análise utilizadas",
     paragraphs: [
-      "O Dama Universe utiliza Vercel Analytics, Google Analytics e Microsoft Clarity para produzir métricas de audiência, desempenho, navegação e interação. Dependendo da ferramenta e da configuração do navegador, podem ser tratados endereço IP, tipo de dispositivo e navegador, páginas visitadas, horários, origem aproximada do acesso, eventos de interação e identificadores técnicos.",
+      "O Dama Universe mantém Vercel Analytics, Google Analytics e Microsoft Clarity para produzir métricas de audiência, desempenho, navegação e interação. Dependendo da ferramenta, podem ser tratados tipo de dispositivo e navegador, páginas visitadas, horários, referência de origem, localização aproximada, eventos de interação e identificadores técnicos.",
       "Essas ferramentas são classificadas neste site como análises opcionais. Elas somente são carregadas depois que o visitante aceita essa categoria no painel de privacidade. A recusa não impede o uso das páginas e pode ser alterada posteriormente pelo botão Privacidade.",
-      "Os dados são enviados aos respectivos provedores, que possuem políticas e períodos de retenção próprios. A configuração e a base jurídica aplicável devem ser revisadas periodicamente e estão sujeitas a validação jurídica especializada.",
+      "O Vercel Analytics informa operar com dados agregados, sem cookies de terceiros e sem armazenar endereço IP. Google Analytics e Microsoft Clarity podem usar cookies próprios e tecnologias semelhantes quando carregados. Os dados seguem para os respectivos provedores, sujeitos às configurações do projeto, às políticas e aos períodos de retenção de cada serviço.",
+      "Ao retirar a permissão, o site informa a revogação às ferramentas compatíveis e recarrega a página para remover os coletores já injetados. Cookies já mantidos por serviços ou pelo navegador também podem ser apagados nas configurações do navegador.",
     ],
   },
   {
-    title: "Vídeos e serviços externos",
+    title: "Vídeos, comentários e links externos",
     paragraphs: [
-      "Vídeos incorporados utilizam o domínio de privacidade aprimorada youtube-nocookie.com. O iframe não é criado antes da permissão para conteúdo externo, evitando conexão antecipada desnecessária com o YouTube.",
-      "Downloads, GPTs e outros links podem direcionar a Google Drive, ChatGPT, YouTube ou outros serviços. Ao abrir esses endereços, o tratamento de dados passa a seguir também as políticas do serviço acessado.",
+      "Vídeos incorporados utilizam o modo de privacidade aprimorada no domínio youtube-nocookie.com. O iframe não é criado antes da permissão para conteúdo externo. Depois de permitido, o YouTube recebe a conexão e pode tratar dados quando o player é carregado ou utilizado.",
+      "Quando configurados, comentários usam Giscus e GitHub Discussions. O script e o quadro externo também só são criados depois da mesma permissão. Para publicar, o visitante pode precisar autenticar-se no GitHub e passa a se submeter às políticas dessa plataforma.",
+      "Downloads, GPTs, redes sociais e outros links apenas direcionam para Google Drive, ChatGPT, YouTube, GitHub ou outros serviços quando o visitante decide abri-los. A partir desse acesso, o tratamento de dados segue também as políticas do destino.",
     ],
   },
   {
     title: "Preferência de privacidade",
     paragraphs: [
-      "A escolha sobre análises e conteúdo externo é registrada somente no armazenamento local deste navegador. O registro contém a versão da preferência, as categorias aceitas e datas técnicas de atualização e expiração; não contém nome, e-mail ou conteúdo do formulário.",
+      "A escolha sobre análises e conteúdo externo é registrada no armazenamento local deste navegador. O registro contém somente a versão da preferência, as categorias aceitas e datas técnicas de atualização e expiração; não contém nome, e-mail nem conteúdo do formulário.",
       "A preferência expira após 180 dias, quando o site volta a solicitar uma escolha. Ela também pode ser revista a qualquer momento pelo botão Privacidade ou apagada manualmente nas configurações do navegador.",
     ],
   },
   {
     title: "Controle e solicitações",
     paragraphs: [
-      "O visitante pode recusar categorias opcionais sem perder as funções essenciais do site. Para solicitar informações, correção ou exclusão relacionada a um contato enviado, quando aplicável, utilize a página de contato e descreva a solicitação sem incluir novos dados sensíveis.",
-      "A definição de prazos de retenção, bases legais e procedimentos de atendimento deve ser confirmada por avaliação jurídica e operacional especializada.",
+      "O visitante pode recusar categorias opcionais sem perder as funções essenciais do site. Vídeos incorporados e comentários externos permanecem bloqueados, mas links diretos podem ser abertos por decisão do visitante.",
+      "Para solicitar acesso, correção ou exclusão relacionada a um contato enviado, quando aplicável, utilize a página de contato e descreva a solicitação sem incluir novos dados sensíveis. Bases legais, prazos de retenção e procedimentos de atendimento devem ser confirmados por avaliação jurídica e operacional especializada.",
     ],
   },
 ];

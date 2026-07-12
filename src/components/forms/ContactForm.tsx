@@ -3,55 +3,17 @@
 import { useState } from "react";
 
 import { GlowButton, MetallicCard } from "@/components/ui";
-
-const contactTypes = [
-  "Dúvida",
-  "Sugestão",
-  "Erro em programa",
-  "Parceria",
-  "Patrocínio",
-  "Contato profissional",
-  "Outro",
-];
+import {
+  CONTACT_LIMITS,
+  CONTACT_TYPES,
+  validateContactPayload,
+  type ContactPayload,
+} from "@/lib/contact";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
-type ContactFormPayload = {
-  name: string;
-  email: string;
-  subject: string;
-  contactType: string;
-  message: string;
-};
-
-const requiredFields: Array<keyof ContactFormPayload> = [
-  "name",
-  "email",
-  "subject",
-  "contactType",
-  "message",
-];
-
-function getFormValue(formData: FormData, key: keyof ContactFormPayload) {
+function getFormValue(formData: FormData, key: keyof ContactPayload) {
   return String(formData.get(key) ?? "").trim();
-}
-
-function validatePayload(payload: ContactFormPayload) {
-  const missingField = requiredFields.find((field) => !payload[field]);
-
-  if (missingField) {
-    return "Preencha todos os campos obrigatórios antes de enviar.";
-  }
-
-  if (!payload.email.includes("@") || !payload.email.includes(".")) {
-    return "Informe um e-mail válido para contato.";
-  }
-
-  if (payload.message.length < 10) {
-    return "Escreva uma mensagem um pouco mais detalhada antes de enviar.";
-  }
-
-  return null;
 }
 
 export function ContactForm() {
@@ -61,22 +23,27 @@ export function ContactForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    if (status === "sending") {
+      return;
+    }
+
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const payload: ContactFormPayload = {
+    const payload = {
       name: getFormValue(formData, "name"),
       email: getFormValue(formData, "email"),
       subject: getFormValue(formData, "subject"),
       contactType: getFormValue(formData, "contactType"),
       message: getFormValue(formData, "message"),
+      website: getFormValue(formData, "website"),
     };
 
-    const validationError = validatePayload(payload);
+    const validation = validateContactPayload(payload);
 
-    if (validationError) {
+    if (!validation.success) {
       setStatus("error");
-      setFeedbackMessage(validationError);
+      setFeedbackMessage(validation.message);
       return;
     }
 
@@ -84,27 +51,31 @@ export function ContactForm() {
     setFeedbackMessage(null);
 
     try {
-      const endpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
-
-      if (!endpoint) {
-        throw new Error("Endpoint do formulário não configurado.");
-      }
-
-      const response = await fetch(endpoint, {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        body: formData,
+        body: JSON.stringify(validation.data),
       });
 
-      if (!response.ok) {
-        throw new Error("Falha no envio do formulário.");
-      }
+      const result = (await response.json().catch(() => null)) as
+        | { message?: string }
+        | null;
 
-      form.reset();
-      setStatus("success");
-      setFeedbackMessage("Mensagem enviada com sucesso. Obrigado pelo contato.");
+      if (response.ok) {
+        form.reset();
+        setStatus("success");
+        setFeedbackMessage(
+          result?.message ?? "Mensagem enviada com sucesso. Obrigado pelo contato."
+        );
+      } else {
+        setStatus("error");
+        setFeedbackMessage(
+          result?.message ?? "Não foi possível enviar a mensagem neste momento."
+        );
+      }
     } catch {
       setStatus("error");
       setFeedbackMessage(
@@ -122,6 +93,17 @@ export function ContactForm() {
           value="Nova mensagem enviada pelo Dama Universe"
         />
 
+        <div className="sr-only" aria-hidden="true">
+          <label htmlFor="contact-website">Não preencha este campo</label>
+          <input
+            id="contact-website"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div className="grid gap-5 md:grid-cols-2">
           <label className="space-y-2 text-sm font-medium text-chromeLight">
             <span>Nome</span>
@@ -131,6 +113,8 @@ export function ContactForm() {
               placeholder="Seu nome"
               type="text"
               autoComplete="name"
+              minLength={CONTACT_LIMITS.name.min}
+              maxLength={CONTACT_LIMITS.name.max}
               required
             />
           </label>
@@ -143,6 +127,7 @@ export function ContactForm() {
               placeholder="seu@email.com"
               type="email"
               autoComplete="email"
+              maxLength={CONTACT_LIMITS.email.max}
               required
             />
           </label>
@@ -156,6 +141,8 @@ export function ContactForm() {
               name="subject"
               placeholder="Assunto da mensagem"
               type="text"
+              minLength={CONTACT_LIMITS.subject.min}
+              maxLength={CONTACT_LIMITS.subject.max}
               required
             />
           </label>
@@ -171,7 +158,7 @@ export function ContactForm() {
               <option value="" disabled>
                 Selecione uma opção
               </option>
-              {contactTypes.map((type) => (
+              {CONTACT_TYPES.map((type) => (
                 <option key={type} value={type}>
                   {type}
                 </option>
@@ -186,6 +173,8 @@ export function ContactForm() {
             className="min-h-40 w-full rounded-2xl border border-border bg-backgroundSoft px-4 py-3 text-text outline-none transition placeholder:text-muted/70 focus:border-electric focus:ring-2 focus:ring-electric/25"
             name="message"
             placeholder="Escreva sua mensagem de forma objetiva. Não inclua dados sensíveis."
+            minLength={CONTACT_LIMITS.message.min}
+            maxLength={CONTACT_LIMITS.message.max}
             required
           />
         </label>

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { SecurityNotice } from "@/components/notices";
+import { useConsent } from "@/components/privacy";
 import { MetallicCard } from "@/components/ui";
 
 type GiscusConfig = {
@@ -47,11 +48,13 @@ export function GiscusComments({
   const containerRef = useRef<HTMLDivElement>(null);
   const config = useMemo(() => getGiscusConfig(), []);
   const configured = isConfigured(config);
+  const { preferences, ready, savePreferences } = useConsent();
+  const externalContentAllowed = preferences?.externalMedia === true;
 
   useEffect(() => {
     const container = containerRef.current;
 
-    if (!container || !configured) {
+    if (!container || !configured || !externalContentAllowed) {
       return;
     }
 
@@ -83,7 +86,11 @@ export function GiscusComments({
     return () => {
       container.innerHTML = "";
     };
-  }, [config.category, config.categoryId, config.repo, config.repoId, configured, mapping, term, theme]);
+  }, [config.category, config.categoryId, config.repo, config.repoId, configured, externalContentAllowed, mapping, term, theme]);
+
+  if (!configured) {
+    return null;
+  }
 
   return (
     <section className={className} aria-label="Comentários">
@@ -96,29 +103,28 @@ export function GiscusComments({
             <p className="mt-3 leading-7 text-muted">{description}</p>
           </div>
 
-          {configured ? (
+          {externalContentAllowed ? (
             <div ref={containerRef} className="min-h-32" />
-          ) : (
+          ) : ready ? (
             <div className="rounded-2xl border border-chrome/20 bg-backgroundSoft/80 p-5 text-sm leading-7 text-muted">
-              Os comentários via Giscus ainda não foram ativados. Configure as variáveis públicas
-              <code className="mx-1 rounded bg-white/[0.06] px-1.5 py-0.5 text-chromeLight">
-                NEXT_PUBLIC_GISCUS_REPO
-              </code>
-              ,
-              <code className="mx-1 rounded bg-white/[0.06] px-1.5 py-0.5 text-chromeLight">
-                NEXT_PUBLIC_GISCUS_REPO_ID
-              </code>
-              ,
-              <code className="mx-1 rounded bg-white/[0.06] px-1.5 py-0.5 text-chromeLight">
-                NEXT_PUBLIC_GISCUS_CATEGORY
-              </code>
-              e
-              <code className="mx-1 rounded bg-white/[0.06] px-1.5 py-0.5 text-chromeLight">
-                NEXT_PUBLIC_GISCUS_CATEGORY_ID
-              </code>
-              quando o GitHub Discussions estiver preparado.
+              <p>
+                Os comentários usam Giscus e GitHub Discussions. A conexão só é
+                aberta quando você permite conteúdo externo.
+              </p>
+              <button
+                type="button"
+                onClick={() =>
+                  savePreferences({
+                    analytics: preferences?.analytics ?? false,
+                    externalMedia: true,
+                  })
+                }
+                className="mt-4 min-h-11 rounded-full border border-electric/70 px-5 py-2 font-bold text-electricLight transition hover:bg-electric/10 focus-ring"
+              >
+                Permitir comentários externos
+              </button>
             </div>
-          )}
+          ) : null}
         </MetallicCard>
       </div>
     </section>

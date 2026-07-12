@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default function DownloadsPage() {
-  redirect("/programas/dama-gerador-fcc");
+  permanentRedirect("/programas/dama-gerador-fcc");
 }

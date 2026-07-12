@@ -1,9 +1,9 @@
 import { ResponsibilityNotice } from "@/components/notices";
 import { DamaFccTutorials } from "@/components/videos";
 import { GlowButton, MetallicCard, SectionTitle } from "@/components/ui";
+import { getProgramDownloadUrl } from "@/data";
 
-const downloadUrl =
-  "https://drive.google.com/file/d/1P4DmjPet9GsmoOWROxmKKb6Zt-F6fIC_/view?usp=drive_link";
+const downloadUrl = getProgramDownloadUrl("dama-gerador-fcc");
 
 const resources = [
   "Geração de FCC a partir de B.O. em PDF",

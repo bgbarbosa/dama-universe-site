@@ -1,6 +1,14 @@
 import { ProgramCard } from "@/components/programs";
 import { MetallicCard, SectionHeader } from "@/components/ui";
 import { programs } from "@/data";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "Programas — Dama Universe",
+  description:
+    "Catálogo de programas, ferramentas e sistemas do ecossistema Dama Universe, com versões, status e páginas de detalhes.",
+  path: "/programas",
+});
 
 export default function ProgramasPage() {
   return (

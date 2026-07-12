@@ -8,9 +8,9 @@ import {
   SectionHeader,
   SectionTitle,
 } from "@/components/ui";
+import { getProgramDownloadUrl } from "@/data";
 
-const downloadUrl =
-  "https://drive.usercontent.google.com/download?id=15g2KC03fdVtbqtpsFBX-4RyEfRXgYAhK&export=download";
+const downloadUrl = getProgramDownloadUrl("dama-token-sigo-fix");
 
 const mainBenefits = [
   "Correção guiada de falhas de assinatura por token no SIGO Desktop.",

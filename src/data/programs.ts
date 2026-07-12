@@ -56,7 +56,7 @@ export const programs: Program[] = [
     status: "Disponível",
     updatedAt: "2026-07-04",
     detailsUrl: "/programas/dama-cleaner-sigo-desktop",
-    downloadUrl: "https://drive.usercontent.google.com/download?id=1cLprfcL_ZfLixQvXguYGuNo_tas6t_vI&export=download",
+    downloadUrl: "https://drive.google.com/uc?export=download&id=1cLprfcL_ZfLixQvXguYGuNo_tas6t_vI",
     iconUrl: "/images/programs/dama-cleaner-sigo.png",
     featured: true,
   },
@@ -151,3 +151,17 @@ export const programs: Program[] = [
 ];
 
 export const featuredPrograms = programs.filter((program) => program.featured);
+
+export function getProgramBySlug(slug: string) {
+  return programs.find((program) => program.slug === slug);
+}
+
+export function getProgramDownloadUrl(slug: string) {
+  const program = getProgramBySlug(slug);
+
+  if (!program?.downloadUrl) {
+    throw new Error(`Programa sem URL de download publicada: ${slug}`);
+  }
+
+  return program.downloadUrl;
+}
