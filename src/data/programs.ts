@@ -105,7 +105,7 @@ export const programs: Program[] = [
     updatedAt: "2026-07-13",
     detailsUrl: "/programas/dama-gestor-de-inqueritos",
     downloadUrl:
-      "https://drive.usercontent.google.com/download?id=1sIMAwBV8_actMKhuLj0hBHe91z-lsEos&export=download",
+      "https://drive.usercontent.google.com/download?id=1FT8gPYaNmW6eajMPdT8qtM1W78wsEZun&export=download",
     iconUrl: "/images/programs/dama-gestor-de-inqueritos.png",
     featured: true,
   },
