@@ -93,6 +93,23 @@ export const programs: Program[] = [
     featured: true,
   },
   {
+    name: "Dama Gestor de Inquéritos",
+    slug: "dama-gestor-de-inqueritos",
+    category: "Gestão cartorária e prazos",
+    shortDescription:
+      "Aplicação desktop Windows, local e offline, para cadastro e acompanhamento de inquéritos, prazos, documentos, objetos, relatórios e dados correcionais.",
+    fullDescription:
+      "O Dama Gestor de Inquéritos é uma aplicação desktop Windows voltada à organização cartorária. O sistema permite cadastrar e acompanhar inquéritos policiais, controlar prazos e dilações, organizar documentos e juntadas, registrar objetos e movimentações, importar dados de PDFs e planilhas, gerar relatórios e realizar backups locais.",
+    version: "1.0.0",
+    status: "Disponível",
+    updatedAt: "2026-07-13",
+    detailsUrl: "/programas/dama-gestor-de-inqueritos",
+    downloadUrl:
+      "https://drive.usercontent.google.com/download?id=1sIMAwBV8_actMKhuLj0hBHe91z-lsEos&export=download",
+    iconUrl: "/images/programs/dama-gestor-de-inqueritos.png",
+    featured: true,
+  },
+  {
     name: "Dama Gerador FCC Universal",
     slug: "dama-gerador-fcc-universal",
     category: "Automação documental avançada",
@@ -118,23 +135,6 @@ export const programs: Program[] = [
     status: "Ajustes finais",
     updatedAt: "2026-06-23",
     detailsUrl: "/programas/sdo",
-    featured: true,
-  },
-  {
-    name: "Dama Gestor de Inquéritos",
-    slug: "dama-gestor-de-inqueritos",
-    category: "Gestão cartorária e prazos",
-    shortDescription:
-      "Aplicação desktop Windows, local e offline, para cadastro e acompanhamento de inquéritos, prazos, documentos, objetos, relatórios e dados correcionais.",
-    fullDescription:
-      "O Dama Gestor de Inquéritos é uma aplicação desktop Windows voltada à organização cartorária. O sistema permite cadastrar e acompanhar inquéritos policiais, controlar prazos e dilações, organizar documentos e juntadas, registrar objetos e movimentações, importar dados de PDFs e planilhas, gerar relatórios e realizar backups locais.",
-    version: "1.0.0",
-    status: "Disponível",
-    updatedAt: "2026-07-13",
-    detailsUrl: "/programas/dama-gestor-de-inqueritos",
-    downloadUrl:
-      "https://drive.usercontent.google.com/download?id=1sIMAwBV8_actMKhuLj0hBHe91z-lsEos&export=download",
-    iconUrl: "/images/programs/dama-gestor-de-inqueritos.png",
     featured: true,
   },
   {
