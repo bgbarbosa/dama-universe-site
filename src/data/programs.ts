@@ -125,13 +125,16 @@ export const programs: Program[] = [
     slug: "dama-gestor-de-inqueritos",
     category: "Gestão cartorária e prazos",
     shortDescription:
-      "Sistema em desenvolvimento para controle de inquéritos, prazos, documentos, objetos, relatórios e dados correcionais.",
+      "Aplicação desktop Windows, local e offline, para cadastro e acompanhamento de inquéritos, prazos, documentos, objetos, relatórios e dados correcionais.",
     fullDescription:
-      "O Dama Gestor de Inquéritos é um sistema desktop em desenvolvimento, planejado para centralizar o controle de inquéritos policiais, prazos, dilações, documentos, objetos em cartório, movimentações, relatórios mensais e dados correcionais exigidos em rotinas de conferência. O projeto foi concebido para funcionar de forma local/offline, com banco SQLite, organização por cartório, alertas de vencimento e relatórios estruturados.",
-    version: "Planejamento técnico",
-    status: "Em desenvolvimento",
-    updatedAt: "2026-06-23",
+      "O Dama Gestor de Inquéritos é uma aplicação desktop Windows voltada à organização cartorária. O sistema permite cadastrar e acompanhar inquéritos policiais, controlar prazos e dilações, organizar documentos e juntadas, registrar objetos e movimentações, importar dados de PDFs e planilhas, gerar relatórios e realizar backups locais.",
+    version: "1.0.0",
+    status: "Disponível",
+    updatedAt: "2026-07-13",
     detailsUrl: "/programas/dama-gestor-de-inqueritos",
+    downloadUrl:
+      "https://drive.usercontent.google.com/download?id=1sIMAwBV8_actMKhuLj0hBHe91z-lsEos&export=download",
+    iconUrl: "/images/programs/dama-gestor-de-inqueritos.png",
     featured: true,
   },
   {

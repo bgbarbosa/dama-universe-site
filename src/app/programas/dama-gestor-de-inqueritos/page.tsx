@@ -1,40 +1,39 @@
+import { getProgramDownloadUrl } from "@/data";
 import { createPageMetadata } from "@/lib/seo";
 import { InfoNotice, ResponsibilityNotice } from "@/components/notices";
 import { GlowButton, MetallicCard, PageHeader, SectionTitle } from "@/components/ui";
 
 export const metadata = createPageMetadata({
-  title: "Dama Gestor de Inquéritos — Dama Universe",
+  title: "Dama Gestor de Inquéritos 1.0.0 — Dama Universe",
   description:
-    "Sistema desktop em desenvolvimento para gestão de inquéritos policiais, prazos, documentos, objetos em cartório, dados correcionais e relatórios.",
+    "Aplicação desktop Windows, local e offline, para cadastro e acompanhamento de inquéritos, prazos, documentos, objetos, relatórios e dados correcionais.",
   path: "/programas/dama-gestor-de-inqueritos",
 });
 
+const downloadUrl = getProgramDownloadUrl("dama-gestor-de-inqueritos");
+
 const mainFeatures = [
-  "Controle de inquéritos policiais por delegacia, cartório e procedimento.",
-  "Painel principal com vencidos, vencem hoje, vencem em até 5 dias, em andamento, relatados e remetidos.",
-  "Cadastro manual de IP e importação inteligente de documentos.",
-  "Tela de conferência antes de salvar dados extraídos automaticamente.",
-  "Controle de prazos, dilações e vencimentos calculados.",
-  "Alertas locais para IPs vencidos, a vencer e sem prazo definido.",
-  "Gestão documental com cópia segura dos arquivos para pasta própria do Dama.",
-  "Controle de objetos em cartório, lacres, localização física e situação do objeto.",
-  "Linha do tempo, movimentações, logs de ações e histórico do IP.",
-  "Relatórios mensais, relatórios de objetos e relatório correcional do Ministério Público.",
+  "Cadastro manual de inquéritos policiais e importação assistida de PDFs com conferência humana.",
+  "Painel por cartório, delegacia, status, prazo e completude dos dados correcionais.",
+  "Controle de prazos, pedidos, dilações, vencimentos e alertas locais.",
+  "Gestão de documentos e juntadas com cópia segura, hash SHA-256 e controle de versões.",
+  "Cadastro, movimentação e baixa lógica de objetos em cartório.",
+  "Importação de planilhas correcionais nos formatos XLSX e XLSM.",
+  "Relatórios operacionais e correcionais em Excel e PDF.",
+  "Logs de ações, backups locais e restauração validada do banco SQLite.",
 ];
 
 const modules = [
-  "Login, usuários, delegacias e cartórios",
-  "Painel principal de IPs",
-  "Cadastro manual de IP",
-  "Dados correcionais / Ministério Público",
-  "Importação inteligente da capa do IP",
-  "Classificação documental",
-  "Prazos e dilações",
-  "Alertas do Windows",
-  "Juntadas e sincronização de pasta",
-  "Controle de objetos em cartório",
-  "Linha do tempo e movimentações",
-  "Relatórios, backup, segurança e logs",
+  "Configuração inicial, login e usuários",
+  "Painel principal e filtros",
+  "Cadastro e edição de inquéritos",
+  "Importação assistida de PDF",
+  "Importação de planilha correcional",
+  "Prazos, pedidos e dilações",
+  "Documentos, juntadas e sincronização",
+  "Objetos e movimentações",
+  "Relatórios Excel e PDF",
+  "Backup, restauração e logs",
 ];
 
 const correctionalFields = [
@@ -62,10 +61,11 @@ const technicalStack = [
   "SQLite",
   "PyMuPDF",
   "openpyxl",
-  "ReportLab ou solução simples equivalente",
-  "winotify ou plyer",
+  "ReportLab",
+  "Pillow",
+  "plyer",
   "PyInstaller",
-  "Funcionamento local/offline no MVP",
+  "Inno Setup",
 ];
 
 export default function DamaGestorDeInqueritosPage() {
@@ -74,66 +74,66 @@ export default function DamaGestorDeInqueritosPage() {
       <PageHeader
         title="Dama Gestor de Inquéritos"
         subtitle="Gestão documental, prazos, objetos e dados correcionais"
-        description="Sistema desktop em desenvolvimento para centralizar o controle de inquéritos policiais, prazos, documentos, objetos em cartório, movimentações, relatórios e dados correcionais exigidos em controle do Ministério Público."
+        description="Aplicação desktop Windows, local e offline, para organizar inquéritos policiais, prazos, documentos, objetos, relatórios e rotinas correcionais em uma única base."
       />
 
       <section className="mx-auto max-w-7xl px-6 pb-20">
         <div className="mb-10 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <MetallicCard variant="featured" className="p-8">
-            <p className="eyebrow mb-4">Em desenvolvimento</p>
+            <p className="eyebrow mb-4">Versão 1.0.0 disponível</p>
 
             <h2 className="title-chrome text-3xl font-black sm:text-4xl">
-              Controle inteligente de inquéritos policiais
+              Controle local de inquéritos policiais
             </h2>
 
             <div className="mt-6 space-y-5 text-sm leading-7 text-muted md:text-base md:leading-8">
               <p>
-                O Dama Gestor de Inquéritos está sendo planejado como um aplicativo desktop local para Windows, voltado ao uso prático em rotina cartorária e policial.
+                O Dama Gestor de Inquéritos centraliza o cadastro e o acompanhamento de inquéritos, prazos, documentos, juntadas, objetos, movimentações e relatórios em uma aplicação desktop para Windows.
               </p>
 
               <p>
-                A proposta é substituir ou reduzir controles dispersos em planilhas, pastas de arquivos, anotações manuais e consultas isoladas, reunindo em uma única base o acompanhamento de IPs, prazos, documentos, objetos, movimentações e relatórios.
+                O sistema funciona localmente, utiliza banco SQLite e organiza os dados por delegacia e cartório. A importação de PDFs e planilhas é assistida e exige conferência humana antes da gravação definitiva.
               </p>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <GlowButton href="/programas" variant="secondary">
-                Voltar aos programas
+              <GlowButton href={downloadUrl} external variant="primary">
+                Baixar versão 1.0.0
               </GlowButton>
 
-              <GlowButton href="/contato" variant="primary">
-                Enviar sugestão
+              <GlowButton href="/programas" variant="secondary">
+                Voltar aos programas
               </GlowButton>
             </div>
           </MetallicCard>
 
           <MetallicCard className="p-8">
-            <h3 className="text-2xl font-black text-text">Resumo do projeto</h3>
+            <h3 className="text-2xl font-black text-text">Resumo do programa</h3>
 
             <dl className="mt-6 space-y-4 text-sm">
               <div>
                 <dt className="font-bold uppercase tracking-[0.18em] text-electricLight">Status</dt>
-                <dd className="mt-1 text-muted">Em desenvolvimento</dd>
+                <dd className="mt-1 text-muted">Disponível</dd>
+              </div>
+
+              <div>
+                <dt className="font-bold uppercase tracking-[0.18em] text-electricLight">Versão</dt>
+                <dd className="mt-1 text-muted">1.0.0</dd>
               </div>
 
               <div>
                 <dt className="font-bold uppercase tracking-[0.18em] text-electricLight">Plataforma</dt>
-                <dd className="mt-1 text-muted">Desktop Windows</dd>
+                <dd className="mt-1 text-muted">Windows 10 ou posterior</dd>
               </div>
 
               <div>
                 <dt className="font-bold uppercase tracking-[0.18em] text-electricLight">Funcionamento</dt>
-                <dd className="mt-1 text-muted">Local/offline no MVP</dd>
+                <dd className="mt-1 text-muted">Local e offline</dd>
               </div>
 
               <div>
-                <dt className="font-bold uppercase tracking-[0.18em] text-electricLight">Identidade visual</dt>
-                <dd className="mt-1 text-muted">Verde e preto</dd>
-              </div>
-
-              <div>
-                <dt className="font-bold uppercase tracking-[0.18em] text-electricLight">Finalidade</dt>
-                <dd className="mt-1 text-muted">Gestão de IPs, prazos, documentos, objetos e relatórios</dd>
+                <dt className="font-bold uppercase tracking-[0.18em] text-electricLight">Armazenamento</dt>
+                <dd className="mt-1 text-muted">Banco SQLite e arquivos na pasta Documentos do usuário</dd>
               </div>
             </dl>
           </MetallicCard>
@@ -143,21 +143,21 @@ export default function DamaGestorDeInqueritosPage() {
           <MetallicCard>
             <p className="eyebrow mb-4">Problema</p>
             <p className="text-sm leading-7 text-muted">
-              O controle de inquéritos costuma ficar espalhado entre planilhas, pastas, PDFs, anotações manuais e alertas informais.
+              O controle de inquéritos pode ficar espalhado entre planilhas, pastas, PDFs, anotações manuais e alertas informais.
             </p>
           </MetallicCard>
 
           <MetallicCard>
-            <p className="eyebrow mb-4">Solução proposta</p>
+            <p className="eyebrow mb-4">Solução</p>
             <p className="text-sm leading-7 text-muted">
-              Centralizar IPs, prazos, documentos, objetos, movimentações, logs e relatórios em sistema local organizado por delegacia e cartório.
+              Centralizar IPs, prazos, documentos, objetos, movimentações, logs e relatórios em uma aplicação local organizada por delegacia e cartório.
             </p>
           </MetallicCard>
 
           <MetallicCard>
             <p className="eyebrow mb-4">Regra central</p>
             <p className="text-sm leading-7 text-muted">
-              O IP pertence ao cartório. O usuário logado define o cartório padrão, mas a consulta geral pode continuar disponível.
+              O IP pertence ao cartório. Os dados e documentos permanecem preservados, e encerramentos são registrados de forma lógica e auditável.
             </p>
           </MetallicCard>
         </div>
@@ -165,9 +165,9 @@ export default function DamaGestorDeInqueritosPage() {
         <div className="mb-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <MetallicCard>
             <SectionTitle
-              eyebrow="Recursos previstos"
-              title="O que o sistema deverá fazer"
-              description="Principais funções planejadas para o Dama Gestor de Inquéritos."
+              eyebrow="Recursos"
+              title="O que o sistema oferece"
+              description="Principais funções disponíveis na versão 1.0.0."
               className="mb-6"
             />
 
@@ -184,8 +184,8 @@ export default function DamaGestorDeInqueritosPage() {
           <MetallicCard>
             <SectionTitle
               eyebrow="Módulos"
-              title="Arquitetura funcional prevista"
-              description="O desenvolvimento deve ser modular, com cada etapa funcional antes de avançar para a próxima."
+              title="Áreas funcionais"
+              description="Organização das capacidades disponíveis no aplicativo."
               className="mb-6"
             />
 
@@ -202,8 +202,8 @@ export default function DamaGestorDeInqueritosPage() {
         <MetallicCard variant="notice" className="mb-10">
           <SectionTitle
             eyebrow="Dados Correcionais / MP"
-            title="Módulo correcional incorporado ao núcleo do sistema"
-            description="O projeto prevê um bloco específico para registrar, conferir, filtrar, alertar e exportar dados correcionais em padrão compatível com controle do Ministério Público."
+            title="Dados correcionais integrados aos fluxos do sistema"
+            description="Os campos podem ser mantidos na edição dos dados principais, importados de planilhas e utilizados nos relatórios. A versão atual não apresenta uma aba correcional dedicada totalmente integrada."
             className="mb-6"
           />
 
@@ -220,8 +220,8 @@ export default function DamaGestorDeInqueritosPage() {
           <MetallicCard>
             <SectionTitle
               eyebrow="Tecnologia"
-              title="Stack técnica planejada"
-              description="Base técnica sugerida para o desenvolvimento do aplicativo desktop local."
+              title="Base técnica"
+              description="Tecnologias utilizadas na aplicação e na distribuição para Windows."
               className="mb-6"
             />
 
@@ -238,22 +238,22 @@ export default function DamaGestorDeInqueritosPage() {
             <SectionTitle
               eyebrow="Segurança documental"
               title="Preservação dos arquivos importados"
-              description="O sistema deverá copiar documentos para pasta própria, calcular hash, registrar no banco, manter histórico e evitar substituições automáticas."
+              description="Documentos são copiados para a estrutura do programa, recebem hash e não são sobrescritos automaticamente."
               className="mb-6"
             />
 
             <p className="text-sm leading-7 text-muted">
-              A regra de ouro do projeto é que o Dama nunca apague nem substitua documentos automaticamente. Arquivos importados devem ser preservados, versionados ou complementados somente com ação confirmada pelo usuário.
+              O sistema mantém histórico e auditoria das operações relevantes. Arquivos duplicados ou possíveis novas versões recebem alertas para conferência antes da ação do usuário.
             </p>
           </MetallicCard>
         </div>
 
-        <InfoNotice title="Projeto em desenvolvimento" className="mb-6">
-          Esta página apresenta o escopo planejado do Dama Gestor de Inquéritos. As funcionalidades descritas podem ser implementadas por etapas, ajustadas durante o desenvolvimento e liberadas progressivamente.
+        <InfoNotice title="Antes de instalar" className="mb-6">
+          A extração automática depende de PDFs com camada de texto e não executa OCR em documentos somente escaneados. O backup interno protege o banco SQLite, mas não substitui uma cópia segura de toda a árvore de documentos dos inquéritos.
         </InfoNotice>
 
         <ResponsibilityNotice>
-          O Dama Gestor de Inquéritos será uma ferramenta de apoio à organização e ao controle interno. Ele não substitui a responsabilidade funcional, a conferência humana, os sistemas oficiais, as normas institucionais ou a validação final dos dados pelo usuário responsável.
+          O Dama Gestor de Inquéritos é uma ferramenta de apoio à organização e ao controle interno. Ele não substitui a responsabilidade funcional, a conferência humana, os sistemas oficiais, as normas institucionais ou a validação final dos dados pelo usuário responsável.
         </ResponsibilityNotice>
       </section>
     </main>

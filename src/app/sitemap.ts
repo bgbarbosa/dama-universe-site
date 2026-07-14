@@ -3,8 +3,8 @@ import { footerNavigation, posts, programs } from "@/data";
 import { siteConfig } from "@/lib/seo";
 
 const routeDates: Record<string, string> = {
-  "/": "2026-07-10",
-  "/programas": "2026-07-10",
+  "/": "2026-07-13",
+  "/programas": "2026-07-13",
   "/gpts": "2026-06-25",
   "/blog": "2026-06-25",
   "/referencias": "2026-06-23",

@@ -19,6 +19,15 @@ export type UpdateItem = {
 
 export const updates: UpdateItem[] = [
   {
+    title: "Dama Gestor de Inquéritos 1.0.0 disponível",
+    area: "Programas",
+    type: "Programa",
+    date: "2026-07-13",
+    summary:
+      "Aplicação Windows local e offline para cadastro e acompanhamento de inquéritos, prazos, documentos, objetos, relatórios e backups.",
+    url: "/programas/dama-gestor-de-inqueritos",
+  },
+  {
     title: "Dama Token SIGO Fix 1.0.0 publicado",
     area: "Programas",
     type: "Programa",
