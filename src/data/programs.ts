@@ -5,6 +5,7 @@ export type ProgramStatus =
   | "Testes finais"
   | "Em arquitetura reservada"
   | "Em planejamento"
+  | "Projeto sob consulta"
   | "Futuro"
   | "Indisponível";
 
@@ -27,6 +28,21 @@ export type Program = {
 };
 
 export const programs: Program[] = [
+  {
+    name: "Dama Gestor de RH",
+    slug: "dama-gestor-rh",
+    category: "Gestão operacional de RH",
+    shortDescription:
+      "Solução para organizar trabalhadores, contratos, alocações, ocorrências, afastamentos, substituições e acompanhamento operacional.",
+    fullDescription:
+      "O Dama Gestor de RH é uma solução de software com base funcional existente para gestão operacional de recursos humanos. A implantação e as adequações são definidas conforme a estrutura, os vínculos, os contratos, os perfis de acesso e as necessidades de cada organização.",
+    version: "Base funcional",
+    status: "Projeto sob consulta",
+    updatedAt: "2026-08-12",
+    detailsUrl: "/programas/dama-gestor-rh",
+    iconUrl: "/images/programs/dama-gestor-rh.png",
+    featured: true,
+  },
   {
     name: "Dama Gerador FCC",
     slug: "dama-gerador-fcc",

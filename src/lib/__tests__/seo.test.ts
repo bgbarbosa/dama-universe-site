@@ -19,4 +19,24 @@ describe("createPageMetadata", () => {
       ])
     );
   });
+
+  it("permite imagem social específica por página", () => {
+    const metadata = createPageMetadata({
+      title: "Página de teste",
+      description: "Descrição de teste",
+      path: "/teste",
+      image: "/images/og/teste.png",
+      imageAlt: "Imagem social de teste",
+    });
+
+    expect(metadata.openGraph?.images).toEqual([
+      expect.objectContaining({
+        url: `${siteConfig.url}/images/og/teste.png`,
+        alt: "Imagem social de teste",
+      }),
+    ]);
+    expect(metadata.twitter).toMatchObject({
+      images: [`${siteConfig.url}/images/og/teste.png`],
+    });
+  });
 });
