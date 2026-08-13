@@ -16,7 +16,7 @@ export function PageHeader({ title, subtitle, description, className }: PageHead
           {subtitle}
         </p>
       ) : null}
-      <ChromeTitle as="h1" className="text-4xl md:text-7xl">
+      <ChromeTitle as="h1" className="break-words text-3xl sm:text-4xl md:text-7xl">
         {title}
       </ChromeTitle>
       {description ? (

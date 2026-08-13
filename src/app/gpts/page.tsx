@@ -21,7 +21,7 @@ export default function GptsPage() {
       />
 
       <section className="mx-auto max-w-7xl px-6 pb-20">
-        <div className="mb-8">
+        <div className="mb-8 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
           <MetallicCard variant="notice">
             <h2 className="text-2xl font-black text-text">
               Assistentes com finalidade definida
@@ -32,6 +32,15 @@ export default function GptsPage() {
               e cuidados necessários. Eles funcionam como ferramentas de apoio, não
               como substitutos da conferência humana, responsabilidade técnica ou
               validação final.
+            </p>
+          </MetallicCard>
+
+          <MetallicCard variant="warning">
+            <p className="eyebrow mb-4 text-goldSoft">Uso responsável</p>
+            <p className="text-sm leading-7 text-muted">
+              Não envie dados sensíveis, documentos sigilosos, informações
+              pessoais de terceiros, senhas, tokens ou conteúdo relacionado a
+              procedimentos restritos.
             </p>
           </MetallicCard>
         </div>

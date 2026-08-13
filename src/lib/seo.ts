@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Dama Universe",
   url: "https://damauniverse.com.br",
   locale: "pt_BR",
-  ogImage: "/images/og/dama-universe-og.svg",
+  ogImage: "/images/og/dama-universe-og.png",
   defaultTitle: "Dama Universe — Programas, IA, dados e ferramentas em evolução",
   defaultDescription:
     "Dama Universe é um espaço dedicado a programas, ferramentas digitais, inteligência artificial, análise de dados, automação, downloads, versões e conteúdos técnicos.",
@@ -15,6 +15,8 @@ type CreatePageMetadataParams = {
   description: string;
   path?: string;
   type?: "website" | "article";
+  image?: string;
+  imageAlt?: string;
 };
 
 export function createPageMetadata({
@@ -22,10 +24,12 @@ export function createPageMetadata({
   description,
   path = "/",
   type = "website",
+  image = siteConfig.ogImage,
+  imageAlt = "Dama Universe — Programas, IA, dados e ferramentas em evolução",
 }: CreatePageMetadataParams): Metadata {
   const canonicalPath = path.startsWith("/") ? path : `/${path}`;
   const url = new URL(canonicalPath, siteConfig.url).toString();
-  const imageUrl = new URL(siteConfig.ogImage, siteConfig.url).toString();
+  const imageUrl = new URL(image, siteConfig.url).toString();
 
   return {
     title,
@@ -45,7 +49,7 @@ export function createPageMetadata({
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: "Dama Universe — Programas, IA, dados e ferramentas em evolução",
+          alt: imageAlt,
         },
       ],
     },

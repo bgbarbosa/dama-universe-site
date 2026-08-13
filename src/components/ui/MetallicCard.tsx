@@ -29,7 +29,7 @@ export function MetallicCard({
   return (
     <div
       className={[
-        "rounded-2xl border bg-metallic-card p-6 transition-all duration-200",
+        "rounded-2xl border bg-metallic-card p-5 transition-all duration-200 sm:p-6",
         variantClasses[variant],
         className
       ].join(" ")}

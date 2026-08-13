@@ -8,7 +8,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isProduction ? "" : " 'unsafe-eval'"} https://www.googletagmanager.com https://www.clarity.ms https://*.clarity.ms https://giscus.app`,
+  `script-src 'self' 'unsafe-inline'${isProduction ? "" : " 'unsafe-eval' https://va.vercel-scripts.com"} https://www.googletagmanager.com https://www.clarity.ms https://*.clarity.ms https://giscus.app`,
   "style-src 'self' 'unsafe-inline' https://giscus.app",
   "img-src 'self' data: blob: https://i.ytimg.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com",
   "font-src 'self' data:",

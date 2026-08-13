@@ -2,7 +2,7 @@ export type SocialStatus = "Ativo" | "Previsto" | "Temporário" | "Indisponível
 
 export type SocialLink = {
   name: string;
-  url: string;
+  url: string | null;
   icon?: string;
   status: SocialStatus;
 };
@@ -10,31 +10,31 @@ export type SocialLink = {
 export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
-    url: "#",
+    url: null,
     icon: "github",
     status: "Previsto",
   },
   {
     name: "Instagram",
-    url: "#",
+    url: null,
     icon: "instagram",
     status: "Previsto",
   },
   {
     name: "YouTube",
-    url: "#",
+    url: null,
     icon: "youtube",
     status: "Previsto",
   },
   {
     name: "LinkedIn",
-    url: "#",
+    url: null,
     icon: "linkedin",
     status: "Previsto",
   },
   {
     name: "E-mail",
-    url: "#",
+    url: null,
     icon: "mail",
     status: "Temporário",
   },

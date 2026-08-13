@@ -8,9 +8,9 @@ import {
   SectionHeader,
   SectionTitle,
 } from "@/components/ui";
+import { getProgramDownloadUrl } from "@/data";
 
-const downloadUrl =
-  "https://drive.google.com/uc?export=download&id=1cLprfcL_ZfLixQvXguYGuNo_tas6t_vI";
+const downloadUrl = getProgramDownloadUrl("dama-cleaner-sigo-desktop");
 
 const features = [
   "Limpeza local de cache e arquivos temporários do SIGO Desktop.",

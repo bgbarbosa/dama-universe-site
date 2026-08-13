@@ -58,7 +58,7 @@ export function VideoCard({
   const videoDescription = description ?? video?.description ?? "";
 
   const currentYoutubeUrl =
-    youtubeUrl ?? url ?? video?.youtubeUrl ?? video?.url ?? "#";
+    youtubeUrl ?? url ?? video?.youtubeUrl ?? video?.url ?? "";
 
   const currentYoutubeId =
     youtubeId ??
@@ -74,7 +74,7 @@ export function VideoCard({
 
   const isPublished =
     currentStatus.toLowerCase() === "publicado" &&
-    currentYoutubeUrl !== "#" &&
+    isExternalUrl(currentYoutubeUrl) &&
     currentYoutubeId.length > 0;
 
   return (
@@ -123,9 +123,10 @@ export function VideoCard({
 
         <div className="mt-auto pt-6">
           <GlowButton
-            href={currentYoutubeUrl}
+            href={isPublished ? currentYoutubeUrl : undefined}
             external={isExternalUrl(currentYoutubeUrl)}
             variant={isPublished ? "primary" : "secondary"}
+            disabled={!isPublished}
           >
             {isPublished ? "Assistir no YouTube" : "Vídeo em preparação"}
           </GlowButton>

@@ -8,9 +8,9 @@ import {
   SectionHeader,
   SectionTitle,
 } from "@/components/ui";
+import { getProgramDownloadUrl } from "@/data";
 
-const downloadUrl =
-  "https://drive.usercontent.google.com/download?id=1y0pRu7YeazLrSYFq2Sf0rgtrgMkh48rh&export=download";
+const downloadUrl = getProgramDownloadUrl("dama-biometria-sigo-fix");
 
 const features = [
   "Correção automática recomendada para problemas comuns de biometria e assinatura.",

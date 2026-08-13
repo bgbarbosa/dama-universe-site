@@ -5,6 +5,7 @@ export type ProgramStatus =
   | "Testes finais"
   | "Em arquitetura reservada"
   | "Em planejamento"
+  | "Projeto sob consulta"
   | "Futuro"
   | "Indisponível";
 
@@ -27,6 +28,21 @@ export type Program = {
 };
 
 export const programs: Program[] = [
+  {
+    name: "Dama Gestor de RH",
+    slug: "dama-gestor-rh",
+    category: "Gestão operacional de RH",
+    shortDescription:
+      "Solução para organizar trabalhadores, contratos, alocações, ocorrências, afastamentos, substituições e acompanhamento operacional.",
+    fullDescription:
+      "O Dama Gestor de RH é uma solução de software com base funcional existente para gestão operacional de recursos humanos. A implantação e as adequações são definidas conforme a estrutura, os vínculos, os contratos, os perfis de acesso e as necessidades de cada organização.",
+    version: "Base funcional",
+    status: "Projeto sob consulta",
+    updatedAt: "2026-08-12",
+    detailsUrl: "/programas/dama-gestor-rh",
+    iconUrl: "/images/programs/dama-gestor-rh.png",
+    featured: true,
+  },
   {
     name: "Dama Gerador FCC",
     slug: "dama-gerador-fcc",
@@ -56,7 +72,7 @@ export const programs: Program[] = [
     status: "Disponível",
     updatedAt: "2026-07-04",
     detailsUrl: "/programas/dama-cleaner-sigo-desktop",
-    downloadUrl: "https://drive.usercontent.google.com/download?id=1cLprfcL_ZfLixQvXguYGuNo_tas6t_vI&export=download",
+    downloadUrl: "https://drive.google.com/uc?export=download&id=1cLprfcL_ZfLixQvXguYGuNo_tas6t_vI",
     iconUrl: "/images/programs/dama-cleaner-sigo.png",
     featured: true,
   },
@@ -151,3 +167,17 @@ export const programs: Program[] = [
 ];
 
 export const featuredPrograms = programs.filter((program) => program.featured);
+
+export function getProgramBySlug(slug: string) {
+  return programs.find((program) => program.slug === slug);
+}
+
+export function getProgramDownloadUrl(slug: string) {
+  const program = getProgramBySlug(slug);
+
+  if (!program?.downloadUrl) {
+    throw new Error(`Programa sem URL de download publicada: ${slug}`);
+  }
+
+  return program.downloadUrl;
+}

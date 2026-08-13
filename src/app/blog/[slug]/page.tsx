@@ -1,6 +1,7 @@
 import { createPageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { ResponsibilityNotice } from "@/components/notices";
+import { GiscusComments } from "@/components/comments";
 import { GlowButton, MetallicCard, PageHeader } from "@/components/ui";
 import { getPostContentBySlug, postContents } from "@/data";
 
@@ -82,7 +83,7 @@ export default async function BlogPostPage({
               className="border-electric/60 shadow-[0_0_28px_rgba(37,150,255,0.20)]"
             >
               <h2 className="text-2xl font-semibold text-chromeLight">{section.heading}</h2>
-              <div className="mt-4 space-y-4 text-base leading-8 text-muted">
+              <div className="mt-4 space-y-4 break-words text-base leading-8 text-muted [overflow-wrap:anywhere]">
                 {section.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -95,6 +96,11 @@ export default async function BlogPostPage({
           <ResponsibilityNotice>
             Conteúdos técnicos publicados no Dama Universe possuem finalidade informativa e de apoio. A aplicação prática exige análise, validação e responsabilidade do usuário.
           </ResponsibilityNotice>
+
+          <GiscusComments
+            title={`Comentários sobre “${post.title}”`}
+            description="Use este espaço para dúvidas gerais e contribuições construtivas relacionadas ao conteúdo."
+          />
 
           <div className="flex flex-wrap gap-3">
             <GlowButton href="/blog" variant="secondary">

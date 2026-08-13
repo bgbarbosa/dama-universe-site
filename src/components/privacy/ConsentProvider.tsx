@@ -45,16 +45,19 @@ export function useConsent() {
 function AnalyticsIntegrations() {
   const pathname = usePathname();
   const { googleAnalyticsId, microsoftClarityId } = analyticsConfig;
+  const [googleAnalyticsReady, setGoogleAnalyticsReady] = useState(false);
 
   useEffect(() => {
-    if (!googleAnalyticsId || typeof window === "undefined") {
+    if (!googleAnalyticsId || !googleAnalyticsReady) {
       return;
     }
 
-    window.gtag?.("config", googleAnalyticsId, {
-      page_path: window.location.href,
+    window.gtag?.("event", "page_view", {
+      page_location: window.location.href,
+      page_path: pathname,
+      page_title: document.title,
     });
-  }, [googleAnalyticsId, pathname]);
+  }, [googleAnalyticsId, googleAnalyticsReady, pathname]);
 
   return (
     <>
@@ -62,19 +65,26 @@ function AnalyticsIntegrations() {
 
       {googleAnalyticsId ? (
         <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-            strategy="afterInteractive"
-          />
           <Script id="google-analytics" strategy="afterInteractive">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               window.gtag = gtag;
               gtag('js', new Date());
+              gtag('consent', 'default', {
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                analytics_storage: 'granted'
+              });
               gtag('config', '${googleAnalyticsId}', { send_page_view: false });
             `}
           </Script>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+            strategy="afterInteractive"
+            onReady={() => setGoogleAnalyticsReady(true)}
+          />
         </>
       ) : null}
 
@@ -83,6 +93,7 @@ function AnalyticsIntegrations() {
           {`
             (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              c[a]('consentv2',{ad_Storage:'denied',analytics_Storage:'granted'});
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
               y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "${microsoftClarityId}");
@@ -136,11 +147,18 @@ function ConsentPanel({
 
       <p className="mt-4 text-sm leading-7 text-muted">
         Usamos Vercel Analytics, Google Analytics e Microsoft Clarity para
-        compreender o uso do site. Vídeos do YouTube só são conectados quando
-        você permite conteúdo externo. A escolha fica salva neste navegador por
-        180 dias. Consulte a{" "}
+        compreender o uso do site. Vídeos do YouTube e comentários Giscus só
+        abrem conexão quando você permite conteúdo externo. A escolha fica salva
+        neste navegador por 180 dias. Consulte a{" "}
         <Link href="/politica-de-cookies" className="text-electricLight underline">
           Política de Cookies
+        </Link>
+        {" e a "}
+        <Link
+          href="/politica-de-privacidade"
+          className="text-electricLight underline"
+        >
+          Política de Privacidade
         </Link>
         .
       </p>
@@ -172,8 +190,8 @@ function ConsentPanel({
             <span>
               <span className="block font-bold text-text">Conteúdo externo</span>
               <span className="mt-1 block text-sm leading-6 text-muted">
-                Permite carregar vídeos incorporados pelo domínio de privacidade
-                aprimorada do YouTube.
+                Permite carregar vídeos pelo modo de privacidade aprimorada do
+                YouTube e comentários via Giscus/GitHub Discussions.
               </span>
             </span>
           </label>
@@ -223,12 +241,18 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   useEffect(() => {
-    const stored = parseConsentPreferences(
-      window.localStorage.getItem(CONSENT_STORAGE_KEY)
-    );
+    let stored: ConsentPreferences | null = null;
 
-    if (!stored) {
-      window.localStorage.removeItem(CONSENT_STORAGE_KEY);
+    try {
+      stored = parseConsentPreferences(
+        window.localStorage.getItem(CONSENT_STORAGE_KEY)
+      );
+
+      if (!stored) {
+        window.localStorage.removeItem(CONSENT_STORAGE_KEY);
+      }
+    } catch {
+      stored = null;
     }
 
     setPreferences(stored);
@@ -238,14 +262,39 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
   const savePreferences = useCallback<ConsentContextValue["savePreferences"]>(
     (choices) => {
       const nextPreferences = createConsentPreferences(choices);
-      window.localStorage.setItem(
-        CONSENT_STORAGE_KEY,
-        JSON.stringify(nextPreferences)
-      );
+      const analyticsWasRevoked =
+        preferences?.analytics === true && !nextPreferences.analytics;
+      let persisted = false;
+
+      try {
+        window.localStorage.setItem(
+          CONSENT_STORAGE_KEY,
+          JSON.stringify(nextPreferences)
+        );
+        persisted = true;
+      } catch {
+        // A preferência ainda vale nesta sessão quando o armazenamento é bloqueado.
+      }
+
+      if (analyticsWasRevoked) {
+        window.gtag?.("consent", "update", {
+          ad_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+          analytics_storage: "denied",
+        });
+        window.clarity?.("consent", false);
+      }
+
       setPreferences(nextPreferences);
       setSettingsOpen(false);
+
+      // O recarregamento remove também o coletor já injetado pela Vercel.
+      if (analyticsWasRevoked && persisted) {
+        window.setTimeout(() => window.location.reload(), 250);
+      }
     },
-    []
+    [preferences]
   );
 
   return (
@@ -290,5 +339,6 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    clarity?: (...args: unknown[]) => void;
   }
 }

@@ -1,44 +1,11 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-
-const quickLinks = [
-  { label: "Início", href: "/" },
-  { label: "Programas", href: "/programas" },
-  { label: "GPTs Personalizados", href: "/gpts" },
-  { label: "Blog", href: "/blog" },
-  { label: "Referências", href: "/referencias" },
-  { label: "Apoie", href: "/apoie" },
-  { label: "Sobre", href: "/sobre" },
-  { label: "Contato", href: "/contato" },
-  { label: "Termos de Uso", href: "/termos-de-uso" },
-  { label: "Política de Privacidade", href: "/politica-de-privacidade" },
-  { label: "Política de Comentários", href: "/politica-de-comentarios" },
-];
-
-const socialLinks = [
-  { label: "GitHub", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "YouTube", href: "#" },
-  { label: "LinkedIn", href: "#" },
-];
+import { footerNavigation, socialLinks } from "@/data";
 
 function FooterLink({ href, children }: { href: string; children: ReactNode }) {
   const className =
     "rounded-md text-sm text-muted transition duration-200 hover:text-electricLight focus-ring";
-  const linkLabel = typeof children === "string" ? children : "Link";
   const isExternal = href.startsWith("http");
-
-  if (href === "#") {
-    return (
-      <a
-        href={href}
-        className={className}
-        aria-label={`${linkLabel} — canal oficial em preparação`}
-      >
-        {children}
-      </a>
-    );
-  }
 
   if (isExternal) {
     return (
@@ -61,6 +28,11 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
 }
 
 export function Footer() {
+  const activeSocialLinks = socialLinks.filter(
+    (link): link is typeof link & { url: string } =>
+      link.status === "Ativo" && Boolean(link.url)
+  );
+
   return (
     <footer className="border-t border-border/80 bg-backgroundSoft/80 text-text">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:px-8 lg:grid-cols-[1.2fr_1.4fr_0.95fr]">
@@ -94,7 +66,7 @@ export function Footer() {
           </h2>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            {quickLinks.map((link) => (
+            {footerNavigation.map((link) => (
               <FooterLink key={link.href} href={link.href}>
                 {link.label}
               </FooterLink>
@@ -107,13 +79,15 @@ export function Footer() {
             Canais oficiais em preparação
           </h2>
 
-          <div className="mt-5 flex flex-col gap-3">
-            {socialLinks.map((link) => (
-              <FooterLink key={link.label} href={link.href}>
-                {link.label}
-              </FooterLink>
-            ))}
-          </div>
+          {activeSocialLinks.length ? (
+            <div className="mt-5 flex flex-col gap-3">
+              {activeSocialLinks.map((link) => (
+                <FooterLink key={link.name} href={link.url}>
+                  {link.name}
+                </FooterLink>
+              ))}
+            </div>
+          ) : null}
 
           <p className="mt-5 text-xs leading-6 text-mutedSoft">
             Os canais oficiais do Dama Universe serão ativados gradualmente

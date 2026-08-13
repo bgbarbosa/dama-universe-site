@@ -39,14 +39,18 @@ export function parseConsentPreferences(
   try {
     const parsed = JSON.parse(value) as Partial<ConsentPreferences>;
     const expiresAt = parsed.expiresAt ? new Date(parsed.expiresAt) : null;
+    const updatedAt = parsed.updatedAt ? new Date(parsed.updatedAt) : null;
 
     if (
       parsed.version !== CONSENT_VERSION ||
       typeof parsed.analytics !== "boolean" ||
       typeof parsed.externalMedia !== "boolean" ||
       typeof parsed.updatedAt !== "string" ||
+      !updatedAt ||
+      Number.isNaN(updatedAt.getTime()) ||
       !expiresAt ||
       Number.isNaN(expiresAt.getTime()) ||
+      expiresAt <= updatedAt ||
       expiresAt <= now
     ) {
       return null;

@@ -19,6 +19,15 @@ export type UpdateItem = {
 
 export const updates: UpdateItem[] = [
   {
+    title: "Dama Gestor de RH apresentado no Dama Universe",
+    area: "Programas",
+    type: "Programa",
+    date: "2026-08-12",
+    summary:
+      "Nova página institucional apresenta a base funcional do Dama Gestor de RH para organização de trabalhadores, contratos, alocações, ocorrências, afastamentos, coberturas e acompanhamento operacional. Projetos sob consulta.",
+    url: "/programas/dama-gestor-rh",
+  },
+  {
     title: "Dama Token SIGO Fix 1.0.0 publicado",
     area: "Programas",
     type: "Programa",

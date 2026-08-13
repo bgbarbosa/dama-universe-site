@@ -2,9 +2,9 @@ import { createPageMetadata } from "@/lib/seo";
 import { ResponsibilityNotice, SecurityNotice } from "@/components/notices";
 import { DamaFccTutorials } from "@/components/videos";
 import { GlowButton, MetallicCard, SectionHeader, SectionTitle } from "@/components/ui";
+import { getProgramDownloadUrl } from "@/data";
 
-const downloadUrl =
-  "https://drive.google.com/file/d/1P4DmjPet9GsmoOWROxmKKb6Zt-F6fIC_/view?usp=drive_link";
+const downloadUrl = getProgramDownloadUrl("dama-gerador-fcc");
 
 const features = [
   "Geração de FCC a partir de Boletim de Ocorrência em PDF.",
