@@ -30,6 +30,60 @@ a {
   text-decoration: none;
 }
 
+@keyframes release-glow-cycle {
+  0%,
+  100% {
+    border-color: rgba(37, 150, 255, 0.8);
+    box-shadow: 0 0 28px rgba(37, 150, 255, 0.28);
+  }
+
+  34% {
+    border-color: rgba(70, 225, 255, 0.9);
+    box-shadow: 0 0 34px rgba(70, 225, 255, 0.34);
+  }
+
+  68% {
+    border-color: rgba(214, 167, 47, 0.78);
+    box-shadow: 0 0 30px rgba(214, 167, 47, 0.3);
+  }
+}
+
+@keyframes release-accent-cycle {
+  0%,
+  100% {
+    border-color: rgba(37, 150, 255, 0.78);
+    background-color: rgba(37, 150, 255, 0.14);
+    color: #bfe5ff;
+  }
+
+  34% {
+    border-color: rgba(70, 225, 255, 0.88);
+    background-color: rgba(70, 225, 255, 0.14);
+    color: #d4f8ff;
+  }
+
+  68% {
+    border-color: rgba(214, 167, 47, 0.75);
+    background-color: rgba(214, 167, 47, 0.13);
+    color: #f3d98c;
+  }
+}
+
+@keyframes release-stripe-cycle {
+  0%,
+  100% {
+    background-color: #2596ff;
+  }
+
+  34% {
+    background-color: #46e1ff;
+  }
+
+  68% {
+    background-color: #d6a72f;
+  }
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;
@@ -66,5 +120,49 @@ a {
 
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electricLight focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .release-glow {
+    @apply relative overflow-hidden border;
+    animation: release-glow-cycle 2.8s ease-in-out infinite;
+  }
+
+  .release-glow::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    content: "";
+    animation: release-stripe-cycle 2.8s ease-in-out infinite;
+  }
+
+  .release-glow-badge {
+    animation: release-accent-cycle 2.8s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .release-glow,
+  .release-glow::before,
+  .release-glow-badge {
+    animation: none;
+  }
+
+  .release-glow {
+    border-color: rgba(37, 150, 255, 0.78);
+    box-shadow: 0 0 24px rgba(37, 150, 255, 0.24);
+  }
+
+  .release-glow::before {
+    background-color: #2596ff;
+  }
+
+  .release-glow-badge {
+    border-color: rgba(37, 150, 255, 0.78);
+    background-color: rgba(37, 150, 255, 0.14);
+    color: #bfe5ff;
   }
 }

@@ -16,7 +16,7 @@ export function SiteUpdatesPreview() {
   const latestUpdates = updates.slice(0, 8);
 
   return (
-    <section className="page-section-tight">
+    <section id="novidades-recentes" className="page-section-tight scroll-mt-24">
       <div className="container-site">
         <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">

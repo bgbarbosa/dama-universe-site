@@ -2,27 +2,54 @@ import Image from "next/image";
 
 import { createPageMetadata } from "@/lib/seo";
 import { ResponsibilityNotice, SecurityNotice } from "@/components/notices";
+import { BiometriaUpdateBanner } from "@/components/updates";
 import {
   GlowButton,
   MetallicCard,
   SectionHeader,
   SectionTitle,
 } from "@/components/ui";
-import { getProgramDownloadUrl } from "@/data";
+import { getProgramBySlug, getProgramDownloadUrl } from "@/data";
 
 const downloadUrl = getProgramDownloadUrl("dama-biometria-sigo-fix");
+const program =
+  getProgramBySlug("dama-biometria-sigo-fix") ??
+  (() => {
+    throw new Error("Dados do Dama Biometria SIGO Fix não encontrados.");
+  })();
 
 const features = [
-  "Correção automática recomendada para problemas comuns de biometria e assinatura.",
-  "Diagnóstico de Java/Nitgen com identificação de arquitetura 32/64 bits.",
-  "Verificação da DLL NBioBSPJNI.dll usada pelo ambiente biométrico.",
-  "Instalação local de Java quando os instaladores autorizados estiverem no pacote.",
-  "Reaplicação de bibliotecas de assinatura e biometria a partir do pacote validado.",
-  "Reparo seguro do driver HFDU06/Nitgen, sem remover dispositivo que já esteja OK.",
-  "Backup antes da substituição de arquivos relevantes.",
-  "Painel de log para acompanhar o andamento da execução.",
-  "Log salvo para apoio em suporte e análise posterior.",
-  "Orientação para abrir o SIGO pelo atalho normal/original após a correção.",
+  "Correção Automática Recomendada para diagnóstico e tratamento dos problemas mais comuns.",
+  "Identificação automática da versão e do perfil homologado do SIGO Desktop.",
+  "Identificação da versão e do app.asar.",
+  "Diagnóstico de Java e identificação de arquiteturas 32 e 64 bits.",
+  "Identificação da arquitetura da NBioBSPJNI.dll.",
+  "Seleção segura do Java compatível com a biblioteca Nitgen utilizada pelo SIGO.",
+  "Validação nativa da biblioteca biométrica.",
+  "Validação Java/JNI para confirmar a integração com a biblioteca Nitgen.",
+  "Launcher isolado para abertura do SIGO com o Java compatível.",
+  "Preservação do PATH e do JAVA_HOME globais do Windows.",
+  "Reparo transacional da pilha Nitgen, com backup e rollback em caso de falha.",
+  "Verificação e preservação do leitor HFDU06 quando já estiver funcional.",
+  "Identificação do hardware por VID/PID.",
+  "Logs técnicos ampliados em C:\\ProgramData\\DamaBiometriaSigoFix\\logs.",
+];
+
+const changedItems = [
+  "Compatibilidade homologada com o SIGO Desktop 1.0.48.",
+  "Identificação automática da versão e do perfil do SIGO.",
+  "Identificação da versão e do app.asar.",
+  "Detecção da arquitetura das bibliotecas Nitgen.",
+  "Seleção segura do Java compatível.",
+  "Validação nativa da biblioteca biométrica.",
+  "Validação Java/JNI/Nitgen.",
+  "Launcher isolado para abertura do SIGO.",
+  "Preservação do PATH e do JAVA_HOME globais.",
+  "Reparo transacional da pilha Nitgen.",
+  "Backup e rollback em caso de falha.",
+  "Identificação de hardware por VID/PID.",
+  "Preservação do HFDU06 quando já estiver funcional.",
+  "Logs técnicos ampliados.",
 ];
 
 const workflow = [
@@ -39,8 +66,12 @@ const workflow = [
     text: "Use primeiro a opção Correção Automática Recomendada e acompanhe o painel de log até a conclusão.",
   },
   {
-    title: "4. Testar assinatura",
-    text: "Abra o SIGO pelo atalho normal/original e faça um teste real de assinatura biométrica.",
+    title: "4. Abrir o SIGO",
+    text: "Se o programa criar o atalho “SIGO Desktop - Biometria Corrigida”, utilize esse atalho. Ele inicia o SIGO com o Java compatível somente naquele processo, sem alterar permanentemente o PATH ou o JAVA_HOME do Windows. Caso o launcher não seja necessário, siga a orientação apresentada pela ferramenta.",
+  },
+  {
+    title: "5. Testar a biometria",
+    text: "Realize uma operação real de assinatura via PAD/Biometria e confirme a captura da impressão digital.",
   },
 ];
 
@@ -50,11 +81,14 @@ const technicalItems = [
   "PyInstaller",
   "Inno Setup",
   "Java 8 x86/x64",
+  "Java/JNI Probe",
   "Nitgen JNI",
   "HFDU06",
+  "VID/PID",
+  "Backup transacional",
+  "Rollback",
   "Logs em ProgramData",
-  "Backup prévio",
-  "Execução guiada",
+  "Launcher isolado",
 ];
 
 const problemItems = [
@@ -62,8 +96,12 @@ const problemItems = [
   "Biometria não inicia",
   "Falha de assinatura",
   "Java incompatível",
-  "DLL Nitgen 32/64 bits",
+  "Java 32/64 bits incompatível com JNI",
+  "Biblioteca Nitgen não carregada",
+  "Falha na integração Java/JNI/Nitgen",
+  "Leitor biométrico não reconhecido",
   "Driver biométrico inconsistente",
+  "Componentes auxiliares ausentes ou incompatíveis",
 ];
 
 const outOfScopeItems = [
@@ -76,9 +114,9 @@ const outOfScopeItems = [
 ];
 
 export const metadata = createPageMetadata({
-  title: "Dama Biometria SIGO Fix — Dama Universe",
+  title: "Dama Biometria SIGO Fix 2.0.0 — Dama Universe",
   description:
-    "Ferramenta Windows independente para auxiliar na correção de falhas locais de biometria, assinatura, Java e componentes relacionados ao uso do SIGO Desktop.",
+    "Versão 2.0.0 para Windows, preparada para o ambiente homologado do SIGO Desktop 1.0.48, com correção guiada de biometria, assinatura, Java e Nitgen.",
   path: "/programas/dama-biometria-sigo-fix",
 });
 
@@ -90,7 +128,7 @@ export default function DamaBiometriaSigoFixPage() {
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <SectionHeader
               eyebrow="Programa disponível"
-              title="Dama Biometria SIGO Fix"
+              title="Dama Biometria SIGO Fix 2.0.0"
               description="Ferramenta Windows independente de apoio ao usuário para corrigir problemas locais recorrentes de Java, biometria, assinatura e componentes relacionados ao uso do SIGO Desktop."
             />
 
@@ -120,7 +158,7 @@ export default function DamaBiometriaSigoFixPage() {
                   <dt className="text-xs uppercase tracking-[0.24em] text-mutedSoft">
                     Versão
                   </dt>
-                  <dd className="mt-1 font-bold text-text">1.0.0</dd>
+                  <dd className="mt-1 font-bold text-text">{program.version}</dd>
                 </div>
                 <div>
                   <dt className="text-xs uppercase tracking-[0.24em] text-mutedSoft">
@@ -142,11 +180,19 @@ export default function DamaBiometriaSigoFixPage() {
                   </dt>
                   <dd className="mt-1 font-bold text-goldSoft">Disponível</dd>
                 </div>
+                <div className="sm:col-span-2">
+                  <dt className="text-xs uppercase tracking-[0.24em] text-mutedSoft">
+                    Compatibilidade homologada
+                  </dt>
+                  <dd className="mt-1 font-bold text-electricLight">
+                    {program.compatibility}
+                  </dd>
+                </div>
               </dl>
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <GlowButton href={downloadUrl} external variant="primary">
-                  Baixar instalador
+                  {program.downloadLabel}
                 </GlowButton>
                 <GlowButton href="/contato" variant="secondary">
                   Solicitar suporte
@@ -154,9 +200,8 @@ export default function DamaBiometriaSigoFixPage() {
               </div>
 
               <p className="mt-5 text-sm leading-7 text-mutedSoft">
-                O download é feito pelo Google Drive. Execute o instalador e o
-                programa com permissão de administrador e use primeiro a Correção
-                Automática Recomendada.
+                Após instalar, execute o programa como administrador e utilize
+                primeiro a Correção Automática Recomendada.
               </p>
             </MetallicCard>
           </div>
@@ -165,6 +210,8 @@ export default function DamaBiometriaSigoFixPage() {
 
       <section className="pb-20">
         <div className="container-site space-y-8">
+          <BiometriaUpdateBanner variant="program" />
+
           <MetallicCard className="border-2 border-red-500/70 bg-red-950/20 shadow-[0_0_55px_rgba(239,68,68,0.28)]">
             <p className="eyebrow mb-4 text-red-300">
               Declaração essencial de independência
@@ -183,6 +230,39 @@ export default function DamaBiometriaSigoFixPage() {
             </p>
           </MetallicCard>
 
+          <section
+            id="o-que-mudou-na-versao-2"
+            className="scroll-mt-28"
+            aria-labelledby="titulo-o-que-mudou-na-versao-2"
+          >
+            <MetallicCard variant="featured">
+              <p className="eyebrow mb-4">Atualização importante</p>
+              <h2
+                id="titulo-o-que-mudou-na-versao-2"
+                className="text-2xl font-black text-text sm:text-3xl"
+              >
+                O que mudou na versão 2.0.0
+              </h2>
+              <p className="body-text-sm mt-4 max-w-4xl">
+                A versão 2.0.0 aprimora a integração entre o perfil do SIGO,
+                Java, JNI, bibliotecas Nitgen, launcher e leitor biométrico,
+                adotando validações e reparos mais conservadores.
+              </p>
+
+              <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {changedItems.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-electric/25 bg-backgroundSoft/80 p-4 text-sm leading-6 text-chromeLight"
+                  >
+                    <span className="mr-2 text-electricLight">•</span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </MetallicCard>
+          </section>
+
           <MetallicCard>
             <SectionTitle
               title="O que é o Dama Biometria SIGO Fix"
@@ -200,9 +280,16 @@ export default function DamaBiometriaSigoFixPage() {
 
               <p>
                 A proposta é reduzir tentativas manuais, comandos técnicos e
-                diagnósticos complexos. O usuário executa a ferramenta, acompanha
-                o log, aguarda a conclusão e depois abre o SIGO pelo atalho
-                normal/original para testar a assinatura biométrica.
+                diagnósticos complexos. Na versão 2.0.0, o programa também
+                verifica a compatibilidade entre o Java e as bibliotecas JNI
+                utilizadas pelo SIGO, reduzindo falhas causadas por arquiteturas
+                incompatíveis.
+              </p>
+
+              <p>
+                Após a correção, siga a orientação apresentada pelo programa.
+                Quando o atalho “SIGO Desktop - Biometria Corrigida” for criado,
+                utilize-o para abrir o SIGO com o Java compatível.
               </p>
             </div>
           </MetallicCard>
@@ -243,12 +330,32 @@ export default function DamaBiometriaSigoFixPage() {
                   normal de correção e deve ser tentada antes da correção
                   avançada ou de opções específicas de assinatura.
                 </p>
+                <p className="mt-4 text-sm font-semibold leading-7 text-chromeLight">
+                  Perfil do SIGO → Java → Nitgen/JNI → validação das bibliotecas
+                  → launcher → componentes de assinatura → driver biométrico →
+                  teste funcional
+                </p>
+                <p className="body-text-sm mt-4">
+                  O programa procura evitar alterações desnecessárias. Se uma
+                  biblioteca ou driver já estiver funcionando corretamente, a
+                  ferramenta poderá apenas validar o componente e preservá-lo.
+                </p>
               </MetallicCard>
 
               <SecurityNotice>
-                Antes de executar, feche o SIGO Desktop, conecte o leitor
-                biométrico em uma porta USB estável e aguarde o término da
-                correção. Não interrompa a execução no meio do processo.
+                <div>
+                  <p className="font-bold text-text">Antes da correção:</p>
+                  <ol className="mt-3 list-decimal space-y-2 pl-5">
+                    <li>Feche completamente o SIGO Desktop.</li>
+                    <li>Mantenha conectado somente o leitor que será utilizado.</li>
+                    <li>
+                      Execute o Dama Biometria SIGO Fix como administrador.
+                    </li>
+                    <li>Utilize primeiro a Correção Automática Recomendada.</li>
+                    <li>Aguarde a conclusão completa.</li>
+                    <li>Não desconecte o leitor durante a execução.</li>
+                  </ol>
+                </div>
               </SecurityNotice>
             </div>
           </div>
@@ -284,25 +391,29 @@ export default function DamaBiometriaSigoFixPage() {
             </MetallicCard>
           </div>
 
-          <MetallicCard>
-            <SectionTitle
-              title="Fluxo recomendado de uso"
-              description="O uso normal foi pensado para ser objetivo: fechar o SIGO, executar a ferramenta, acompanhar o log e testar a assinatura."
-              className="mb-6"
-            />
+          <section id="fluxo-recomendado" className="scroll-mt-24">
+            <MetallicCard>
+              <SectionTitle
+                title="Fluxo recomendado de uso"
+                description="Feche o SIGO, execute a ferramenta como administrador, use a correção recomendada, siga a orientação de abertura e teste a biometria em uma operação real."
+                className="mb-6"
+              />
 
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {workflow.map((step) => (
-                <div
-                  key={step.title}
-                  className="rounded-2xl border border-border bg-backgroundSoft/80 p-5"
-                >
-                  <h3 className="text-lg font-black text-text">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-muted">{step.text}</p>
-                </div>
-              ))}
-            </div>
-          </MetallicCard>
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+                {workflow.map((step) => (
+                  <div
+                    key={step.title}
+                    className="rounded-2xl border border-border bg-backgroundSoft/80 p-5"
+                  >
+                    <h3 className="text-lg font-black text-text">{step.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-muted">
+                      {step.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </MetallicCard>
+          </section>
 
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <MetallicCard>
@@ -322,23 +433,57 @@ export default function DamaBiometriaSigoFixPage() {
             <MetallicCard variant="featured">
               <p className="eyebrow mb-4 text-goldSoft">Download direto</p>
               <h2 className="text-2xl font-black text-text">
-                Baixar Dama Biometria SIGO Fix 1.0.0
+                Baixar Dama Biometria SIGO Fix 2.0.0
               </h2>
               <p className="body-text-sm mt-4">
-                A versão de lançamento foi preparada para distribuição ao usuário
-                final por instalador/EXE, com interface guiada, painel de log,
-                correção automática recomendada e orientação de teste pelo SIGO
-                original.
+                Versão atual preparada para o ambiente homologado do SIGO Desktop
+                1.0.48.
               </p>
+
+              <dl className="mt-6 grid gap-4 text-sm sm:grid-cols-2">
+                <div>
+                  <dt className="text-mutedSoft">Versão</dt>
+                  <dd className="mt-1 font-bold text-text">{program.version}</dd>
+                </div>
+                <div>
+                  <dt className="text-mutedSoft">Sistema</dt>
+                  <dd className="mt-1 font-bold text-text">Windows</dd>
+                </div>
+                <div className="sm:col-span-2">
+                  <dt className="text-mutedSoft">Instalador</dt>
+                  <dd className="mt-1 break-all font-mono text-xs font-bold text-text sm:text-sm">
+                    {program.installerName}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-mutedSoft">Tamanho aproximado</dt>
+                  <dd className="mt-1 font-bold text-text">{program.downloadSize}</dd>
+                </div>
+                <div>
+                  <dt className="text-mutedSoft">Compatibilidade homologada</dt>
+                  <dd className="mt-1 font-bold text-text">{program.compatibility}</dd>
+                </div>
+                <div className="sm:col-span-2">
+                  <dt className="text-mutedSoft">SHA-256</dt>
+                  <dd className="mt-1 break-all font-mono text-xs font-bold leading-6 text-text">
+                    {program.sha256}
+                  </dd>
+                </div>
+              </dl>
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <GlowButton href={downloadUrl} external variant="primary">
-                  Baixar pelo Google Drive
+                  {program.downloadLabel}
                 </GlowButton>
                 <GlowButton href="/programas" variant="secondary">
                   Ver outros programas
                 </GlowButton>
               </div>
+
+              <p className="mt-5 text-sm leading-7 text-mutedSoft">
+                Após instalar, execute o programa como administrador e utilize
+                primeiro a Correção Automática Recomendada.
+              </p>
             </MetallicCard>
           </div>
         </div>

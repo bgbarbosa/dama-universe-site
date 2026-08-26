@@ -19,6 +19,15 @@ export type UpdateItem = {
 
 export const updates: UpdateItem[] = [
   {
+    title: "Dama Biometria SIGO Fix 2.0.0 disponível",
+    area: "Programas",
+    type: "Programa",
+    date: "2026-08-25",
+    summary:
+      "Nova versão preparada para o SIGO Desktop 1.0.48, com validação Java/JNI, launcher isolado, reparo transacional e tratamento mais seguro da biometria.",
+    url: "/programas/dama-biometria-sigo-fix",
+  },
+  {
     title: "Dama Gestor de RH apresentado no Dama Universe",
     area: "Programas",
     type: "Programa",

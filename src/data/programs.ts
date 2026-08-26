@@ -20,6 +20,13 @@ export type Program = {
   updatedAt?: string;
   detailsUrl: string;
   downloadUrl?: string;
+  downloadLabel?: string;
+  compatibility?: string;
+  installerName?: string;
+  downloadSize?: string;
+  sha256?: string;
+  updateBadge?: string;
+  updateSummary?: string;
   manualUrl?: string;
   changelogUrl?: string;
   repositoryUrl?: string;
@@ -83,12 +90,20 @@ export const programs: Program[] = [
     shortDescription:
       "Ferramenta Windows independente para auxiliar na correção de falhas locais de biometria, assinatura, Java, bibliotecas Nitgen e componentes relacionados ao uso do SIGO Desktop.",
     fullDescription:
-      "O Dama Biometria SIGO Fix é uma ferramenta Windows independente, criada para auxiliar usuários do SIGO Desktop quando ocorrem falhas locais ligadas à biometria, assinatura, Java, bibliotecas Nitgen e reconhecimento do leitor biométrico. O programa oferece uma correção automática recomendada, opções avançadas para casos específicos, painel de log e orientação para que o usuário abra o SIGO pelo atalho normal/original após a correção. A ferramenta não é oficial do SIGO, não substitui suporte institucional e atua apenas como apoio para problemas locais recorrentes.",
-    version: "1.0.0",
+      "O Dama Biometria SIGO Fix é uma ferramenta Windows independente, criada para auxiliar usuários do SIGO Desktop quando ocorrem falhas locais ligadas à biometria, assinatura, Java, bibliotecas Nitgen e reconhecimento do leitor biométrico. O programa oferece uma correção automática recomendada, opções avançadas para casos específicos, painel de log e orientação de abertura do SIGO com o Java compatível. A ferramenta não é oficial do SIGO, não substitui suporte institucional e atua apenas como apoio para problemas locais recorrentes.",
+    version: "2.0.0",
     status: "Disponível",
     updatedAt: "2026-07-04",
     detailsUrl: "/programas/dama-biometria-sigo-fix",
-    downloadUrl: "https://drive.usercontent.google.com/download?id=1y0pRu7YeazLrSYFq2Sf0rgtrgMkh48rh&export=download",
+    downloadUrl:
+      "https://drive.usercontent.google.com/download?id=1ch2P9lNlfgE4SuehWrwbei7k4huY7mc6&export=download&confirm=t",
+    downloadLabel: "Baixar versão 2.0.0",
+    compatibility: "SIGO Desktop 1.0.48",
+    installerName: "Dama_Biometria_SIGO_Fix_Setup_2.0.0.exe",
+    downloadSize: "233,33 MiB",
+    sha256: "7008AAD7F921A4E14A9C9BDA98AFEC2160B667B615B3134B186AC80EA8CDE715",
+    updateBadge: "NOVO • ATUALIZAÇÃO 2.0.0",
+    updateSummary: "Correções de Java • Nitgen • JNI • Biometria",
     iconUrl: "/images/programs/dama-biometria-sigo-fix.png",
     featured: true,
   },

@@ -5,6 +5,7 @@ import { GlowButton, MetallicCard } from "@/components/ui";
 type ProgramCardData = {
   title?: string;
   name?: string;
+  slug?: string;
   description?: string;
   shortDescription?: string;
   category?: string;
@@ -14,6 +15,10 @@ type ProgramCardData = {
   detailsUrl?: string;
   downloadHref?: string;
   downloadUrl?: string;
+  downloadLabel?: string;
+  compatibility?: string;
+  updateBadge?: string;
+  updateSummary?: string;
   iconUrl?: string;
   featured?: boolean;
 };
@@ -26,6 +31,7 @@ export function ProgramCard({
   program,
   title,
   name,
+  slug,
   description,
   shortDescription,
   category,
@@ -35,10 +41,15 @@ export function ProgramCard({
   detailsUrl,
   downloadHref,
   downloadUrl,
+  downloadLabel,
+  compatibility,
+  updateBadge,
+  updateSummary,
   iconUrl,
   featured = false,
 }: ProgramCardProps) {
   const programTitle = title ?? name ?? program?.title ?? program?.name ?? "Programa";
+  const programSlug = slug ?? program?.slug;
 
   const programDescription =
     description ??
@@ -64,6 +75,14 @@ export function ProgramCard({
     program?.downloadHref ??
     program?.downloadUrl;
 
+  const downloadButtonLabel =
+    downloadLabel ?? program?.downloadLabel ?? "Download";
+
+  const programCompatibility =
+    compatibility ?? program?.compatibility;
+  const programUpdateBadge = updateBadge ?? program?.updateBadge;
+  const programUpdateSummary = updateSummary ?? program?.updateSummary;
+
   const programIconUrl = iconUrl ?? program?.iconUrl;
   const isFeatured = featured || Boolean(program?.featured);
 
@@ -72,10 +91,26 @@ export function ProgramCard({
   );
 
   return (
-    <MetallicCard
-      variant={isFeatured ? "featured" : "default"}
-      className="flex h-full flex-col"
+    <div
+      id={programSlug ? `programa-${programSlug}` : undefined}
+      className="h-full scroll-mt-24"
+      data-testid={programSlug ? `program-card-${programSlug}` : undefined}
     >
+      <MetallicCard
+        variant={isFeatured ? "featured" : "default"}
+        className={[
+          "flex h-full flex-col",
+          programUpdateBadge ? "release-glow" : "",
+        ].join(" ")}
+      >
+      {programUpdateBadge ? (
+        <div className="relative z-10 mb-4">
+          <span className="release-glow-badge inline-flex rounded-full border px-3 py-1.5 text-[0.68rem] font-black uppercase tracking-[0.18em]">
+            {programUpdateBadge}
+          </span>
+        </div>
+      ) : null}
+
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-wrap gap-2">
           <span className="rounded-full border border-electric/45 bg-electric/10 px-3 py-1 text-xs font-bold text-electricLight">
@@ -117,6 +152,18 @@ export function ProgramCard({
         </p>
       ) : null}
 
+      {programCompatibility ? (
+        <p className="mt-5 text-sm font-bold text-electricLight">
+          Atualizado para o {programCompatibility}
+        </p>
+      ) : null}
+
+      {programUpdateSummary ? (
+        <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-goldSoft">
+          {programUpdateSummary}
+        </p>
+      ) : null}
+
       <div className="mt-auto pt-8">
         <p className="mb-5 text-sm text-muted">
           Versão: <span className="font-bold text-text">{programVersion}</span>
@@ -133,11 +180,12 @@ export function ProgramCard({
               external={isDownloadExternal}
               variant="primary"
             >
-              Download
+              {downloadButtonLabel}
             </GlowButton>
           ) : null}
         </div>
       </div>
-    </MetallicCard>
+      </MetallicCard>
+    </div>
   );
 }
