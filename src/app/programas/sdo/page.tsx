@@ -1,3 +1,4 @@
+import { ProgramContact } from "@/components/programs/ProgramContact";
 import { createPageMetadata } from "@/lib/seo";
 import { InfoNotice, ResponsibilityNotice } from "@/components/notices";
 import { GlowButton, MetallicCard, PageHeader } from "@/components/ui";
@@ -57,7 +58,7 @@ const statusItems = [
 
 export default function SdoPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageHeader
         title="SDO"
         subtitle="Sistema de Deliberação, Distribuição e Controle de Ocorrências Plantonistas"
@@ -217,6 +218,7 @@ export default function SdoPage() {
           validação institucional ou os procedimentos oficiais da unidade.
         </ResponsibilityNotice>
       </section>
+      <ProgramContact />
     </main>
   );
 }

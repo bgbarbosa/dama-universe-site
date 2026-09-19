@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 
 import { GlowButton, MetallicCard } from "@/components/ui";
@@ -99,10 +100,11 @@ export function ProgramCard({
       <MetallicCard
         variant={isFeatured ? "featured" : "default"}
         className={[
-          "flex h-full flex-col",
+          "flex h-full flex-col !p-0",
           programUpdateBadge ? "release-glow" : "",
         ].join(" ")}
       >
+      <Link href={detailsHref} aria-label={`Conhecer ${programTitle}`} className="flex flex-1 flex-col rounded-2xl p-5 transition-colors hover:bg-electric/5 focus-ring sm:p-6">
       {programUpdateBadge ? (
         <div className="relative z-10 mb-4">
           <span className="release-glow-badge inline-flex rounded-full border px-3 py-1.5 text-[0.68rem] font-black uppercase tracking-[0.18em]">
@@ -164,27 +166,15 @@ export function ProgramCard({
         </p>
       ) : null}
 
-      <div className="mt-auto pt-8">
-        <p className="mb-5 text-sm text-muted">
-          Versão: <span className="font-bold text-text">{programVersion}</span>
-        </p>
-
-        <div className="flex flex-wrap gap-3">
-          <GlowButton href={detailsHref} variant="secondary">
-            Ver detalhes
-          </GlowButton>
-
-          {downloadLink ? (
-            <GlowButton
-              href={downloadLink}
-              external={isDownloadExternal}
-              variant="primary"
-            >
-              {downloadButtonLabel}
-            </GlowButton>
-          ) : null}
+      <p className="mt-auto pt-6 text-sm text-muted">Versão: <span className="font-bold text-text">{programVersion}</span></p>
+      <span aria-hidden="true" className="mt-3 text-sm font-semibold text-electricLight">Conhecer programa →</span>
+      </Link>
+      {downloadLink ? (
+        <div className="border-t border-border px-5 py-4 sm:px-6">
+          <GlowButton href={downloadLink} external={isDownloadExternal} variant="secondary">{downloadButtonLabel}</GlowButton>
+          {downloadLink.includes("google.com") ? <p className="mt-2 text-xs text-muted">Download pelo Google Drive</p> : null}
         </div>
-      </div>
+      ) : null}
       </MetallicCard>
     </div>
   );

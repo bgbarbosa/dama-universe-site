@@ -4,6 +4,7 @@ export type PostItem = {
   category: string;
   summary: string;
   date: string;
+  updatedAt?: string;
   readingTime?: string;
   tags?: string[];
 };
@@ -30,8 +31,9 @@ export const posts: PostItem[] = [
   {
     title: "Dama Gerador FCC 3.0: uma nova etapa operacional",
     slug: "dama-gerador-fcc-3-nova-etapa-operacional",
+    updatedAt: "2026-09-19",
     category: "Programas Dama",
-    summary: "Registro da evolução do Dama Gerador FCC 3.0, com página própria, download direto, tutoriais em vídeo e foco em uso local no Windows.",
+    summary: "Registro da evolução do Dama Gerador FCC 3.0, com página própria, download pelo Google Drive, tutoriais em vídeo e foco em uso local no Windows.",
     date: "2026-06-25",
     readingTime: "5 min",
     tags: ["Dama Gerador FCC 3.0", "tutorial", "download"],

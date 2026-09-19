@@ -28,7 +28,7 @@ export const CONTACT_LIMITS = {
 
 export type ContactValidationResult =
   | { success: true; data: ContactPayload }
-  | { success: false; message: string };
+  | { success: false; message: string; field?: keyof ContactPayload };
 
 function normalizeText(value: unknown) {
   return typeof value === "string"
@@ -54,14 +54,14 @@ export function validateContactPayload(value: unknown): ContactValidationResult 
   const website = normalizeText(input.website);
 
   if (!hasLengthBetween(name, CONTACT_LIMITS.name.min, CONTACT_LIMITS.name.max)) {
-    return { success: false, message: "Informe um nome válido." };
+    return { success: false, field: "name", message: "Informe um nome válido." };
   }
 
   if (
     email.length > CONTACT_LIMITS.email.max ||
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   ) {
-    return { success: false, message: "Informe um e-mail válido." };
+    return { success: false, field: "email", message: "Informe um e-mail válido." };
   }
 
   if (
@@ -71,11 +71,11 @@ export function validateContactPayload(value: unknown): ContactValidationResult 
       CONTACT_LIMITS.subject.max
     )
   ) {
-    return { success: false, message: "Informe um assunto válido." };
+    return { success: false, field: "subject", message: "Informe um assunto válido." };
   }
 
   if (!CONTACT_TYPES.includes(contactType as ContactType)) {
-    return { success: false, message: "Selecione um tipo de contato válido." };
+    return { success: false, field: "contactType", message: "Selecione um tipo de contato válido." };
   }
 
   if (
@@ -87,6 +87,7 @@ export function validateContactPayload(value: unknown): ContactValidationResult 
   ) {
     return {
       success: false,
+      field: "message",
       message: `A mensagem deve ter entre ${CONTACT_LIMITS.message.min} e ${CONTACT_LIMITS.message.max} caracteres.`,
     };
   }

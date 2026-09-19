@@ -22,7 +22,7 @@ export const customGpts: CustomGpt[] = [
     category: "Redação policial",
     status: "Público",
     shortDescription:
-      "Auxilia agentes de segurança pública, escrivães e operadores jurídicos na redação de históricos de ocorrências policiais com precisão, clareza e conformidade legal.",
+      "Auxilia agentes de segurança pública, escrivães e operadores jurídicos na redação de históricos de ocorrências policiais com foco em clareza e organização, sujeito à revisão humana e à avaliação jurídica aplicável.",
     purpose:
       "Atuar como apoio especializado na redação de históricos de ocorrência e análise jurídica preliminar, sempre com linguagem formal, objetiva e fiel aos fatos informados pelo usuário.",
     indicatedFor: [

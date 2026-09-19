@@ -85,7 +85,7 @@ export function Header() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Navegação principal" className="hidden items-center gap-1 lg:flex">
           {primaryNavigation.map((item) => {
             const isActive =
               item.href === "/"
@@ -113,7 +113,7 @@ export function Header() {
           {cta.label === "Conhecer criador" ? (
             <GlowButton
               href={cta.href}
-              className="border-2 border-electric bg-electric/15 px-6 py-3 text-sm font-black text-electricLight shadow-[0_0_35px_rgba(37,150,255,0.55)] hover:bg-electric hover:text-white hover:shadow-[0_0_50px_rgba(37,150,255,0.75)]"
+              variant="secondary"
             >
               {cta.label}
             </GlowButton>

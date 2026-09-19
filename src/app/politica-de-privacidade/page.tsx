@@ -7,14 +7,14 @@ const sections = [
     title: "Responsável e escopo",
     paragraphs: [
       "Esta política descreve o tratamento de dados realizado no site Dama Universe. Para dúvidas ou solicitações sobre informações enviadas ao projeto, utilize a página de contato.",
-      "Última atualização: 12 de julho de 2026.",
+      "Última atualização: 19 de setembro de 2026.",
     ],
   },
   {
     title: "Dados enviados pelo formulário de contato",
     paragraphs: [
       "O formulário de contato pode receber nome, e-mail, assunto, tipo de contato e mensagem. Esses dados são usados para responder ao contato e tratar a solicitação apresentada.",
-      "O envio é uma ação iniciada pelo visitante. Os dados são validados novamente pelo servidor do Dama Universe e então encaminhados ao serviço de formulário definido em configuração privada. O provedor e os prazos de retenção dessa operação devem permanecer documentados e revisados pelo responsável pelo site.",
+      "O envio é uma ação iniciada pelo visitante. Os dados são validados novamente pelo servidor do Dama Universe e então encaminhados ao Formspree, serviço utilizado para encaminhar a mensagem ao responsável pelo projeto.",
       "Não envie documentos sigilosos, senhas, dados de terceiros ou informações relacionadas a procedimentos restritos.",
     ],
   },
@@ -46,7 +46,7 @@ const sections = [
     title: "Controle e solicitações",
     paragraphs: [
       "O visitante pode recusar categorias opcionais sem perder as funções essenciais do site. Vídeos incorporados e comentários externos permanecem bloqueados, mas links diretos podem ser abertos por decisão do visitante.",
-      "Para solicitar acesso, correção ou exclusão relacionada a um contato enviado, quando aplicável, utilize a página de contato e descreva a solicitação sem incluir novos dados sensíveis. Bases legais, prazos de retenção e procedimentos de atendimento devem ser confirmados por avaliação jurídica e operacional especializada.",
+      "Para solicitar acesso, correção ou exclusão relacionada a um contato enviado, quando aplicável, utilize a página de contato e descreva a solicitação sem incluir novos dados sensíveis. Para esclarecer o tratamento da sua mensagem e os prazos aplicáveis, fale com o responsável pela página de contato.",
     ],
   },
 ];
@@ -60,7 +60,7 @@ export const metadata = createPageMetadata({
 
 export default function PoliticaDePrivacidadePage() {
   return (
-    <main className="mx-auto w-full max-w-6xl px-5 pb-20 sm:px-6">
+    <main id="conteudo" tabIndex={-1} className="mx-auto w-full max-w-6xl px-5 pb-20 sm:px-6">
       <PageHeader
         title="Política de Privacidade"
         subtitle="Transparência e controle"

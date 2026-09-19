@@ -1,3 +1,4 @@
+import { HorizontalScroller } from "@/components/ui/HorizontalScroller";
 import { GlowButton, MetallicCard, SectionTitle } from "@/components/ui";
 import { YouTubeEmbed } from "@/components/privacy";
 
@@ -42,27 +43,19 @@ export function DamaFccTutorials({
           title="Como usar o Dama Gerador FCC 3.0"
           description={
             showIntro
-              ? "Assista aos tutoriais oficiais em três partes. Os vídeos ficam em rolagem horizontal para manter a página limpa e evitar que um fique abaixo do outro."
+              ? "Acompanhe os primeiros passos, a geração e a conferência dos documentos. Os vídeos só carregam após sua permissão para conteúdo externo."
               : undefined
           }
         />
 
-        <GlowButton
-          href="https://www.youtube.com/playlist?list=PL"
-          external
-          variant="secondary"
-          className="hidden"
-        >
-          Ver playlist
-        </GlowButton>
+
       </div>
 
-      <div className="-mx-5 overflow-x-auto px-5 pb-4">
-        <div className="flex min-w-full gap-5">
+      <HorizontalScroller label="Tutoriais FCC">
           {tutorials.map((video) => (
             <MetallicCard
               key={video.videoId}
-              className="min-w-[320px] max-w-[420px] flex-1 border-electric/70 p-4 shadow-[0_0_35px_rgba(37,150,255,0.28)]"
+              className="w-[min(320px,80vw)] shrink-0 border-electric/70 p-4 shadow-[0_0_35px_rgba(37,150,255,0.28)]"
             >
               <div className="aspect-video overflow-hidden rounded-2xl border border-borderSoft bg-background">
                 <YouTubeEmbed
@@ -87,8 +80,7 @@ export function DamaFccTutorials({
               </div>
             </MetallicCard>
           ))}
-        </div>
-      </div>
+        </HorizontalScroller>
 
       <p className="mt-2 text-xs leading-6 text-mutedSoft">
         Arraste para o lado para ver as três partes do tutorial.

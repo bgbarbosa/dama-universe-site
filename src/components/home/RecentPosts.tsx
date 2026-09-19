@@ -1,9 +1,9 @@
-import { posts } from "@/data";
+import { getRecentPosts } from "@/lib/blog";
 import { BlogCard } from "@/components/blog";
 import { GlowButton, SectionTitle } from "@/components/ui";
 
 export function RecentPosts() {
-  const recentPosts = posts.slice(0, 3);
+  const recentPosts = getRecentPosts(3);
 
   return (
     <section className="px-6 py-16">

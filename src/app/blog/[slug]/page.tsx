@@ -1,3 +1,4 @@
+import { formatDate, getReadingTime, relatedPrograms } from "@/lib/blog";
 import { createPageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { ResponsibilityNotice } from "@/components/notices";
@@ -46,7 +47,7 @@ export default async function BlogPostPage({
   }
 
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageHeader title={post.title} subtitle={post.category} description={post.summary} />
 
       <article className="mx-auto max-w-4xl px-6 pb-20">
@@ -56,11 +57,12 @@ export default async function BlogPostPage({
               {post.category}
             </span>
             <span className="rounded-full border border-chrome/20 bg-white/[0.03] px-3 py-1 text-muted">
-              {post.date}
+              Publicado em <time dateTime={post.date}>{formatDate(post.date)}</time>
             </span>
-            {post.readingTime ? (
+            {post.updatedAt ? <span className="rounded-full border border-chrome/20 px-3 py-1 text-muted">Atualizado em <time dateTime={post.updatedAt}>{formatDate(post.updatedAt)}</time></span> : null}
+            {getReadingTime(post.slug) ? (
               <span className="rounded-full border border-chrome/20 bg-white/[0.03] px-3 py-1 text-muted">
-                {post.readingTime}
+                {getReadingTime(post.slug)}
               </span>
             ) : null}
           </div>
@@ -93,6 +95,9 @@ export default async function BlogPostPage({
         </div>
 
         <div className="mt-10 space-y-6">
+          {relatedPrograms[post.slug]?.length ? <nav aria-label="Programas relacionados" className="flex flex-wrap gap-3">
+            {relatedPrograms[post.slug].map((program) => <GlowButton key={program.href} href={program.href}>Conhecer {program.name}</GlowButton>)}
+          </nav> : null}
           <ResponsibilityNotice>
             Conteúdos técnicos publicados no Dama Universe possuem finalidade informativa e de apoio. A aplicação prática exige análise, validação e responsabilidade do usuário.
           </ResponsibilityNotice>

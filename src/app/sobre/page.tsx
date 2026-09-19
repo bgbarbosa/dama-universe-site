@@ -1,7 +1,9 @@
+import Image from "next/image";
+import { contacts, mailto } from "@/data/contacts";
 import { createPageMetadata } from "@/lib/seo";
 import { GlowButton, MetallicCard, PageHeader, SectionTitle } from "@/components/ui";
 
-const SITE_PROFISSIONAL_URL = "https://pericia-digital-marco-site.vercel.app/";
+const SITE_PROFISSIONAL_URL = contacts.professionalSite;
 const LATTES_URL = "https://lattes.cnpq.br/1970561249212557";
 
 const areas = [
@@ -25,68 +27,19 @@ export const metadata = createPageMetadata({
 
 export default function SobrePage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageHeader
-        title="Sobre o Dama Universe"
-        subtitle="Projeto, documentação e evolução"
-        description="Um espaço para reunir, documentar e compartilhar projetos digitais desenvolvidos com foco em organização, tecnologia, inteligência artificial, análise de dados e automação."
+        title="Marco Barbosa"
+        subtitle="Criador do Dama Universe"
+        description="Inteligência Artificial, ChatGPT, engenharia de prompts, análise de dados, capacitação e produtividade aplicadas a soluções digitais."
       />
 
       <section className="mx-auto max-w-5xl px-6 pb-20">
-        <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <MetallicCard className="space-y-6">
-            <p className="leading-8 text-muted">
-              O Dama Universe nasceu com o objetivo de reunir, documentar e
-              compartilhar projetos digitais desenvolvidos com foco em
-              organização, tecnologia, inteligência artificial, análise de dados
-              e automação.
-            </p>
-
-            <p className="leading-8 text-muted">
-              O espaço funciona como uma central de programas, GPTs
-              personalizados, conteúdos técnicos, referências, downloads e
-              registros de evolução, permitindo acompanhar versões, melhorias,
-              ideias futuras e materiais de apoio.
-            </p>
-          </MetallicCard>
-
-          <MetallicCard variant="notice">
-            <p className="eyebrow mb-4 text-goldSoft">Diretriz</p>
-
-            <h2 className="text-2xl font-black text-text">
-              Segurança e responsabilidade
-            </h2>
-
-            <p className="mt-4 text-sm leading-7 text-muted">
-              O site foi planejado para divulgar projetos e conteúdos técnicos
-              sem publicar dados sensíveis, documentos restritos, códigos
-              privados, senhas, tokens ou informações pessoais de terceiros.
-            </p>
-          </MetallicCard>
-        </div>
-
-        <div className="mt-14">
-          <SectionTitle
-            title="Áreas abordadas"
-            description="Temas que orientam a construção dos projetos, programas, GPTs e conteúdos publicados."
-          />
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {areas.map((area) => (
-              <MetallicCard key={area} className="p-5">
-                <p className="font-medium text-chromeLight">{area}</p>
-              </MetallicCard>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-14">
+        <div className="mb-14">
           <MetallicCard variant="featured" className="overflow-hidden p-0">
             <div className="grid gap-8 p-7 sm:p-9 lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
               <div className="rounded-3xl border border-border bg-background/40 p-6">
-                <div className="flex h-24 w-24 items-center justify-center rounded-3xl border border-electric/50 bg-surface text-4xl font-black text-text shadow-electric">
-                  M
-                </div>
+                <Image src="/images/creator/marco-barbosa.webp" alt="Marco Barbosa, criador do Dama Universe" width={640} height={800} sizes="(max-width: 1024px) 80vw, 320px" priority className="mx-auto h-auto w-full max-w-xs rounded-2xl" />
 
                 <h2 className="mt-6 text-2xl font-black text-text">
                   Marco Aurélio Pereira Barbosa
@@ -97,9 +50,9 @@ export default function SobrePage() {
                 </p>
 
                 <p className="mt-5 text-sm leading-7 text-muted">
-                  Atuação voltada à tecnologia, inteligência artificial, análise
-                  de dados, automação documental, investigação digital,
-                  computação forense e organização técnica de informações.
+                  Atuação voltada à Inteligência Artificial, ChatGPT, engenharia de prompts,
+                  análise de dados, capacitação, produtividade e automação.
+                  Investigação digital, perícia e computação forense compõem seu repertório técnico complementar.
                 </p>
               </div>
 
@@ -126,7 +79,11 @@ export default function SobrePage() {
                   digitais.
                 </p>
 
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-6 flex flex-col items-start gap-2">
+                  <a className="contact-link" href={mailto(contacts.creator)}>{contacts.creator}</a>
+                  <a className="contact-link" href={contacts.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn de Marco Barbosa</a>
+                </div>
+                <div className="mt-8 flex flex-wrap gap-3">
                   <GlowButton
                     href={SITE_PROFISSIONAL_URL}
                     external
@@ -143,6 +100,56 @@ export default function SobrePage() {
             </div>
           </MetallicCard>
         </div>
+        <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <MetallicCard className="space-y-6">
+            <h2 className="text-2xl font-black text-text">Sobre o Dama Universe</h2>
+            <p className="leading-8 text-muted">
+              O Dama Universe é um projeto, marca e ecossistema autoral criado para reunir, documentar e
+              compartilhar projetos digitais desenvolvidos com foco em
+              organização, tecnologia, inteligência artificial, análise de dados
+              e automação.
+            </p>
+
+            <p className="leading-8 text-muted">
+              O espaço funciona como uma central de programas, GPTs
+              personalizados, conteúdos técnicos, referências, downloads e
+              registros de evolução, permitindo acompanhar versões, melhorias,
+              ideias futuras e materiais de apoio.
+            </p>
+          </MetallicCard>
+
+          <MetallicCard variant="notice">
+            <p className="eyebrow mb-4 text-goldSoft">Diretriz</p>
+
+            <h2 className="text-2xl font-black text-text">
+              Segurança e responsabilidade
+            </h2>
+
+            <p className="mt-4 text-sm leading-7 text-muted">
+              O site foi planejado para divulgar projetos e conteúdos técnicos
+              sem publicar dados sensíveis, documentos restritos, códigos
+              privados, senhas, tokens ou informações pessoais de terceiros.
+              A autoria pessoal não representa endosso da Polícia Civil, do SIGO, da APECOF ou de outras instituições.
+            </p>
+          </MetallicCard>
+        </div>
+
+        <div className="mt-14">
+          <SectionTitle
+            title="Áreas abordadas"
+            description="Temas que orientam a construção dos projetos, programas, GPTs e conteúdos publicados."
+          />
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {areas.map((area) => (
+              <MetallicCard key={area} className="p-5">
+                <p className="font-medium text-chromeLight">{area}</p>
+              </MetallicCard>
+            ))}
+          </div>
+        </div>
+
+
       </section>
     </main>
   );

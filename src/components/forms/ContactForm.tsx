@@ -20,6 +20,15 @@ export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
 
+  const [fieldError, setFieldError] = useState<{ field?: keyof ContactPayload; message: string } | null>(null);
+
+  function errorProps(field: keyof ContactPayload) {
+    return { "aria-invalid": fieldError?.field === field || undefined, "aria-describedby": fieldError?.field === field ? `error-${field}` : undefined };
+  }
+  function errorMessage(field: keyof ContactPayload) {
+    return fieldError?.field === field ? <span id={`error-${field}`} className="block text-sm text-red-100">{fieldError.message}</span> : null;
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -44,9 +53,15 @@ export function ContactForm() {
     if (!validation.success) {
       setStatus("error");
       setFeedbackMessage(validation.message);
+      setFieldError(validation);
+      if (validation.field) {
+        const input = form.elements.namedItem(validation.field);
+        if (input instanceof HTMLElement) input.focus();
+      }
       return;
     }
 
+    setFieldError(null);
     setStatus("sending");
     setFeedbackMessage(null);
 
@@ -79,14 +94,14 @@ export function ContactForm() {
     } catch {
       setStatus("error");
       setFeedbackMessage(
-        "Não foi possível enviar a mensagem neste momento. Verifique se o formulário foi configurado corretamente ou tente novamente mais tarde."
+        "Não foi possível enviar a mensagem. Verifique sua conexão e tente novamente mais tarde. Seu texto foi mantido para uma nova tentativa."
       );
     }
   }
 
   return (
     <MetallicCard className="mx-auto max-w-3xl border-electric/70 shadow-[0_0_35px_rgba(37,150,255,0.28)]">
-      <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+      <form aria-busy={status === "sending"} className="space-y-6" onSubmit={handleSubmit} noValidate>
         <input
           type="hidden"
           name="_subject"
@@ -110,6 +125,7 @@ export function ContactForm() {
             <input
               className="w-full rounded-2xl border border-border bg-backgroundSoft px-4 py-3 text-text outline-none transition placeholder:text-muted/70 focus:border-electric focus:ring-2 focus:ring-electric/25"
               name="name"
+              {...errorProps("name")}
               placeholder="Seu nome"
               type="text"
               autoComplete="name"
@@ -117,6 +133,7 @@ export function ContactForm() {
               maxLength={CONTACT_LIMITS.name.max}
               required
             />
+          {errorMessage("name")}
           </label>
 
           <label className="space-y-2 text-sm font-medium text-chromeLight">
@@ -124,12 +141,14 @@ export function ContactForm() {
             <input
               className="w-full rounded-2xl border border-border bg-backgroundSoft px-4 py-3 text-text outline-none transition placeholder:text-muted/70 focus:border-electric focus:ring-2 focus:ring-electric/25"
               name="email"
+              {...errorProps("email")}
               placeholder="seu@email.com"
               type="email"
               autoComplete="email"
               maxLength={CONTACT_LIMITS.email.max}
               required
             />
+          {errorMessage("email")}
           </label>
         </div>
 
@@ -139,12 +158,14 @@ export function ContactForm() {
             <input
               className="w-full rounded-2xl border border-border bg-backgroundSoft px-4 py-3 text-text outline-none transition placeholder:text-muted/70 focus:border-electric focus:ring-2 focus:ring-electric/25"
               name="subject"
+              {...errorProps("subject")}
               placeholder="Assunto da mensagem"
               type="text"
               minLength={CONTACT_LIMITS.subject.min}
               maxLength={CONTACT_LIMITS.subject.max}
               required
             />
+          {errorMessage("subject")}
           </label>
 
           <label className="space-y-2 text-sm font-medium text-chromeLight">
@@ -152,6 +173,7 @@ export function ContactForm() {
             <select
               className="w-full rounded-2xl border border-border bg-backgroundSoft px-4 py-3 text-text outline-none transition focus:border-electric focus:ring-2 focus:ring-electric/25"
               name="contactType"
+              {...errorProps("contactType")}
               required
               defaultValue=""
             >
@@ -164,6 +186,7 @@ export function ContactForm() {
                 </option>
               ))}
             </select>
+          {errorMessage("contactType")}
           </label>
         </div>
 
@@ -172,13 +195,16 @@ export function ContactForm() {
           <textarea
             className="min-h-40 w-full rounded-2xl border border-border bg-backgroundSoft px-4 py-3 text-text outline-none transition placeholder:text-muted/70 focus:border-electric focus:ring-2 focus:ring-electric/25"
             name="message"
+              {...errorProps("message")}
             placeholder="Escreva sua mensagem de forma objetiva. Não inclua dados sensíveis."
             minLength={CONTACT_LIMITS.message.min}
             maxLength={CONTACT_LIMITS.message.max}
             required
           />
-        </label>
+        {errorMessage("message")}
+          </label>
 
+        {status === "sending" ? <p role="status" className="text-sm text-muted">Enviando mensagem. Aguarde a confirmação.</p> : null}
         {feedbackMessage ? (
           <div
             className={

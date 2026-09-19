@@ -1,3 +1,4 @@
+import { ProgramContact } from "@/components/programs/ProgramContact";
 import { createPageMetadata } from "@/lib/seo";
 import { InfoNotice, ResponsibilityNotice } from "@/components/notices";
 import { GlowButton, MetallicCard, PageHeader } from "@/components/ui";
@@ -62,7 +63,7 @@ const manuals = [
 
 export default function DamaGeradorFccUniversalPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageHeader
         title="Dama Gerador FCC Universal"
         subtitle="Biblioteca de modelos, identidade institucional e geração personalizada de FCC"
@@ -243,6 +244,7 @@ export default function DamaGeradorFccUniversalPage() {
           </ResponsibilityNotice>
         </div>
       </section>
+      <ProgramContact />
     </main>
   );
 }

@@ -1,3 +1,4 @@
+import { ClientsSection } from "@/components/programs/ClientsSection";
 import { ProgramCard } from "@/components/programs";
 import { MetallicCard, SectionHeader } from "@/components/ui";
 import { programs } from "@/data";
@@ -12,7 +13,7 @@ export const metadata = createPageMetadata({
 
 export default function ProgramasPage() {
   return (
-    <main className="bg-dama-radial">
+    <main id="conteudo" tabIndex={-1} className="bg-dama-radial">
       <section className="page-section-tight">
         <div className="container-site">
           <SectionHeader
@@ -22,11 +23,14 @@ export default function ProgramasPage() {
             align="center"
           />
 
+          <h2 className="sr-only">Catálogo de programas</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {programs.map((program) => (
               <ProgramCard key={program.slug} {...program} />
             ))}
           </div>
+
+          <ClientsSection />
 
           <MetallicCard className="mt-10" variant="notice">
             <p className="text-sm leading-7 text-muted md:text-base md:leading-8">

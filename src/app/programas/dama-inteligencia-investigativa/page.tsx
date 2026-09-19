@@ -1,3 +1,4 @@
+import { ProgramContact } from "@/components/programs/ProgramContact";
 import { createPageMetadata } from "@/lib/seo";
 import { GlowButton, MetallicCard, PageHeader } from "@/components/ui";
 
@@ -49,7 +50,7 @@ export const metadata = createPageMetadata({
 
 export default function DamaInteligenciaInvestigativaPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageHeader
         title="Dama Inteligência Investigativa"
         subtitle="O projeto mais ambicioso do ecossistema Dama"
@@ -208,6 +209,7 @@ export default function DamaInteligenciaInvestigativaPage() {
           </div>
         </MetallicCard>
       </section>
+      <ProgramContact />
     </main>
   );
 }

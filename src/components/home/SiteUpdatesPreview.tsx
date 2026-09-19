@@ -1,3 +1,5 @@
+import { formatDate } from "@/lib/blog";
+import { HorizontalScroller } from "@/components/ui/HorizontalScroller";
 import { updates } from "@/data";
 import { GlowButton, MetallicCard } from "@/components/ui";
 
@@ -33,16 +35,15 @@ export function SiteUpdatesPreview() {
           </div>
 
           <GlowButton href="/blog" variant="secondary" className="w-fit">
-            Ver conteúdos
+            Ler artigos no Blog
           </GlowButton>
         </div>
 
-        <div className="-mx-5 overflow-x-auto px-5 pb-4">
-          <div className="flex min-w-full gap-5">
+        <HorizontalScroller label="Novidades recentes">
             {latestUpdates.map((update) => (
               <MetallicCard
                 key={`${update.date}-${update.title}`}
-                className="min-w-[290px] max-w-[340px] flex-1 border-electric/70 shadow-[0_0_35px_rgba(37,150,255,0.28)]"
+                className="w-[min(320px,80vw)] shrink-0 border-borderSoft"
               >
                 <div className="flex flex-wrap gap-2">
                   <span
@@ -56,7 +57,7 @@ export function SiteUpdatesPreview() {
                   </span>
 
                   <span className="rounded-full border border-borderSoft bg-white/[0.03] px-3 py-1 text-xs font-semibold text-muted">
-                    {update.date}
+                    <time dateTime={update.date}>{formatDate(update.date)}</time>
                   </span>
                 </div>
 
@@ -85,8 +86,7 @@ export function SiteUpdatesPreview() {
                 ) : null}
               </MetallicCard>
             ))}
-          </div>
-        </div>
+        </HorizontalScroller>
 
         <p className="mt-2 text-xs leading-6 text-mutedSoft">
           Arraste para o lado para ver mais novidades recentes.

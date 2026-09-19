@@ -1,3 +1,4 @@
+import { ProgramContact } from "@/components/programs/ProgramContact";
 import { getProgramDownloadUrl } from "@/data";
 import { createPageMetadata } from "@/lib/seo";
 import { InfoNotice, ResponsibilityNotice } from "@/components/notices";
@@ -70,7 +71,7 @@ const technicalStack = [
 
 export default function DamaGestorDeInqueritosPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageHeader
         title="Dama Gestor de Inquéritos"
         subtitle="Gestão documental, prazos, objetos e dados correcionais"
@@ -256,6 +257,7 @@ export default function DamaGestorDeInqueritosPage() {
           O Dama Gestor de Inquéritos é uma ferramenta de apoio à organização e ao controle interno. Ele não substitui a responsabilidade funcional, a conferência humana, os sistemas oficiais, as normas institucionais ou a validação final dos dados pelo usuário responsável.
         </ResponsibilityNotice>
       </section>
+      <ProgramContact />
     </main>
   );
 }

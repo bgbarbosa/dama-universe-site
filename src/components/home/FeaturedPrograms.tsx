@@ -1,8 +1,10 @@
-import { featuredPrograms } from "@/data";
+import { programs } from "@/data";
 import { ProgramCard } from "@/components/programs";
 import { SectionTitle } from "@/components/ui";
 
+const showcaseSlugs = ["dama-gestor-rh", "dama-gerador-fcc", "dama-biometria-sigo-fix"];
 export function FeaturedPrograms() {
+  const featuredPrograms = programs.filter((program) => showcaseSlugs.includes(program.slug));
   return (
     <section className="px-6 py-16">
       <div className="mx-auto max-w-6xl space-y-8">

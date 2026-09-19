@@ -1,3 +1,4 @@
+import { ProgramContact } from "@/components/programs/ProgramContact";
 import Image from "next/image";
 
 import { createPageMetadata } from "@/lib/seo";
@@ -122,10 +123,10 @@ export const metadata = createPageMetadata({
 
 export default function DamaBiometriaSigoFixPage() {
   return (
-    <main className="bg-dama-radial">
+    <main id="conteudo" tabIndex={-1} className="bg-dama-radial [overflow-wrap:anywhere]">
       <section className="page-section-tight">
         <div className="container-site">
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <SectionHeader
               eyebrow="Programa disponível"
               title="Dama Biometria SIGO Fix 2.0.0"
@@ -153,7 +154,7 @@ export default function DamaBiometriaSigoFixPage() {
                 </div>
               </div>
 
-              <dl className="grid gap-5 sm:grid-cols-2">
+              <dl className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div>
                   <dt className="text-xs uppercase tracking-[0.24em] text-mutedSoft">
                     Versão
@@ -194,7 +195,7 @@ export default function DamaBiometriaSigoFixPage() {
                 <GlowButton href={downloadUrl} external variant="primary">
                   {program.downloadLabel}
                 </GlowButton>
-                <GlowButton href="/contato" variant="secondary">
+                <GlowButton href="/contato#contato-suporte" variant="secondary">
                   Solicitar suporte
                 </GlowButton>
               </div>
@@ -301,10 +302,10 @@ export default function DamaBiometriaSigoFixPage() {
             futuras caso a arquitetura interna do sistema seja alterada.
           </ResponsibilityNotice>
 
-          <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr]">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_0.8fr]">
             <MetallicCard>
               <SectionTitle title="Principais funcionalidades" className="mb-6" />
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {features.map((feature) => (
                   <div
                     key={feature}
@@ -360,7 +361,7 @@ export default function DamaBiometriaSigoFixPage() {
             </div>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <MetallicCard>
               <SectionTitle title="Problemas que busca auxiliar" className="mb-6" />
               <div className="flex flex-wrap gap-3">
@@ -377,7 +378,7 @@ export default function DamaBiometriaSigoFixPage() {
 
             <MetallicCard>
               <SectionTitle title="Fora do escopo" className="mb-6" />
-              <div className="grid gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 {outOfScopeItems.map((item) => (
                   <div
                     key={item}
@@ -399,7 +400,7 @@ export default function DamaBiometriaSigoFixPage() {
                 className="mb-6"
               />
 
-              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5">
                 {workflow.map((step) => (
                   <div
                     key={step.title}
@@ -415,7 +416,7 @@ export default function DamaBiometriaSigoFixPage() {
             </MetallicCard>
           </section>
 
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <MetallicCard>
               <SectionTitle title="Arquitetura e componentes" className="mb-6" />
               <div className="flex flex-wrap gap-3">
@@ -488,6 +489,7 @@ export default function DamaBiometriaSigoFixPage() {
           </div>
         </div>
       </section>
+      <ProgramContact />
     </main>
   );
 }

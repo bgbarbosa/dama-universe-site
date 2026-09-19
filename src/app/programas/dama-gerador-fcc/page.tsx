@@ -1,3 +1,4 @@
+import { ProgramContact } from "@/components/programs/ProgramContact";
 import { createPageMetadata } from "@/lib/seo";
 import { ResponsibilityNotice, SecurityNotice } from "@/components/notices";
 import { DamaFccTutorials } from "@/components/videos";
@@ -60,7 +61,7 @@ export const metadata = createPageMetadata({
 
 export default function DamaGeradorFccPage() {
   return (
-    <main className="bg-dama-radial">
+    <main id="conteudo" tabIndex={-1} className="bg-dama-radial">
       <section className="page-section-tight">
         <div className="container-site">
           <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
@@ -101,7 +102,7 @@ export default function DamaGeradorFccPage() {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <GlowButton href={downloadUrl} external variant="primary">
-                  Baixar ZIP
+                  Baixar ZIP pelo Google Drive
                 </GlowButton>
                 <GlowButton
                   href="/changelog/dama-gerador-fcc/v3.0.0"
@@ -228,7 +229,7 @@ export default function DamaGeradorFccPage() {
             </MetallicCard>
 
             <MetallicCard variant="featured">
-              <p className="eyebrow mb-4 text-goldSoft">Download direto</p>
+              <p className="eyebrow mb-4 text-goldSoft">Download pelo Google Drive</p>
               <h2 className="text-2xl font-black text-text">
                 Baixar Dama Gerador FCC 3.0
               </h2>
@@ -240,7 +241,7 @@ export default function DamaGeradorFccPage() {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <GlowButton href={downloadUrl} external variant="primary">
-                  Baixar ZIP pelo Google Drive
+                  Baixar ZIP pelo Google Drive pelo Google Drive
                 </GlowButton>
                 <GlowButton href="/contato" variant="secondary">
                   Enviar sugestão
@@ -250,6 +251,7 @@ export default function DamaGeradorFccPage() {
           </div>
         </div>
       </section>
+      <ProgramContact />
     </main>
   );
 }

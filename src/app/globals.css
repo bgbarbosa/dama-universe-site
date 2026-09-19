@@ -166,3 +166,13 @@ a {
     color: #bfe5ff;
   }
 }
+
+@layer components {
+  .contact-link {
+    @apply inline-flex min-h-11 max-w-full items-center break-all rounded px-1 text-electricLight underline decoration-electric/40 underline-offset-4 focus-ring;
+  }
+}
+main { scroll-margin-top: 6rem; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

@@ -21,14 +21,14 @@ describe("validateContactPayload", () => {
   });
 
   it.each([
-    [null, "Dados do formulário inválidos."],
-    [{ ...validPayload, name: "" }, "Informe um nome válido."],
-    [{ ...validPayload, email: "invalido" }, "Informe um e-mail válido."],
-    [{ ...validPayload, subject: "x" }, "Informe um assunto válido."],
-    [{ ...validPayload, contactType: "Inventado" }, "Selecione um tipo de contato válido."],
-    [{ ...validPayload, message: "curta" }, "A mensagem deve ter entre 10 e 4000 caracteres."],
-    [{ ...validPayload, message: "x".repeat(4001) }, "A mensagem deve ter entre 10 e 4000 caracteres."],
-  ])("rejeita dados inválidos", (payload, message) => {
-    expect(validateContactPayload(payload)).toEqual({ success: false, message });
+    [null, "Dados do formulário inválidos.", undefined],
+    [{ ...validPayload, name: "" }, "Informe um nome válido.", "name"],
+    [{ ...validPayload, email: "invalido" }, "Informe um e-mail válido.", "email"],
+    [{ ...validPayload, subject: "x" }, "Informe um assunto válido.", "subject"],
+    [{ ...validPayload, contactType: "Inventado" }, "Selecione um tipo de contato válido.", "contactType"],
+    [{ ...validPayload, message: "curta" }, "A mensagem deve ter entre 10 e 4000 caracteres.", "message"],
+    [{ ...validPayload, message: "x".repeat(4001) }, "A mensagem deve ter entre 10 e 4000 caracteres.", "message"],
+  ])("rejeita dados inválidos", (payload, message, field) => {
+    expect(validateContactPayload(payload)).toEqual({ success: false, message, ...(field ? { field } : {}) });
   });
 });

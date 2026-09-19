@@ -42,7 +42,7 @@ export function DamaFccHighlight() {
                 Ver página do programa
               </GlowButton>
               <GlowButton href={downloadUrl} external variant="secondary">
-                Baixar ZIP
+                Baixar ZIP pelo Google Drive
               </GlowButton>
             </div>
           </div>

@@ -46,7 +46,7 @@ export const metadata = createPageMetadata({
 
 export default function TermosDeUsoPage() {
   return (
-    <main className="mx-auto w-full max-w-6xl px-6 pb-20">
+    <main id="conteudo" tabIndex={-1} className="mx-auto w-full max-w-6xl px-6 pb-20">
       <PageHeader
         title="Termos de Uso"
         subtitle="Segurança, responsabilidade e uso adequado"

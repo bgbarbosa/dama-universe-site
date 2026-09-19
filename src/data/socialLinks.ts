@@ -1,3 +1,5 @@
+import { contacts, mailto } from "./contacts";
+
 export type SocialStatus = "Ativo" | "Previsto" | "Temporário" | "Indisponível";
 
 export type SocialLink = {
@@ -8,34 +10,8 @@ export type SocialLink = {
 };
 
 export const socialLinks: SocialLink[] = [
-  {
-    name: "GitHub",
-    url: null,
-    icon: "github",
-    status: "Previsto",
-  },
-  {
-    name: "Instagram",
-    url: null,
-    icon: "instagram",
-    status: "Previsto",
-  },
-  {
-    name: "YouTube",
-    url: null,
-    icon: "youtube",
-    status: "Previsto",
-  },
-  {
-    name: "LinkedIn",
-    url: null,
-    icon: "linkedin",
-    status: "Previsto",
-  },
-  {
-    name: "E-mail",
-    url: null,
-    icon: "mail",
-    status: "Temporário",
-  },
+  { name: contacts.general, url: mailto(contacts.general), icon: "mail", status: "Ativo" },
+  { name: `WhatsApp: ${contacts.whatsappLabel}`, url: contacts.whatsapp, status: "Ativo" },
+  { name: "LinkedIn de Marco Barbosa", url: contacts.linkedin, status: "Ativo" },
+  { name: "Site profissional de Marco Barbosa", url: contacts.professionalSite, status: "Ativo" },
 ];

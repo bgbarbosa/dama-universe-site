@@ -1,3 +1,4 @@
+import { ProgramContact } from "@/components/programs/ProgramContact";
 import Image from "next/image";
 
 import { createPageMetadata } from "@/lib/seo";
@@ -14,7 +15,7 @@ const downloadUrl = getProgramDownloadUrl("dama-cleaner-sigo-desktop");
 
 const features = [
   "Limpeza local de cache e arquivos temporários do SIGO Desktop.",
-  "Atuação focada na pasta local do usuário em %APPDATA%\SIGO Desktop.",
+  "Atuação focada na pasta local do usuário em %APPDATA%\\SIGO Desktop.",
   "Preservação de Preferences, Local State e Local Storage.",
   "Remoção de pastas temporárias como Cache, Code Cache, GPUCache, logs, Crashpad, Network, Session Storage e Storage.",
   "Remoção dos arquivos .updaterId e lockfile quando possível.",
@@ -61,7 +62,7 @@ const workflow = [
   },
   {
     title: "4. Conferir resultado",
-    text: "Ao final, o usuário verifica os status OK ou PARCIAL e pode consultar o log local em Documentos\Dama Cleaner SIGO.",
+    text: "Ao final, o usuário verifica os status OK ou PARCIAL e pode consultar o log local em Documentos\\Dama Cleaner SIGO.",
   },
 ];
 
@@ -83,7 +84,7 @@ export const metadata = createPageMetadata({
 
 export default function DamaCleanerSigoDesktopPage() {
   return (
-    <main className="bg-dama-radial">
+    <main id="conteudo" tabIndex={-1} className="bg-dama-radial">
       <section className="page-section-tight">
         <div className="container-site">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -319,6 +320,7 @@ export default function DamaCleanerSigoDesktopPage() {
           </div>
         </div>
       </section>
+      <ProgramContact />
     </main>
   );
 }

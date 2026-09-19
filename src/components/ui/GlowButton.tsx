@@ -17,7 +17,7 @@ type GlowButtonProps = {
 
 const variantClasses: Record<GlowButtonVariant, string> = {
   primary:
-    "border border-electric/70 bg-electric text-white shadow-electricStrong hover:bg-electricLight hover:shadow-electricStrong",
+    "border border-electric/70 bg-electricDark text-white shadow-electricStrong hover:bg-electricDark hover:shadow-electricStrong",
   secondary:
     "border border-borderSoft bg-white/0 text-text hover:border-electricLight hover:bg-electric/10",
   ghost:

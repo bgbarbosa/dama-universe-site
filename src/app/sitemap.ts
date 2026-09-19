@@ -3,16 +3,16 @@ import { footerNavigation, posts, programs } from "@/data";
 import { siteConfig } from "@/lib/seo";
 
 const routeDates: Record<string, string> = {
-  "/": "2026-07-13",
-  "/programas": "2026-07-13",
-  "/gpts": "2026-06-25",
-  "/blog": "2026-06-25",
+  "/": "2026-09-19",
+  "/programas": "2026-09-19",
+  "/gpts": "2026-09-19",
+  "/blog": "2026-09-19",
   "/referencias": "2026-06-23",
-  "/apoie": "2026-06-25",
-  "/sobre": "2026-06-25",
-  "/contato": "2026-07-12",
+  "/apoie": "2026-09-19",
+  "/sobre": "2026-09-19",
+  "/contato": "2026-09-19",
   "/termos-de-uso": "2026-06-25",
-  "/politica-de-privacidade": "2026-07-12",
+  "/politica-de-privacidade": "2026-09-19",
   "/politica-de-cookies": "2026-07-12",
   "/politica-de-comentarios": "2026-06-25",
 };
@@ -51,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const postEntries = posts.map((post) =>
-    createEntry(`/blog/${post.slug}`, post.date, "yearly", 0.6)
+    createEntry(`/blog/${post.slug}`, post.updatedAt ?? post.date, "yearly", 0.6)
   );
 
   return [

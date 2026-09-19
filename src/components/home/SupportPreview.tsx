@@ -8,7 +8,7 @@ export function SupportPreview() {
           <SectionTitle
             eyebrow="Apoie"
             title="Apoie o projeto"
-            description="O Dama Universe é um projeto em evolução. Futuramente, este espaço poderá receber apoiadores, parceiros e patrocinadores interessados em contribuir com o desenvolvimento dos programas, manutenção do site, criação de conteúdos e evolução das ferramentas."
+            description="Contribua com sugestões, relatos de problemas e compartilhamento de páginas úteis. Propostas de parceria podem ser conversadas diretamente, sob consulta."
           />
 
           <GlowButton href="/apoie" className="w-fit">

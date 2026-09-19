@@ -112,8 +112,9 @@ export const postContents: PostContent[] = [
   {
     title: "Dama Gerador FCC 3.0: uma nova etapa operacional",
     slug: "dama-gerador-fcc-3-nova-etapa-operacional",
+    updatedAt: "2026-09-19",
     category: "Programas Dama",
-    summary: "Registro da evolução do Dama Gerador FCC 3.0, com página própria, download direto, tutoriais em vídeo e foco em uso local no Windows.",
+    summary: "Registro da evolução do Dama Gerador FCC 3.0, com página própria, download pelo Google Drive, tutoriais em vídeo e foco em uso local no Windows.",
     date: "2026-06-25",
     readingTime: "5 min",
     tags: ["Dama Gerador FCC 3.0", "tutorial", "download"],
@@ -121,12 +122,12 @@ export const postContents: PostContent[] = [
       {
         heading: "Introdução",
         paragraphs: [
-          "O Dama Gerador FCC 3.0 marca uma nova etapa do projeto, agora com página própria no Dama Universe, descrição revisada, botão de download direto e tutoriais em vídeo.",
+          "O Dama Gerador FCC 3.0 marca uma nova etapa do projeto, agora com página própria no Dama Universe, descrição revisada, botão de download pelo Google Drive e tutoriais em vídeo.",
           "Essa organização facilita o acesso público às informações essenciais do programa e reduz a necessidade de explicar o funcionamento em mensagens separadas.",
         ],
       },
       {
-        heading: "Download direto e página do programa",
+        heading: "Download pelo Google Drive e página do programa",
         paragraphs: [
           "A decisão de concentrar o download na própria página do programa simplifica o caminho do usuário. Em vez de passar por uma página intermediária de downloads, o visitante acessa a página do Dama Gerador FCC e encontra ali a descrição, o status e o botão para baixar o arquivo.",
           "Esse modelo também deixa o site mais limpo, pois cada programa passa a concentrar seus próprios recursos, materiais e orientações.",

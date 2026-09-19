@@ -4,7 +4,7 @@ import { footerNavigation, socialLinks } from "@/data";
 
 function FooterLink({ href, children }: { href: string; children: ReactNode }) {
   const className =
-    "rounded-md text-sm text-muted transition duration-200 hover:text-electricLight focus-ring";
+    "inline-flex min-h-11 items-center break-words rounded-md text-sm text-muted transition duration-200 hover:text-electricLight focus-ring";
   const isExternal = href.startsWith("http");
 
   if (isExternal) {
@@ -74,9 +74,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-electric/45 bg-electric/5 p-5 shadow-[0_0_32px_rgba(37,150,255,0.22)]">
+        <div className="rounded-3xl border border-borderSoft bg-electric/5 p-5">
           <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-electricLight">
-            Canais oficiais em preparação
+            Canais e contato
           </h2>
 
           {activeSocialLinks.length ? (
@@ -90,8 +90,8 @@ export function Footer() {
           ) : null}
 
           <p className="mt-5 text-xs leading-6 text-mutedSoft">
-            Os canais oficiais do Dama Universe serão ativados gradualmente
-            conforme o projeto evoluir.
+            Dúvidas sobre o projeto? Use o e-mail geral ou o WhatsApp.
+            Os perfis de Marco Barbosa identificam a atuação pessoal do criador.
           </p>
         </div>
       </div>

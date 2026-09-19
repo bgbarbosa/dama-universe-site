@@ -202,7 +202,7 @@ function ConsentPanel({
         <button
           type="button"
           onClick={() => onSave({ analytics: true, externalMedia: true })}
-          className="min-h-11 rounded-full border border-electric bg-electric px-5 py-3 text-sm font-bold text-white transition hover:bg-electricLight focus-ring"
+          className="min-h-11 rounded-full border border-electric bg-electricDark px-5 py-3 text-sm font-bold text-white transition hover:bg-electricDark focus-ring"
         >
           Aceitar opcionais
         </button>
@@ -324,7 +324,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
         <button
           type="button"
           onClick={() => setSettingsOpen(true)}
-          className="fixed bottom-4 left-4 z-[90] min-h-11 rounded-full border border-borderSoft bg-backgroundSoft/92 px-4 py-2 text-xs font-bold text-muted shadow-lg backdrop-blur transition hover:border-electric hover:text-text focus-ring"
+          className="mx-auto mb-6 mt-2 block min-h-11 rounded-full border border-borderSoft bg-backgroundSoft/92 px-4 py-2 text-xs font-bold text-muted shadow-lg backdrop-blur transition hover:border-electric hover:text-text focus-ring"
         >
           Privacidade
         </button>

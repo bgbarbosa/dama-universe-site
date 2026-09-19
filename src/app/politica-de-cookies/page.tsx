@@ -29,7 +29,7 @@ export const metadata = createPageMetadata({
 
 export default function PoliticaDeCookiesPage() {
   return (
-    <main className="mx-auto w-full max-w-6xl px-5 pb-20 sm:px-6">
+    <main id="conteudo" tabIndex={-1} className="mx-auto w-full max-w-6xl px-5 pb-20 sm:px-6">
       <PageHeader
         title="Política de Cookies"
         subtitle="Escolhas armazenadas no navegador"

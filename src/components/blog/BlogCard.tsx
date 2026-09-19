@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { formatDate, getReadingTime } from "@/lib/blog";
 import type { PostItem } from "@/data";
 import { GlowButton, MetallicCard } from "@/components/ui";
 
@@ -28,7 +30,9 @@ function normalizeBlogCardProps(props: BlogCardInput): BlogCardProps {
 }
 
 export function BlogCard(props: BlogCardInput) {
-  const { title, category, summary, date, slug, readingTime } = normalizeBlogCardProps(props);
+  const { title, category, summary, date, slug } = normalizeBlogCardProps(props);
+
+  const readingTime = getReadingTime(slug);
 
   return (
     <MetallicCard className="group flex h-full flex-col gap-5 border-electric/70 shadow-[0_0_35px_rgba(37,150,255,0.28)] hover:border-electric">
@@ -38,7 +42,7 @@ export function BlogCard(props: BlogCardInput) {
             {category}
           </span>
           <span className="rounded-full border border-chrome/20 bg-white/[0.03] px-3 py-1 text-muted">
-            {date}
+            <time dateTime={date}>{formatDate(date)}</time>
           </span>
           {readingTime ? (
             <span className="rounded-full border border-chrome/20 bg-white/[0.03] px-3 py-1 text-muted">
@@ -49,7 +53,7 @@ export function BlogCard(props: BlogCardInput) {
 
         <div>
           <h3 className="text-xl font-semibold text-chromeLight transition group-hover:text-text">
-            {title}
+            <Link className="rounded focus-ring" href={`/blog/${slug}`}>{title}</Link>
           </h3>
           <p className="mt-3 text-sm leading-7 text-muted">{summary}</p>
         </div>
@@ -58,10 +62,11 @@ export function BlogCard(props: BlogCardInput) {
       <div className="mt-auto">
         <GlowButton
           href={`/blog/${slug}`}
+          title={`Ler ${title}`}
           variant="ghost"
           className="px-0 py-0 text-xs text-electricLight hover:bg-transparent"
         >
-          Ler conteúdo →
+          Ler artigo<span className="sr-only">: {title}</span> →
         </GlowButton>
       </div>
     </MetallicCard>

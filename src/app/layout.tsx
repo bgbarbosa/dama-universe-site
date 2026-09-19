@@ -46,6 +46,7 @@ export default function RootLayout({
       <body>
         <ConsentProvider>
           <div className="flex min-h-screen flex-col">
+            <a href="#conteudo" className="sr-only fixed left-4 top-4 z-[100] rounded-xl bg-background px-5 py-3 text-text focus:not-sr-only focus-ring">Pular para o conteúdo</a>
             <Header />
             <div className="flex-1">{children}</div>
             <Footer />

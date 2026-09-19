@@ -3,7 +3,7 @@ import { GlowButton } from "@/components/ui";
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-dama-radial">
-      <div className="container-site grid min-h-[690px] items-center gap-12 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
+      <div className="container-site grid min-h-[540px] items-center gap-12 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
         <div>
           <div className="mb-8 inline-flex rounded-full border border-electric/50 bg-electric/10 px-4 py-2 text-sm font-bold text-electricLight">
             Site, blog e vitrine de projetos Dama
@@ -16,8 +16,8 @@ export function HeroSection() {
           </h1>
 
           <p className="mt-8 max-w-2xl text-2xl font-semibold leading-snug text-text">
-            Programas, downloads, atualizações e conteúdos técnicos reunidos em
-            um só lugar.
+            Ferramentas para organizar informações, automatizar documentos
+            e apoiar o trabalho com dados e IA.
           </p>
 
           <p className="body-text mt-6 max-w-2xl">
@@ -30,6 +30,7 @@ export function HeroSection() {
             <GlowButton href="/programas" variant="primary" className="px-8">
               Conhecer Programas
             </GlowButton>
+            <GlowButton href="/sobre" variant="ghost">Conhecer o criador</GlowButton>
           </div>
         </div>
 

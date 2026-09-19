@@ -43,7 +43,7 @@ export const metadata = createPageMetadata({
 
 export default function ReferenciasPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageHeader
         title="Mestres & Referências"
         subtitle="Fontes de estudo, inspiração e gratidão"

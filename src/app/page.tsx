@@ -1,5 +1,6 @@
+import { DamaFccTutorials } from "@/components/videos";
 import {
-  DamaFccHighlight,
+  FeaturedPrograms,
   FinalCallToAction,
   GptsPreview,
   HeroSection,
@@ -11,7 +12,7 @@ import { BiometriaUpdateBanner } from "@/components/updates";
 
 export default function HomePage() {
   return (
-    <>
+    <main id="conteudo" tabIndex={-1}>
       <HeroSection />
       <section
         id="atualizacao-biometria-2"
@@ -21,12 +22,13 @@ export default function HomePage() {
           <BiometriaUpdateBanner variant="home" />
         </div>
       </section>
+      <FeaturedPrograms />
       <SiteUpdatesPreview />
-      <DamaFccHighlight />
+      <div className="container-site py-12"><DamaFccTutorials /></div>
       <GptsPreview />
       <RecentPosts />
       <SupportPreview />
       <FinalCallToAction />
-    </>
+    </main>
   );
 }

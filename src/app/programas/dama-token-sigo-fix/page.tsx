@@ -1,3 +1,4 @@
+import { ProgramContact } from "@/components/programs/ProgramContact";
 import Image from "next/image";
 
 import { createPageMetadata } from "@/lib/seo";
@@ -79,7 +80,7 @@ export const metadata = createPageMetadata({
 
 export default function DamaTokenSigoFixPage() {
   return (
-    <main className="bg-dama-radial">
+    <main id="conteudo" tabIndex={-1} className="bg-dama-radial">
       <section className="page-section-tight">
         <div className="container-site">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -345,6 +346,7 @@ export default function DamaTokenSigoFixPage() {
           </div>
         </div>
       </section>
+      <ProgramContact />
     </main>
   );
 }

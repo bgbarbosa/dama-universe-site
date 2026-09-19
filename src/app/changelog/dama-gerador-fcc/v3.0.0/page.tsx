@@ -18,7 +18,7 @@ export const metadata = createPageMetadata({
 
 export default function DamaGeradorFccChangelogPage() {
   return (
-    <main className="bg-dama-radial">
+    <main id="conteudo" tabIndex={-1} className="bg-dama-radial">
       <section className="page-section-tight">
         <div className="container-site">
           <SectionHeader

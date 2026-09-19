@@ -1,3 +1,4 @@
+import { ProgramContact } from "@/components/programs/ProgramContact";
 import Image from "next/image";
 
 import { GlowButton, MetallicCard, PageHeader, SectionTitle } from "@/components/ui";
@@ -139,7 +140,7 @@ const currentScope = [
 
 function FlowSteps({ items }: { items: string[] }) {
   return (
-    <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+    <ol className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
       {items.map((item, index) => (
         <li
           key={item}
@@ -157,7 +158,7 @@ function FlowSteps({ items }: { items: string[] }) {
 
 export default function DamaGestorRhPage() {
   return (
-    <main className="bg-dama-radial">
+    <main id="conteudo" tabIndex={-1} className="bg-dama-radial [overflow-wrap:anywhere]">
       <PageHeader
         title="Dama Gestor de RH"
         subtitle="Gestão operacional de recursos humanos"
@@ -167,7 +168,7 @@ export default function DamaGestorRhPage() {
 
       <section className="container-site pb-16 sm:pb-20" aria-labelledby="hero-summary">
         <MetallicCard variant="featured" className="p-7 sm:p-9 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <div>
               <h2 id="hero-summary" className="sr-only">
                 Apresentação da solução
@@ -357,7 +358,7 @@ export default function DamaGestorRhPage() {
 
       <section className="page-section">
         <div className="container-site">
-          <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.08fr_0.92fr]">
             <MetallicCard variant="featured" className="p-7 sm:p-9">
               <p className="eyebrow mb-4">Solução sob encomenda</p>
               <h2 className="title-chrome text-3xl font-black sm:text-4xl">
@@ -392,7 +393,7 @@ export default function DamaGestorRhPage() {
           </div>
 
           <MetallicCard variant="notice" className="mt-6 p-6 sm:p-8">
-            <div className="grid gap-6 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <div>
                 <h2 className="text-xl font-black text-text">Segurança e privacidade</h2>
                 <p className="body-text-sm mt-3">
@@ -427,6 +428,7 @@ export default function DamaGestorRhPage() {
           </GlowButton>
         </div>
       </section>
+      <ProgramContact commercial />
     </main>
   );
 }

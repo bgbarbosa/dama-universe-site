@@ -1,3 +1,4 @@
+import { sortPostsByDate } from "@/lib/blog";
 import { createPageMetadata } from "@/lib/seo";
 import { BlogCard } from "@/components/blog";
 import { MetallicCard, PageHeader } from "@/components/ui";
@@ -12,7 +13,7 @@ export const metadata = createPageMetadata({
 
 export default function BlogPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageHeader
         title="Blog"
         subtitle="Conteúdos técnicos"
@@ -32,7 +33,7 @@ export default function BlogPage() {
         </MetallicCard>
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {posts.map((post) => (
+          {sortPostsByDate(posts).map((post) => (
             <BlogCard key={post.slug} post={post} />
           ))}
         </div>
