@@ -38,7 +38,7 @@ describe("rotas de metadados", () => {
   });
 
   it("usa datas válidas e não futuras", () => {
-    const auditDate = new Date("2026-09-19T23:59:59.999Z");
+    const auditDate = new Date("2026-10-16T23:59:59.999Z");
 
     for (const entry of sitemap()) {
       expect(entry.lastModified).toBeInstanceOf(Date);

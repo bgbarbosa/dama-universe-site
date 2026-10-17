@@ -19,6 +19,15 @@ export type UpdateItem = {
 
 export const updates: UpdateItem[] = [
   {
+    title: "Dama Termos 1.0.0 disponível",
+    area: "Programas",
+    type: "Programa",
+    date: "2026-10-16",
+    summary:
+      "Aplicativo Windows para preencher o Termo de Adesão ao Programa MS Acolhe e Protege, conferir até cinco plantões e gerar PDF. Instalador, ZIP e manual rápido na página do programa.",
+    url: "/programas/dama-termos",
+  },
+  {
     title: "Dama Biometria SIGO Fix 2.0.0 disponível",
     area: "Programas",
     type: "Programa",

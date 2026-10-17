@@ -2,7 +2,7 @@ import { programs } from "@/data";
 import { ProgramCard } from "@/components/programs";
 import { SectionTitle } from "@/components/ui";
 
-const showcaseSlugs = ["dama-gestor-rh", "dama-gerador-fcc", "dama-biometria-sigo-fix"];
+const showcaseSlugs = ["dama-termos", "dama-gestor-rh", "dama-gerador-fcc", "dama-biometria-sigo-fix"];
 export function FeaturedPrograms() {
   const featuredPrograms = programs.filter((program) => showcaseSlugs.includes(program.slug));
   return (
@@ -14,7 +14,7 @@ export function FeaturedPrograms() {
           description="Conheça os principais projetos desenvolvidos no Dama Universe, suas versões, funcionalidades, manuais e atualizações."
         />
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {featuredPrograms.map((program) => (
             <ProgramCard key={program.slug} program={program} />
           ))}

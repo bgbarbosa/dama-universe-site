@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Program } from "@/data/programs";
 
 import { GlowButton, MetallicCard } from "@/components/ui";
 
@@ -17,6 +18,8 @@ type ProgramCardData = {
   downloadHref?: string;
   downloadUrl?: string;
   downloadLabel?: string;
+  alternativeDownload?: Program["alternativeDownload"];
+  previewImage?: Program["previewImage"];
   compatibility?: string;
   updateBadge?: string;
   updateSummary?: string;
@@ -43,6 +46,8 @@ export function ProgramCard({
   downloadHref,
   downloadUrl,
   downloadLabel,
+  alternativeDownload,
+  previewImage,
   compatibility,
   updateBadge,
   updateSummary,
@@ -85,6 +90,8 @@ export function ProgramCard({
   const programUpdateSummary = updateSummary ?? program?.updateSummary;
 
   const programIconUrl = iconUrl ?? program?.iconUrl;
+  const programPreview = previewImage ?? program?.previewImage;
+  const alternative = alternativeDownload ?? program?.alternativeDownload;
   const isFeatured = featured || Boolean(program?.featured);
 
   const isDownloadExternal = Boolean(
@@ -105,6 +112,14 @@ export function ProgramCard({
         ].join(" ")}
       >
       <Link href={detailsHref} aria-label={`Conhecer ${programTitle}`} className="flex flex-1 flex-col rounded-2xl p-5 transition-colors hover:bg-electric/5 focus-ring sm:p-6">
+      {programPreview ? (
+        <Image
+          {...programPreview}
+          alt={programPreview.alt}
+          sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
+          className="mb-5 h-auto w-full rounded-xl border border-borderSoft object-contain"
+        />
+      ) : null}
       {programUpdateBadge ? (
         <div className="relative z-10 mb-4">
           <span className="release-glow-badge inline-flex rounded-full border px-3 py-1.5 text-[0.68rem] font-black uppercase tracking-[0.18em]">
@@ -172,6 +187,13 @@ export function ProgramCard({
       {downloadLink ? (
         <div className="border-t border-border px-5 py-4 sm:px-6">
           <GlowButton href={downloadLink} external={isDownloadExternal} variant="secondary">{downloadButtonLabel}</GlowButton>
+          {alternative ? (
+            <div className="mt-3">
+              <GlowButton href={alternative.url} external={/^https?:\/\//.test(alternative.url)} variant="ghost">
+                {alternative.label}
+              </GlowButton>
+            </div>
+          ) : null}
           {downloadLink.includes("google.com") ? <p className="mt-2 text-xs text-muted">Download pelo Google Drive</p> : null}
         </div>
       ) : null}

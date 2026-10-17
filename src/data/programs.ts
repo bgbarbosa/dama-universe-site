@@ -21,6 +21,8 @@ export type Program = {
   detailsUrl: string;
   downloadUrl?: string;
   downloadLabel?: string;
+  alternativeDownload?: { url: string; label: string };
+  previewImage?: { src: string; alt: string; width: number; height: number };
   compatibility?: string;
   installerName?: string;
   downloadSize?: string;
@@ -35,6 +37,34 @@ export type Program = {
 };
 
 export const programs: Program[] = [
+  {
+    name: "Dama Termos",
+    slug: "dama-termos",
+    category: "Preenchimento e geração de documentos",
+    shortDescription:
+      "Aplicativo Windows para preencher o Termo de Adesão ao Programa MS Acolhe e Protege, conferir até cinco plantões e gerar PDF com assinatura visual opcional.",
+    version: "1.0.0",
+    status: "Disponível",
+    updatedAt: "2026-10-16",
+    detailsUrl: "/programas/dama-termos",
+    downloadUrl:
+      "https://drive.google.com/file/d/1Rk16smRE6dbuyTzG8LXluEHAQjIfvgty/view?usp=sharing",
+    downloadLabel: "Baixar Dama Termos para Windows",
+    alternativeDownload: {
+      url: "https://drive.google.com/file/d/1IRa8Sfg-_XtNiZQuAfYpHPld3M-_q9nY/view?usp=sharing",
+      label: "Baixar instalador em ZIP",
+    },
+    installerName: "DamaTermos_Setup_1.0.0.exe",
+    downloadSize: "Aproximadamente 19,14 MiB",
+    updateBadge: "LANÇAMENTO • VERSÃO 1.0.0",
+    previewImage: {
+      src: "/images/programs/dama-termos-interface.webp",
+      alt: "Interface do Dama Termos com dados do servidor, plantões e fechamento; valores de preenchimento ocultados",
+      width: 1443,
+      height: 1090,
+    },
+    featured: true,
+  },
   {
     name: "Dama Gestor de RH",
     slug: "dama-gestor-rh",
