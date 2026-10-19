@@ -56,12 +56,14 @@ describe("lançamento do Dama Termos 1.0.0", () => {
     expect(zip).toHaveFocus();
   });
 
-  it("acrescenta o lançamento aos destaques preservando os três programas anteriores", () => {
+  it("mantém o lançamento entre três destaques e preserva o RH no catálogo", () => {
     render(<FeaturedPrograms />);
-    for (const name of ["Dama Termos", "Dama Gestor de RH", "Dama Gerador FCC", "Dama Biometria SIGO Fix"]) {
+    for (const name of ["Dama Termos", "Dama Gerador FCC", "Dama Biometria SIGO Fix"]) {
       expect(screen.getByRole("link", { name: `Conhecer ${name}` })).toBeInTheDocument();
     }
-    expect(screen.getByText("LANÇAMENTO • VERSÃO 1.0.0")).toBeInTheDocument();
+    expect(screen.getAllByTestId(/^home-program-/)).toHaveLength(3);
+    expect(getProgramBySlug("dama-gestor-rh")?.status).toBe("Projeto sob consulta");
+    expect(getProgramBySlug("dama-gestor-rh")?.downloadUrl).toBeUndefined();
   });
 
   it("registra o lançamento em primeiro lugar nas novidades com a data de preparação", () => {

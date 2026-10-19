@@ -1,30 +1,8 @@
+import { damaFccTutorials } from "@/data/tutorials";
 import { HorizontalScroller } from "@/components/ui/HorizontalScroller";
 import { GlowButton, MetallicCard, SectionTitle } from "@/components/ui";
 import { YouTubeEmbed } from "@/components/privacy";
 
-const tutorials = [
-  {
-    title: "Parte 01 — Primeiros passos",
-    description:
-      "Introdução ao Dama Gerador FCC 3.0 e visão geral do fluxo inicial de uso.",
-    watchUrl: "https://youtu.be/CL-Q2iOYAJU",
-    videoId: "CL-Q2iOYAJU",
-  },
-  {
-    title: "Parte 02 — Geração e conferência",
-    description:
-      "Continuação do tutorial com foco no uso operacional e na conferência dos dados.",
-    watchUrl: "https://youtu.be/4vmzh-SOBEw",
-    videoId: "4vmzh-SOBEw",
-  },
-  {
-    title: "Parte 03 — Finalização do fluxo",
-    description:
-      "Etapa final do tutorial, com orientações complementares sobre o uso do programa.",
-    watchUrl: "https://youtu.be/mkdPTsE6-KM",
-    videoId: "mkdPTsE6-KM",
-  },
-];
 
 type DamaFccTutorialsProps = {
   className?: string;
@@ -52,7 +30,7 @@ export function DamaFccTutorials({
       </div>
 
       <HorizontalScroller label="Tutoriais FCC">
-          {tutorials.map((video) => (
+          {damaFccTutorials.map((video) => (
             <MetallicCard
               key={video.videoId}
               className="w-[min(320px,80vw)] shrink-0 border-electric/70 p-4 shadow-[0_0_35px_rgba(37,150,255,0.28)]"

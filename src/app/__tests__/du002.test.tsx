@@ -14,8 +14,8 @@ import { getRecentPosts, getReadingTime, formatDate, sortPostsByDate } from "@/l
 import { posts } from "@/data/posts";
 
 describe("TSK-DU-002", () => {
-  it("distribui aliases e contatos confirmados sem canal técnico", () => {
-    const { container } = render(<><ContatoPage /><Footer /></>);
+  it("distribui aliases e contatos confirmados sem canal técnico", async () => {
+    const { container } = render(<>{await ContatoPage({})}<Footer /></>);
     for (const email of [contacts.general, contacts.support, contacts.commercial, contacts.courses, contacts.creator, contacts.professional]) {
       expect(container.querySelector(`a[href="mailto:${email}"]`)).toBeInTheDocument();
     }
@@ -74,9 +74,10 @@ describe("TSK-DU-002", () => {
     expect(getReadingTime(posts[0].slug)).toMatch(/^\d+ min de leitura$/);
     expect(getReadingTime("inexistente")).toBeUndefined();
   });
-  it("apresenta criador primeiro, foto, Lattes e contato individual", () => {
+  it("apresenta o projeto e preserva criador, foto, Lattes e contato individual", () => {
     render(<SobrePage />);
-    expect(screen.getByRole("heading", {level: 1})).toHaveTextContent("Marco Barbosa");
+    expect(screen.getByRole("heading", {level: 1})).toHaveTextContent("Sobre o Dama Universe");
+    expect(screen.getByRole("heading", {name: "Criado por Marco Barbosa"})).toBeVisible();
     expect(screen.getByRole("img", {name: "Marco Barbosa, criador do Dama Universe"})).toHaveAttribute("width", "640");
     expect(screen.getByRole("link", {name: "Currículo Lattes"})).toHaveAttribute("href", "https://lattes.cnpq.br/1970561249212557");
     expect(within(screen.getByRole("main")).getByRole("link", {name: contacts.creator})).toHaveAttribute("href", mailto(contacts.creator));

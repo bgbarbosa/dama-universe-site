@@ -1,58 +1,23 @@
 import { GlowButton } from "@/components/ui";
+import { EcosystemPanel } from "./EcosystemPanel";
+import styles from "./home.module.css";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-dama-radial">
-      <div className="container-site grid min-h-[540px] items-center gap-12 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
-        <div>
-          <div className="mb-8 inline-flex rounded-full border border-electric/50 bg-electric/10 px-4 py-2 text-sm font-bold text-electricLight">
-            Site, blog e vitrine de projetos Dama
-          </div>
-
-          <h1 className="title-chrome max-w-3xl text-6xl font-black leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
-            Dama
-            <br />
-            Universe
-          </h1>
-
-          <p className="mt-8 max-w-2xl text-2xl font-semibold leading-snug text-text">
-            Ferramentas para organizar informações, automatizar documentos
-            e apoiar o trabalho com dados e IA.
-          </p>
-
-          <p className="body-text mt-6 max-w-2xl">
-            Um espaço dedicado ao desenvolvimento e compartilhamento de soluções
-            digitais, projetos em Python, automação documental, análise de
-            dados, inteligência artificial e referências de estudo.
-          </p>
-
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-            <GlowButton href="/programas" variant="primary" className="px-8">
-              Conhecer Programas
-            </GlowButton>
-            <GlowButton href="/sobre" variant="ghost">Conhecer o criador</GlowButton>
+    <section className={styles.hero} aria-labelledby="home-title">
+      <div className={`container-site ${styles.heroGrid}`}>
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}>Tecnologia, conhecimento e projetos autorais</p>
+          <h1 id="home-title" className={styles.heroTitle}>Dama Universe</h1>
+          <p className={styles.heroLead}>Soluções digitais para organizar informações, automatizar tarefas e apoiar o trabalho com dados e inteligência artificial.</p>
+          <p className={styles.description}>Criado por Marco Barbosa, o Dama Universe é um projeto, marca e ecossistema autoral que reúne programas, ferramentas de IA, conteúdos técnicos e referências para documentar, compartilhar e acompanhar a evolução de soluções digitais.</p>
+          <p className={styles.complement}>Conheça ferramentas disponíveis, versões, downloads, tutoriais e iniciativas em desenvolvimento, com informações claras sobre a finalidade e o estágio de cada projeto.</p>
+          <div className={styles.actions}>
+            <GlowButton href="/programas" variant="primary">Explorar programas <span aria-hidden="true">↗︎</span></GlowButton>
+            <GlowButton href="/sobre" variant="secondary">Conhecer o projeto</GlowButton>
           </div>
         </div>
-
-        <div className="relative mx-auto w-full max-w-xl">
-          <div className="rounded-3xl border border-electric/55 bg-surface/75 p-8 shadow-card">
-            <div className="relative flex min-h-[280px] items-center justify-center overflow-hidden rounded-3xl border border-border bg-background/70">
-              <div className="absolute text-[220px] font-black leading-none text-chrome/10">
-                D
-              </div>
-
-              <div className="relative max-w-sm rounded-2xl border border-electric/45 bg-background/85 p-6 shadow-electric">
-                <p className="text-sm font-bold text-electricLight">
-                  Inteligência aplicada
-                </p>
-                <p className="mt-3 text-sm leading-7 text-muted">
-                  Projetos, versões, conteúdos e ferramentas reunidos em uma
-                  base pública organizada.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <EcosystemPanel />
       </div>
     </section>
   );

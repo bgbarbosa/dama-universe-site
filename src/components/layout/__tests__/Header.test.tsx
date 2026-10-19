@@ -1,12 +1,13 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { Header } from "@/components/layout/Header";
 
+const route = vi.hoisted(() => ({ pathname: "/" }));
 vi.mock("next/navigation", () => ({
-  usePathname: () => "/",
+  usePathname: () => route.pathname,
 }));
 
 vi.mock("next/link", () => ({
@@ -35,6 +36,33 @@ vi.mock("next/link", () => ({
 describe("Header", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    route.pathname = "/";
+  });
+
+  it("mantém Referências e os oito destinos no menu principal e no menu móvel", async () => {
+    route.pathname = "/referencias";
+    const user = userEvent.setup(); render(<Header />);
+    const desktop = screen.getByRole("navigation", {name:"Navegação principal"});
+    expect(within(desktop).getAllByRole("link")).toHaveLength(8);
+    expect(within(desktop).getByRole("link",{name:"Referências"})).toHaveAttribute("aria-current","page");
+    await user.click(screen.getByRole("button",{name:"Abrir menu"}));
+    const mobile = screen.getByRole("navigation",{name:"Navegação móvel"});
+    expect(within(mobile).getAllByRole("link").map(link=>link.getAttribute("href"))).toEqual(within(desktop).getAllByRole("link").map(link=>link.getAttribute("href")));
+    expect(within(mobile).getByRole("link",{name:"Referências"})).toHaveAttribute("aria-current","page");
+  });
+
+  it("marca a rota de IA sem trocar a URL e evita CTA redundante na Home", () => {
+    route.pathname = "/gpts";
+    render(<Header />);
+    expect(screen.getByRole("link", { name: "IA aplicada" })).toHaveAttribute("href", "/gpts");
+    expect(screen.getByRole("link", { name: "IA aplicada" })).toHaveAttribute("aria-current", "page");
+    expect(screen.queryByRole("link", { name: "Conhecer criador" })).toBeNull();
+  });
+
+  it("preserva o retorno ao catálogo nas páginas dos programas", () => {
+    route.pathname = "/programas/dama-termos";
+    render(<Header />);
+    expect(screen.getByRole("link", { name: "Ver Programas" })).toHaveAttribute("href", "/programas");
   });
 
   it("abre e fecha o menu móvel por botão", async () => {

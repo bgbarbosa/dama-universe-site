@@ -6,10 +6,10 @@ export type NavigationItem = {
 export const primaryNavigation: NavigationItem[] = [
   { href: "/", label: "Início" },
   { href: "/programas", label: "Programas" },
-  { href: "/gpts", label: "GPTs" },
-  { href: "/blog", label: "Blog" },
+  { href: "/gpts", label: "IA aplicada" },
+  { href: "/blog", label: "Conteúdos" },
   { href: "/referencias", label: "Referências" },
-  { href: "/apoie", label: "Apoie" },
+  { href: "/apoie", label: "Participe" },
   { href: "/sobre", label: "Sobre" },
   { href: "/contato", label: "Contato" },
 ];
@@ -22,8 +22,6 @@ export const legalNavigation: NavigationItem[] = [
 ];
 
 export const footerNavigation: NavigationItem[] = [
-  ...primaryNavigation.map((item) =>
-    item.href === "/gpts" ? { ...item, label: "GPTs Personalizados" } : item
-  ),
+  ...primaryNavigation,
   ...legalNavigation,
 ];

@@ -1,71 +1,39 @@
-import { GlowButton } from "@/components/ui";
+import Link from "next/link";
+import { EditorialIntro, EditorialShell } from "@/components/editorial/EditorialIntro";
+import { AiDemo } from "@/components/editorial/AiDemo";
+import styles from "@/components/editorial/editorial.module.css";
+import { customGpts } from "@/data/gpts";
 import { contacts, mailto } from "@/data/contacts";
-import { GptCard } from "@/components/gpts";
-
-import { MetallicCard, PageHeader } from "@/components/ui";
+import { isPublicWebUrl } from "@/lib/editorial";
 import { createPageMetadata } from "@/lib/seo";
-import { customGpts } from "@/data";
 
 export const metadata = createPageMetadata({
-  title: "GPTs Personalizados — Dama Universe",
-  description:
-    "Assistentes de IA personalizados criados para apoiar documentação, estudo, organização, análise e produção técnica.",
+  title: "IA aplicada — Dama Universe",
+  description: "Ferramentas e exemplos de IA para escrita e organização, com demonstrações fictícias, requisitos de acesso e revisão humana.",
   path: "/gpts",
 });
 
+const concepts = [
+  ["Inteligência Artificial", "Modelos que produzem respostas a partir de padrões e instruções. Servem de apoio à escrita e à organização, mas podem errar. Exemplo fictício: resumir uma reunião inventada em três tópicos."],
+  ["Engenharia de prompts", "É a elaboração de instruções com objetivo, contexto e limites. Exemplo fictício: “Revise este convite de uma oficina imaginária, preserve as datas e destaque ambiguidades”. Ajuda a orientar os GPTs apresentados nesta página."],
+  ["Análise de dados", "Organizar e comparar informações para entender padrões. Exemplo fictício: contar tarefas concluídas em uma planilha de demonstração. No Dama, a organização dos dados apoia ferramentas e conteúdos; resultados exigem conferência."],
+  ["Automação documental", "Usar regras e modelos para reduzir preenchimentos repetitivos. Exemplo fictício: gerar um documento com dados de demonstração. O Dama Gerador FCC aplica esse tipo de recurso com revisão humana."],
+];
+
 export default function GptsPage() {
-  return (
-    <main id="conteudo" tabIndex={-1}>
-      <PageHeader
-        title="GPTs Personalizados"
-        subtitle="Assistentes de IA"
-        description="Assistentes criados para apoiar tarefas específicas de documentação, estudo, organização, análise e produção técnica dentro do ecossistema Dama."
-      />
-
-      <section className="mx-auto max-w-7xl px-6 pb-20">
-        <div className="mb-8 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-          <MetallicCard variant="notice">
-            <h2 className="text-2xl font-black text-text">
-              O que é um GPT personalizado?
-            </h2>
-
-            <p className="mt-4 text-sm leading-7 text-muted">
-              É um assistente no ChatGPT configurado com instruções para uma tarefa.
-              Pode ajudar a organizar um texto ou revisar sua clareza. Cada GPT tem indicação de uso
-              e cuidados necessários. Eles funcionam como ferramentas de apoio, não
-              como substitutos da conferência humana, responsabilidade técnica ou
-              validação final.
-            </p>
-          </MetallicCard>
-
-          <MetallicCard variant="warning">
-            <p className="eyebrow mb-4 text-goldSoft">Uso responsável</p>
-            <p className="text-sm leading-7 text-muted">
-              Não envie dados sensíveis, documentos sigilosos, informações
-              pessoais de terceiros, senhas, tokens ou conteúdo relacionado a
-              procedimentos restritos.
-            </p>
-          </MetallicCard>
-        </div>
-
-        <MetallicCard className="mb-8">
-          <h2 className="text-2xl font-bold text-text">Entenda antes de usar</h2>
-          <dl className="mt-5 space-y-5 text-sm leading-7 text-muted">
-            <div><dt className="font-bold text-text">Inteligência Artificial</dt><dd>Modelos que produzem respostas a partir de padrões e instruções. Servem de apoio à escrita e à organização, mas podem errar. Exemplo fictício: resumir uma reunião inventada em três tópicos.</dd></div>
-            <div><dt className="font-bold text-text">Engenharia de prompts</dt><dd>É a elaboração de instruções com objetivo, contexto e limites. Exemplo fictício: “Revise este convite de uma oficina imaginária, preserve as datas e destaque ambiguidades”. Ajuda a orientar os GPTs apresentados abaixo.</dd></div>
-            <div><dt className="font-bold text-text">Análise de dados</dt><dd>Organizar e comparar informações para entender padrões. Exemplo fictício: contar tarefas concluídas em uma planilha de demonstração. No Dama, a organização dos dados apoia ferramentas e conteúdos; resultados exigem conferência.</dd></div>
-            <div><dt className="font-bold text-text">Automação documental</dt><dd>Usar regras e modelos para reduzir preenchimentos repetitivos. Exemplo fictício: gerar um documento com dados de demonstração. O Dama Gerador FCC aplica esse tipo de recurso com revisão humana.</dd></div>
-          </dl>
-          <p className="mt-5 text-sm leading-7 text-muted">Os exemplos são fictícios. Não envie informações sensíveis. O acesso aos GPTs depende das condições e dos limites da plataforma externa; não há promessa de uso gratuito ou ilimitado.</p>
-          <div className="mt-5 flex flex-wrap gap-3"><GlowButton href="/blog/inteligencia-artificial-como-ferramenta-de-apoio">Aprofundar no Blog</GlowButton><GlowButton href="/programas/dama-gerador-fcc">Conhecer a automação FCC</GlowButton></div>
-          <p className="mt-5 text-sm text-muted">Dúvidas sobre capacitação: <a className="contact-link" href={mailto(contacts.courses)}>{contacts.courses}</a>. Consulte possibilidades; não há anúncio de turmas nesta página.</p>
-        </MetallicCard>
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {customGpts.map((gpt) => (
-            <GptCard key={gpt.slug} gpt={gpt} />
-          ))}
-        </div>
-      </section>
-    </main>
-  );
+  return <EditorialShell>
+    <EditorialIntro eyebrow="Ferramentas e exemplos de IA" title="IA aplicada" lead="Ferramentas e exemplos para transformar instruções em trabalho organizado." description="Conheça recursos do ecossistema Dama para apoiar escrita, organização e tarefas especializadas. Explore suas finalidades, veja exemplos de uso e confira os requisitos antes de acessar cada ferramenta." />
+    <p className={styles.notice}><strong>Uso responsável.</strong> Utilize exemplos e materiais apropriados. Não envie dados sigilosos, credenciais, senhas, tokens, informações pessoais de terceiros ou conteúdo relacionado a procedimentos restritos. As respostas precisam de revisão humana e não substituem responsabilidade técnica ou avaliação jurídica aplicável.</p>
+    <section className={styles.section} aria-labelledby="tools-title">
+      <h2 id="tools-title">Ferramentas para tarefas específicas</h2>
+      <p className={styles.description}>Os recursos abaixo são GPTs no ChatGPT. O acesso depende das condições e dos limites da plataforma externa; não há promessa de uso gratuito ou ilimitado.</p>
+      <ul className={styles.resourceList}>{customGpts.map((gpt) => <li key={gpt.slug} className={styles.resource} data-testid={`ai-tool-${gpt.slug}`}>
+        <div><p className={styles.meta}>GPT · {gpt.status} · {gpt.category} · Autoria: {gpt.author}</p><h3>{gpt.name}</h3><p>{gpt.shortDescription}</p></div>
+        <div className={styles.resourceActions}>{isPublicWebUrl(gpt.url) ? <a className={styles.primaryButton} href={gpt.url} target="_blank" rel="noopener noreferrer" aria-label={`Acessar ${gpt.name}`}>Acessar ferramenta <span aria-hidden="true">↗︎</span></a> : <p>Acesso não disponível.</p>}{gpt.slug === "especialista-em-escrita-e-revisao" ? <Link className={styles.inlineLink} href="#exemplo">Ver exemplo fictício</Link> : null}</div>
+        <details><summary>Como começar<span className="sr-only">: {gpt.name}</span></summary><p>{gpt.purpose}</p><p>Acesse o recurso no ChatGPT, confira suas condições de acesso e formule instruções com objetivo e limites claros. Trabalhe somente com materiais apropriados e revise o resultado antes de qualquer uso formal.</p><div className={styles.detailColumns}><div><h4>Indicado para</h4><ul>{gpt.indicatedFor.map((item) => <li key={item}>{item}</li>)}</ul></div><div><h4>Cuidados específicos</h4><ul>{gpt.precautions.map((item) => <li key={item}>{item}</li>)}</ul></div></div></details>
+      </li>)}</ul>
+    </section>
+    <AiDemo />
+    <section className={styles.section} aria-labelledby="concepts-title"><h2 id="concepts-title">Entenda antes de usar</h2><p className={styles.description}>Um GPT personalizado é um assistente no ChatGPT configurado com instruções para uma tarefa. Pode apoiar a organização ou a revisão de um texto; cada recurso tem indicação de uso e cuidados necessários.</p><dl className={styles.concepts}>{concepts.map(([title, text]) => <div key={title}><dt>{title}</dt><dd>{text}</dd></div>)}</dl><div className={styles.links}><Link href="/blog/inteligencia-artificial-como-ferramenta-de-apoio">Aprofundar nos conteúdos</Link><Link href="/programas/dama-gerador-fcc">Conhecer a automação FCC</Link></div><p className={styles.description}>Dúvidas sobre capacitação: <a className={styles.inlineLink} href={mailto(contacts.courses)}>{contacts.courses}</a>. Consulte possibilidades; não há anúncio de turmas nesta página.</p></section>
+  </EditorialShell>;
 }

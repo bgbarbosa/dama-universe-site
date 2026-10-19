@@ -1,60 +1,23 @@
-import { customGpts } from "@/data";
-import { GlowButton, MetallicCard } from "@/components/ui";
+import Link from "next/link";
+import { customGpts } from "@/data/gpts";
+import styles from "./home.module.css";
 
 export function GptsPreview() {
-  const featuredGpts = customGpts.filter((gpt) => gpt.featured).slice(0, 2);
-
-  return (
-    <section className="page-section-tight">
-      <div className="container-site">
-        <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl">
-            <p className="eyebrow mb-4">Assistentes de IA</p>
-            <h2 className="title-chrome text-3xl font-black sm:text-4xl lg:text-5xl">
-              GPTs personalizados
-            </h2>
-            <p className="body-text mt-4">
-              Assistentes criados para apoiar tarefas específicas de
-              documentação, estudo, organização, análise e produção técnica.
-            </p>
-          </div>
-
-          <GlowButton href="/gpts" variant="secondary">
-            Ver todos os GPTs
-          </GlowButton>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          {featuredGpts.map((gpt) => (
-            <MetallicCard key={gpt.slug} variant="featured">
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full border border-electric/45 bg-electric/10 px-3 py-1 text-xs font-bold text-electricLight">
-                  {gpt.category}
-                </span>
-                <span className="rounded-full border border-gold/50 bg-gold/10 px-3 py-1 text-xs font-bold text-goldSoft">
-                  {gpt.status}
-                </span>
-              </div>
-
-              <h3 className="mt-6 text-2xl font-black text-text">
-                {gpt.name}
-              </h3>
-
-              <p className="body-text-sm mt-4">{gpt.shortDescription}</p>
-
-              <div className="mt-7">
-                <GlowButton
-                  href={gpt.url}
-                  external={gpt.url.startsWith("http")}
-                  variant="primary"
-                >
-                  Acessar GPT
-                </GlowButton>
-              </div>
-            </MetallicCard>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  const featured = customGpts.filter(gpt => gpt.featured).slice(0, 2);
+  return <section id="ia-aplicada" className={`container-site ${styles.section} ${styles.aiSection}`} aria-labelledby="ia-title">
+    <div>
+      <p className={styles.eyebrow}>IA aplicada</p>
+      <h2 id="ia-title" className={styles.sectionTitle}>Assistentes e ferramentas de IA</h2>
+      <p className={styles.description}>Recursos desenvolvidos para apoiar escrita, organização, análise e tarefas especializadas, com informações claras sobre uso, acesso e limitações.</p>
+      <Link href="/gpts" className={`${styles.textLink} focus-ring`}>Conhecer as fichas e os cuidados <span aria-hidden="true">↗︎</span></Link>
+    </div>
+    <div className={styles.aiResources}>
+      {featured.map(gpt => <article key={gpt.slug}>
+        <p className={styles.programCategory}>GPT no ChatGPT <span aria-hidden="true">·</span> {gpt.category}</p>
+        <h3><a href={gpt.url} target="_blank" rel="noopener noreferrer" className="focus-ring">{gpt.slug === "boletim-de-ocorrencia-2" ? "Boletim de Ocorrência" : gpt.name}<span aria-hidden="true"> ↗︎</span></a></h3>
+        <p>{gpt.shortDescription}</p>
+      </article>)}
+      <p className={styles.accessNote}>O acesso depende das condições e dos limites do ChatGPT. Confira a ficha e revise os resultados; não envie informações sensíveis.</p>
+    </div>
+  </section>;
 }

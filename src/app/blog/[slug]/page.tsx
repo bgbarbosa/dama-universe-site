@@ -3,7 +3,12 @@ import { createPageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { ResponsibilityNotice } from "@/components/notices";
 import { GiscusComments } from "@/components/comments";
-import { GlowButton, MetallicCard, PageHeader } from "@/components/ui";
+import Link from "next/link";
+import { EditorialIntro, EditorialShell } from "@/components/editorial/EditorialIntro";
+import { CopyButton } from "@/components/editorial/CopyButton";
+import styles from "@/components/editorial/editorial.module.css";
+import { sectionAnchor } from "@/lib/editorial";
+import { siteConfig } from "@/lib/seo";
 import { getPostContentBySlug, postContents } from "@/data";
 
 export function generateStaticParams() {
@@ -47,11 +52,11 @@ export default async function BlogPostPage({
   }
 
   return (
-    <main id="conteudo" tabIndex={-1}>
-      <PageHeader title={post.title} subtitle={post.category} description={post.summary} />
+    <EditorialShell>
+      <EditorialIntro title={post.title} eyebrow={post.category} description={post.summary} />
 
-      <article className="mx-auto max-w-4xl px-6 pb-20">
-        <MetallicCard className="mb-8 border-electric/70 shadow-[0_0_35px_rgba(37,150,255,0.28)]">
+      <article className={styles.article}>
+        <div>
           <div className="flex flex-wrap gap-2 text-xs">
             <span className="rounded-full border border-electric/30 bg-electric/10 px-3 py-1 font-semibold text-electricLight">
               {post.category}
@@ -76,13 +81,16 @@ export default async function BlogPostPage({
               ))}
             </div>
           ) : null}
-        </MetallicCard>
+        </div>
+
+        {post.content.length >= 3 ? <nav className={styles.tableOfContents} aria-label="Neste conteúdo"><h2>Neste conteúdo</h2><ol>{post.content.map((section, index) => <li key={section.heading}><Link className={styles.inlineLink} href={`#${sectionAnchor(section.heading, index)}`}>{section.heading}</Link></li>)}</ol></nav> : null}
 
         <div className="space-y-8">
-          {post.content.map((section) => (
-            <MetallicCard
+          {post.content.map((section, index) => (
+            <section
               key={section.heading}
-              className="border-electric/60 shadow-[0_0_28px_rgba(37,150,255,0.20)]"
+              id={sectionAnchor(section.heading, index)}
+              className={styles.prose}
             >
               <h2 className="text-2xl font-semibold text-chromeLight">{section.heading}</h2>
               <div className="mt-4 space-y-4 break-words text-base leading-8 text-muted [overflow-wrap:anywhere]">
@@ -90,13 +98,14 @@ export default async function BlogPostPage({
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
-            </MetallicCard>
+              <CopyButton text={`${siteConfig.url}/blog/${post.slug}#${sectionAnchor(section.heading, index)}`} label={`Copiar link: ${section.heading}`} successLabel="Link da seção copiado." />
+            </section>
           ))}
         </div>
 
         <div className="mt-10 space-y-6">
           {relatedPrograms[post.slug]?.length ? <nav aria-label="Programas relacionados" className="flex flex-wrap gap-3">
-            {relatedPrograms[post.slug].map((program) => <GlowButton key={program.href} href={program.href}>Conhecer {program.name}</GlowButton>)}
+            {relatedPrograms[post.slug].map((program) => <Link className={styles.primaryButton} key={program.href} href={program.href}>Conhecer {program.name}</Link>)}
           </nav> : null}
           <ResponsibilityNotice>
             Conteúdos técnicos publicados no Dama Universe possuem finalidade informativa e de apoio. A aplicação prática exige análise, validação e responsabilidade do usuário.
@@ -108,15 +117,15 @@ export default async function BlogPostPage({
           />
 
           <div className="flex flex-wrap gap-3">
-            <GlowButton href="/blog" variant="secondary">
-              Voltar ao Blog
-            </GlowButton>
-            <GlowButton href="/contato" variant="ghost">
+            <Link className={styles.secondaryButton} href="/blog">
+              Voltar aos conteúdos
+            </Link>
+            <Link className={styles.inlineLink} href="/contato?tipo=sugestao">
               Enviar sugestão
-            </GlowButton>
+            </Link>
           </div>
         </div>
       </article>
-    </main>
+    </EditorialShell>
   );
 }

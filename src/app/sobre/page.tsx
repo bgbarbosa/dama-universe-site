@@ -1,156 +1,26 @@
 import Image from "next/image";
+import { EditorialIntro, EditorialShell } from "@/components/editorial/EditorialIntro";
+import styles from "@/components/editorial/editorial.module.css";
 import { contacts, mailto } from "@/data/contacts";
 import { createPageMetadata } from "@/lib/seo";
-import { GlowButton, MetallicCard, PageHeader, SectionTitle } from "@/components/ui";
 
-const SITE_PROFISSIONAL_URL = contacts.professionalSite;
-const LATTES_URL = "https://lattes.cnpq.br/1970561249212557";
-
-const areas = [
-  "Programas e ferramentas digitais",
-  "GPTs personalizados",
-  "Inteligência artificial",
-  "Python e automação",
-  "Análise de dados",
-  "Organização documental",
-  "Computação forense",
-  "Produtividade digital",
-  "Referências de estudo",
+const areas = ["Programas e ferramentas digitais", "IA aplicada (inclui GPTs personalizados)", "Inteligência artificial", "Python e automação", "Análise de dados", "Organização documental", "Computação forense", "Produtividade digital", "Referências de estudo"];
+const process = [
+  ["Compreender a necessidade", "Identificar a tarefa, o contexto e os limites do que se pretende organizar."],
+  ["Estruturar a solução", "Organizar requisitos e definir uma abordagem proporcional à necessidade."],
+  ["Desenvolver e testar", "Implementar e conferir o comportamento no escopo e nos ambientes disponíveis."],
+  ["Documentar", "Registrar finalidade, orientações, requisitos e limitações conhecidas."],
+  ["Acompanhar a evolução", "Rever melhorias e manter registros das mudanças de cada projeto."],
 ];
-
-export const metadata = createPageMetadata({
-  title: "Sobre — Dama Universe",
-  description:
-    "Conheça a proposta do Dama Universe, um espaço para reunir programas, ferramentas digitais, GPTs personalizados, conteúdos, referências e registros de desenvolvimento.",
-  path: "/sobre",
-});
+export const metadata = createPageMetadata({title: "Sobre o Dama Universe", description: "Conheça o Dama Universe, projeto, marca e ecossistema autoral criado por Marco Barbosa para reunir tecnologia aplicada, ferramentas e conhecimento compartilhado.", path: "/sobre"});
 
 export default function SobrePage() {
-  return (
-    <main id="conteudo" tabIndex={-1}>
-      <PageHeader
-        title="Marco Barbosa"
-        subtitle="Criador do Dama Universe"
-        description="Inteligência Artificial, ChatGPT, engenharia de prompts, análise de dados, capacitação e produtividade aplicadas a soluções digitais."
-      />
-
-      <section className="mx-auto max-w-5xl px-6 pb-20">
-        <div className="mb-14">
-          <MetallicCard variant="featured" className="overflow-hidden p-0">
-            <div className="grid gap-8 p-7 sm:p-9 lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
-              <div className="rounded-3xl border border-border bg-background/40 p-6">
-                <Image src="/images/creator/marco-barbosa.webp" alt="Marco Barbosa, criador do Dama Universe" width={640} height={800} sizes="(max-width: 1024px) 80vw, 320px" priority className="mx-auto h-auto w-full max-w-xs rounded-2xl" />
-
-                <h2 className="mt-6 text-2xl font-black text-text">
-                  Marco Aurélio Pereira Barbosa
-                </h2>
-
-                <p className="mt-2 text-sm font-semibold text-electricLight">
-                  Criador do Dama Universe
-                </p>
-
-                <p className="mt-5 text-sm leading-7 text-muted">
-                  Atuação voltada à Inteligência Artificial, ChatGPT, engenharia de prompts,
-                  análise de dados, capacitação, produtividade e automação.
-                  Investigação digital, perícia e computação forense compõem seu repertório técnico complementar.
-                </p>
-              </div>
-
-              <div>
-                <p className="eyebrow mb-5 text-goldSoft">
-                  Quem está por trás do Dama Universe
-                </p>
-
-                <h2 className="title-chrome text-3xl font-black sm:text-4xl">
-                  Projeto autoral, técnico e em evolução
-                </h2>
-
-                <p className="mt-6 text-base leading-8 text-muted sm:text-lg">
-                  O Dama Universe é um projeto autoral desenvolvido por Marco
-                  Aurélio Pereira Barbosa, com foco em inteligência artificial,
-                  análise de dados, automação documental, organização de
-                  informações e desenvolvimento de ferramentas digitais.
-                </p>
-
-                <p className="mt-5 text-base leading-8 text-muted sm:text-lg">
-                  Além dos programas e conteúdos publicados no Dama Universe,
-                  há também um site profissional voltado à apresentação de
-                  trajetória, perícia digital, computação forense e evidências
-                  digitais.
-                </p>
-
-                <div className="mt-6 flex flex-col items-start gap-2">
-                  <a className="contact-link" href={mailto(contacts.creator)}>{contacts.creator}</a>
-                  <a className="contact-link" href={contacts.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn de Marco Barbosa</a>
-                </div>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <GlowButton
-                    href={SITE_PROFISSIONAL_URL}
-                    external
-                    variant="primary"
-                  >
-                    Acessar site profissional
-                  </GlowButton>
-
-                  <GlowButton href={LATTES_URL} external variant="secondary">
-                    Currículo Lattes
-                  </GlowButton>
-                </div>
-              </div>
-            </div>
-          </MetallicCard>
-        </div>
-        <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <MetallicCard className="space-y-6">
-            <h2 className="text-2xl font-black text-text">Sobre o Dama Universe</h2>
-            <p className="leading-8 text-muted">
-              O Dama Universe é um projeto, marca e ecossistema autoral criado para reunir, documentar e
-              compartilhar projetos digitais desenvolvidos com foco em
-              organização, tecnologia, inteligência artificial, análise de dados
-              e automação.
-            </p>
-
-            <p className="leading-8 text-muted">
-              O espaço funciona como uma central de programas, GPTs
-              personalizados, conteúdos técnicos, referências, downloads e
-              registros de evolução, permitindo acompanhar versões, melhorias,
-              ideias futuras e materiais de apoio.
-            </p>
-          </MetallicCard>
-
-          <MetallicCard variant="notice">
-            <p className="eyebrow mb-4 text-goldSoft">Diretriz</p>
-
-            <h2 className="text-2xl font-black text-text">
-              Segurança e responsabilidade
-            </h2>
-
-            <p className="mt-4 text-sm leading-7 text-muted">
-              O site foi planejado para divulgar projetos e conteúdos técnicos
-              sem publicar dados sensíveis, documentos restritos, códigos
-              privados, senhas, tokens ou informações pessoais de terceiros.
-              A autoria pessoal não representa endosso da Polícia Civil, do SIGO, da APECOF ou de outras instituições.
-            </p>
-          </MetallicCard>
-        </div>
-
-        <div className="mt-14">
-          <SectionTitle
-            title="Áreas abordadas"
-            description="Temas que orientam a construção dos projetos, programas, GPTs e conteúdos publicados."
-          />
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {areas.map((area) => (
-              <MetallicCard key={area} className="p-5">
-                <p className="font-medium text-chromeLight">{area}</p>
-              </MetallicCard>
-            ))}
-          </div>
-        </div>
-
-
-      </section>
-    </main>
-  );
+  return <EditorialShell>
+    <EditorialIntro eyebrow="O projeto e sua autoria" title="Sobre o Dama Universe" lead="Tecnologia aplicada, desenvolvimento autoral e conhecimento compartilhado." description="O Dama Universe reúne projetos digitais, ferramentas e conteúdos desenvolvidos para organizar informações, apoiar tarefas e documentar a evolução de soluções práticas." />
+    <section aria-labelledby="project-title"><h2 id="project-title">Um ecossistema autoral em evolução</h2><p className={styles.description}>O Dama Universe é um projeto, marca e ecossistema autoral criado por Marco Aurélio Pereira Barbosa para reunir, documentar e compartilhar projetos digitais com foco em organização, tecnologia, inteligência artificial, análise de dados e automação.</p><p className={styles.description}>O espaço funciona como uma central de programas, GPTs personalizados, conteúdos técnicos, referências, downloads e registros de evolução, permitindo acompanhar versões, melhorias, ideias futuras e materiais de apoio.</p></section>
+    <section className={styles.creator} aria-labelledby="creator-title"><Image className={styles.portrait} src="/images/creator/marco-barbosa.webp" alt="Marco Barbosa, criador do Dama Universe" width={640} height={800} sizes="(max-width: 559px) 200px, 280px" priority /><div><p className={styles.eyebrow}>Quem está por trás do projeto</p><h2 id="creator-title">Criado por Marco Barbosa</h2><p><strong>Marco Aurélio Pereira Barbosa</strong></p><p>Atuação voltada à Inteligência Artificial, ChatGPT, engenharia de prompts, análise de dados, capacitação, produtividade e automação. Investigação digital, perícia e computação forense compõem seu repertório técnico complementar.</p><p>Além dos programas e conteúdos publicados no Dama Universe, há também um site profissional voltado à apresentação de trajetória, perícia digital, computação forense e evidências digitais.</p><div className={styles.links}><a href={mailto(contacts.creator)}>{contacts.creator}</a><a href={contacts.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn de Marco Barbosa</a><a href={contacts.professionalSite} target="_blank" rel="noopener noreferrer">Acessar site profissional</a><a href="https://lattes.cnpq.br/1970561249212557" target="_blank" rel="noopener noreferrer">Currículo Lattes</a></div></div></section>
+    <section className={styles.section} aria-labelledby="process-title"><h2 id="process-title">Da necessidade à ferramenta</h2><p className={styles.description}>Um método orientador de trabalho. Estas etapas não constituem afirmação de que todos os aplicativos foram homologados, auditados ou testados integralmente.</p><ol className={styles.process}>{process.map(([title, text]) => <li key={title}><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
+    <section className={styles.section} aria-labelledby="areas-title"><h2 id="areas-title">Áreas abordadas</h2><p className={styles.description}>Temas que orientam a construção dos projetos, programas, GPTs e conteúdos publicados.</p><ul className={styles.themes}>{areas.map((area) => <li key={area}>{area}</li>)}</ul></section>
+    <section className={styles.section} aria-labelledby="responsibility-title"><h2 id="responsibility-title">Segurança e responsabilidade</h2><p className={styles.notice}>O site foi planejado para divulgar projetos e conteúdos técnicos sem publicar dados sensíveis, documentos restritos, códigos privados, senhas, tokens ou informações pessoais de terceiros. A autoria pessoal não representa endosso da Polícia Civil, do SIGO, da APECOF ou de outras instituições.</p></section>
+  </EditorialShell>;
 }

@@ -24,23 +24,21 @@ describe("divulgação do Dama Biometria SIGO Fix 2.0.0", () => {
     );
   }
 
-  it("exibe o banner entre o hero e Novidades recentes na página principal", () => {
+  it("integra a Biometria aos destaques sem repetir o banner da página específica", () => {
     renderHomePage();
 
-    const banner = screen.getByTestId("biometria-update-banner-home");
+    const card = screen.getByTestId("home-program-dama-biometria-sigo-fix");
     const updatesHeading = screen.getByRole("heading", {
-      name: "Novidades recentes",
+      name: "Evolução e novidades",
     });
 
-    expect(banner).toHaveTextContent("ATUALIZAÇÃO IMPORTANTE");
-    expect(banner).toHaveTextContent(
-      "Dama Biometria SIGO Fix 2.0.0 disponível"
-    );
+    expect(screen.queryByTestId("biometria-update-banner-home")).toBeNull();
+    expect(card).toHaveTextContent("Versão 2.0.0");
     expect(
-      screen.getByRole("link", { name: "Conhecer a versão 2.0.0" })
+      screen.getByRole("link", { name: "Conhecer Dama Biometria SIGO Fix" })
     ).toHaveAttribute("href", "/programas/dama-biometria-sigo-fix");
     expect(
-      banner.compareDocumentPosition(updatesHeading) &
+      card.compareDocumentPosition(updatesHeading) &
         Node.DOCUMENT_POSITION_FOLLOWING
     ).toBeTruthy();
   });

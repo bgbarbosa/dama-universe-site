@@ -97,3 +97,79 @@ describe("acessibilidade e falhas do formulário", () => {
     await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Não foi possível enviar"));
   });
 });
+
+describe("contato contextual — PAGINAS-003", () => {
+  afterEach(() => vi.restoreAllMocks());
+  const options = [{slug:"dama-termos",name:"Dama Termos"}];
+  function fillBase(message = "Mensagem inteiramente fictícia para teste local.") {
+    for (const [name,value] of Object.entries({name:"Pessoa de teste",email:"teste@example.com",subject:"Teste de contexto",message})) fireEvent.change(document.querySelector(`[name="${name}"]`)!,{target:{value}});
+  }
+
+  it("preserva mensagem e contexto ao alternar tipo, sem campo obrigatório oculto", () => {
+    render(<ContactForm programOptions={options} initialContactType="Erro em programa" initialProgram="dama-termos" />);
+    expect(screen.getByRole("combobox",{name:"Programa relacionado (opcional)"})).toHaveValue("dama-termos");
+    fillBase(); fireEvent.change(screen.getByLabelText("Versão informada (opcional)"),{target:{value:"versão fictícia"}});
+    fireEvent.change(screen.getByLabelText("Tipo de contato"),{target:{value:"Parceria"}});
+    expect(screen.queryByLabelText("Programa relacionado (opcional)")).toBeNull();
+    expect(screen.queryByLabelText("Versão informada (opcional)")).toBeNull();
+    expect(screen.getByLabelText("Mensagem")).toHaveValue("Mensagem inteiramente fictícia para teste local.");
+    fireEvent.change(screen.getByLabelText("Tipo de contato"),{target:{value:"Dúvida"}});
+    expect(screen.getByLabelText("Programa relacionado (opcional)")).toHaveValue("dama-termos");
+    expect(screen.getByLabelText("Versão informada (opcional)")).not.toBeRequired();
+  });
+
+  it("inclui contexto explicitamente na mensagem, sem alterar o contrato da API", async () => {
+    const fetchMock = vi.spyOn(globalThis,"fetch").mockResolvedValue(new Response('{}',{status:200}));
+    render(<ContactForm programOptions={options} initialContactType="Erro em programa" initialProgram="dama-termos" />);
+    fillBase(); fireEvent.change(screen.getByLabelText("Versão informada (opcional)"),{target:{value:"1.0.0 informada no teste"}});
+    fireEvent.click(screen.getByRole("button",{name:"Enviar mensagem"}));
+    await waitFor(()=>expect(fetchMock).toHaveBeenCalledOnce());
+    const [url,request] = fetchMock.mock.calls[0];
+    const payload = JSON.parse(request!.body as string);
+    expect(url).toBe("/api/contact");
+    expect(Object.keys(payload).sort()).toEqual(["contactType","email","message","name","subject","website"]);
+    expect(payload.contactType).toBe("Erro em programa");
+    expect(payload.message).toContain("Programa relacionado: Dama Termos (dama-termos)");
+    expect(payload.message).toContain("Versão informada pelo visitante: 1.0.0 informada no teste");
+    expect(payload.message).toContain("Mensagem inteiramente fictícia");
+  });
+
+  it("não deixa o prefixo de programa validar uma mensagem vazia", () => {
+    const fetchMock=vi.spyOn(globalThis,"fetch");
+    render(<ContactForm programOptions={options} initialContactType="Dúvida" initialProgram="dama-termos" />);
+    fillBase(""); fireEvent.click(screen.getByRole("button",{name:"Enviar mensagem"}));
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.getByLabelText("Mensagem")).toHaveAttribute("aria-invalid","true");
+  });
+
+  it("valida também o limite da mensagem com contexto sem truncar o texto", () => {
+    const fetchMock=vi.spyOn(globalThis,"fetch");
+    render(<ContactForm programOptions={options} initialContactType="Dúvida" initialProgram="dama-termos" />);
+    fillBase("x".repeat(4000)); fireEvent.click(screen.getByRole("button",{name:"Enviar mensagem"}));
+    expect(fetchMock).not.toHaveBeenCalled(); expect(screen.getByLabelText("Mensagem")).toHaveValue("x".repeat(4000));
+    expect(screen.getByRole("status")).toHaveTextContent("4000");
+  });
+
+  it("não envia contexto oculto e preserva o honeypot", async () => {
+    const fetchMock=vi.spyOn(globalThis,"fetch").mockResolvedValue(new Response('{}',{status:200}));
+    render(<ContactForm programOptions={options} initialContactType="Sugestão" initialProgram="dama-termos" />);
+    fillBase(); fireEvent.change(screen.getByLabelText("Tipo de contato"),{target:{value:"Outro"}});
+    fireEvent.click(screen.getByRole("button",{name:"Enviar mensagem"}));
+    await waitFor(()=>expect(fetchMock).toHaveBeenCalledOnce());
+    const payload=JSON.parse(fetchMock.mock.calls[0][1]!.body as string);
+    expect(payload.message).toBe("Mensagem inteiramente fictícia para teste local."); expect(payload.website).toBe("");
+    expect(document.querySelector('[name="website"]')).toHaveAttribute("tabindex","-1");
+  });
+
+  it("mantém programa, versão e mensagem em erro HTTP, sem anunciar sucesso", async () => {
+    vi.spyOn(globalThis,"fetch").mockResolvedValue(new Response(JSON.stringify({message:"Erro simulado, sem envio."}),{status:503}));
+    render(<ContactForm programOptions={options} initialContactType="Dúvida" initialProgram="dama-termos" />);
+    fillBase(); fireEvent.change(screen.getByLabelText("Versão informada (opcional)"),{target:{value:"Versão fictícia"}});
+    fireEvent.click(screen.getByRole("button",{name:"Enviar mensagem"}));
+    await waitFor(()=>expect(screen.getByRole("status")).toHaveTextContent("Erro simulado"));
+    expect(screen.getByLabelText("Programa relacionado (opcional)")).toHaveValue("dama-termos");
+    expect(screen.getByLabelText("Versão informada (opcional)")).toHaveValue("Versão fictícia");
+    expect(screen.getByLabelText("Mensagem")).toHaveValue("Mensagem inteiramente fictícia para teste local.");
+    expect(screen.getByRole("button",{name:"Enviar mensagem"})).toBeEnabled();
+  });
+});

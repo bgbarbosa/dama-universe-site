@@ -4,7 +4,7 @@ import { footerNavigation, socialLinks } from "@/data";
 
 function FooterLink({ href, children }: { href: string; children: ReactNode }) {
   const className =
-    "inline-flex min-h-11 items-center break-words rounded-md text-sm text-muted transition duration-200 hover:text-electricLight focus-ring";
+    "inline-flex min-h-11 min-w-0 items-center rounded-md text-sm text-muted [overflow-wrap:anywhere] transition duration-200 hover:text-electricLight focus-ring";
   const isExternal = href.startsWith("http");
 
   if (isExternal) {
@@ -35,17 +35,17 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border/80 bg-backgroundSoft/80 text-text">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:px-8 lg:grid-cols-[1.2fr_1.4fr_0.95fr]">
-        <div className="space-y-4">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-12 md:px-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)_minmax(0,0.95fr)]">
+        <div className="min-w-0 space-y-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-3 rounded-full focus-visible:dama-focus"
+            className="inline-flex max-w-full items-center gap-3 rounded-full focus-visible:dama-focus"
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-chrome/35 bg-white/[0.04] text-lg font-black chrome-text shadow-chrome">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-chrome/35 bg-white/[0.04] text-lg font-black chrome-text shadow-chrome">
               D
             </span>
 
-            <span>
+            <span className="min-w-0 [overflow-wrap:anywhere]">
               <span className="block text-lg font-semibold text-chromeLight">
                 Dama Universe
               </span>
@@ -65,7 +65,7 @@ export function Footer() {
             Links rápidos
           </h2>
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {footerNavigation.map((link) => (
               <FooterLink key={link.href} href={link.href}>
                 {link.label}
@@ -75,7 +75,7 @@ export function Footer() {
         </div>
 
         <div className="rounded-3xl border border-borderSoft bg-electric/5 p-5">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-electricLight">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-electricLight [overflow-wrap:anywhere]">
             Canais e contato
           </h2>
 
@@ -97,14 +97,14 @@ export function Footer() {
       </div>
 
       <div className="border-t border-border/70">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-6 text-sm text-muted md:flex-row md:items-center md:justify-between md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col flex-wrap gap-4 px-5 py-6 text-sm text-muted md:flex-row md:items-center md:justify-between md:px-8">
           <p className="max-w-3xl leading-7">
             As ferramentas disponibilizadas possuem finalidade de apoio,
             organização e automação, exigindo conferência e responsabilidade do
             usuário.
           </p>
 
-          <p className="shrink-0 text-chrome">
+          <p className="min-w-0 text-chrome">
             © 2026 Dama Universe. Todos os direitos reservados.
           </p>
         </div>
