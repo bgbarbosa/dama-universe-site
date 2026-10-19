@@ -7,15 +7,16 @@ import { CatalogProgramRow } from "./CatalogProgramRow";
 import { SigoContext } from "./SigoContext";
 import styles from "./catalog.module.css";
 
-export function ProgramsCatalog({ programs }: { programs: readonly CatalogProgram[] }) {
+export function ProgramsCatalog({ programs, initialOnlyAvailable = false }: { programs: readonly CatalogProgram[]; initialOnlyAvailable?: boolean }) {
   const [category, setCategory] = useState<CatalogFilter>("todos");
   const [query, setQuery] = useState("");
+  const [onlyAvailable, setOnlyAvailable] = useState(initialOnlyAvailable);
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-  const results = filterCatalog(programs, category, query);
-  const hasFilters = category !== "todos" || query.length > 0;
+  const results = filterCatalog(programs, category, query, onlyAvailable);
+  const hasFilters = onlyAvailable || category !== "todos" || query.length > 0;
   function clearFilters() {
-    setCategory("todos"); setQuery(""); setOpenSlug(null); searchRef.current?.focus();
+    setCategory("todos"); setQuery(""); setOnlyAvailable(false); setOpenSlug(null); searchRef.current?.focus();
   }
   return (
     <div>
@@ -24,6 +25,10 @@ export function ProgramsCatalog({ programs }: { programs: readonly CatalogProgra
           <legend className="sr-only">Filtrar programas por categoria</legend>
           {[{ id: "todos", filterLabel: "Todos" }, ...catalogCategories].map((item) => <button type="button" key={item.id} aria-pressed={category === item.id} onClick={() => { setCategory(item.id as CatalogFilter); setOpenSlug(null); }}>{item.filterLabel}</button>)}
         </fieldset>
+        <label className={styles.availability} data-active={onlyAvailable}>
+          <input type="checkbox" checked={onlyAvailable} onChange={(event) => { setOnlyAvailable(event.target.checked); setOpenSlug(null); }} aria-describedby="catalog-count" />
+          <span>Somente disponíveis para download</span>
+        </label>
         <div className={styles.searchRow}>
           <div className={styles.search}>
             <label htmlFor="program-search">Buscar programa</label>

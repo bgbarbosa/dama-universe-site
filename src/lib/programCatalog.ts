@@ -31,9 +31,10 @@ export function normalizeCatalogSearch(value: string) {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").trim();
 }
 
-export function filterCatalog(programs: readonly CatalogProgram[], category: CatalogFilter, query: string) {
+export function filterCatalog(programs: readonly CatalogProgram[], category: CatalogFilter, query: string, onlyAvailable = false) {
   const terms = normalizeCatalogSearch(query).split(/\s+/).filter(Boolean);
   return programs.filter((program) => {
+    if (onlyAvailable && !program.downloadUrl) return false;
     if (category !== "todos" && program.category !== category) return false;
     const categoryLabel = catalogCategories.find((item) => item.id === program.category)!.label;
     const text = normalizeCatalogSearch(`${program.name} ${program.summary} ${categoryLabel}`);

@@ -11,7 +11,11 @@ export const metadata = createPageMetadata({
   path: "/programas",
 });
 
-export default function ProgramasPage() {
+type Props = { searchParams?: Promise<Record<string, string | string[] | undefined>> };
+
+export default async function ProgramasPage({ searchParams }: Props) {
+  const params = (await searchParams) ?? {};
+  const onlyAvailable = params.disponiveis === "1";
   return (
     <main id="conteudo" tabIndex={-1} className={styles.catalog}>
       <div className="container-site">
@@ -24,7 +28,7 @@ export default function ProgramasPage() {
             requisitos e os recursos disponíveis.
           </p>
         </header>
-        <ProgramsCatalog programs={catalogPrograms} />
+        <ProgramsCatalog key={onlyAvailable ? "available" : "all"} programs={catalogPrograms} initialOnlyAvailable={onlyAvailable} />
         <ClientsSection />
         <p className={styles.notice}>
           Os programas do Dama Universe são ferramentas autorais em evolução.

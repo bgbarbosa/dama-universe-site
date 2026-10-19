@@ -1,5 +1,4 @@
 import { HeroSection } from "@/components/home/HeroSection";
-import { ExploreNeeds } from "@/components/home/ExploreNeeds";
 import { FeaturedPrograms } from "@/components/home/FeaturedPrograms";
 import { GptsPreview } from "@/components/home/GptsPreview";
 import { SiteUpdatesPreview } from "@/components/home/SiteUpdatesPreview";
@@ -17,7 +16,6 @@ export const metadata = createPageMetadata({
 export default function HomePage() {
   return <main id="conteudo" tabIndex={-1} className={styles.home}>
     <HeroSection />
-    <ExploreNeeds />
     <FeaturedPrograms />
     <GptsPreview />
     <SiteUpdatesPreview />

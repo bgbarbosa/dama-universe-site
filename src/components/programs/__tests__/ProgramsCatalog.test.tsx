@@ -167,13 +167,65 @@ describe("DU-TSK-PROGRAMAS-002", () => {
     expect(screen.getByText(/Em computadores institucionais/)).toBeVisible();
   });
 
-  it("mantém uma H1, categorias H2, SEO da rota e clientes atendidos ocultos", () => {
-    render(<ProgramasPage />);
+  it("mantém uma H1, categorias H2, SEO da rota e clientes atendidos ocultos", async () => {
+    render(await ProgramasPage({}));
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Programas");
     expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(3);
     expect(screen.queryByText("Clientes atendidos")).toBeNull();
     expect(metadata.alternates?.canonical).toBe("https://damauniverse.com.br/programas");
     expect(metadata.openGraph).toMatchObject({ url: "https://damauniverse.com.br/programas" });
+  });
+});
+
+describe("DU-TSK-HOME-005 — disponibilidade no catálogo compartilhado", () => {
+  it("abre a URL aprovada com filtro selecionado e somente os seis downloads reais", async () => {
+    render(await ProgramasPage({ searchParams: Promise.resolve({ disponiveis: "1" }) }));
+    expect(screen.getByRole("checkbox", { name: "Somente disponíveis para download" })).toBeChecked();
+    expect(rows().map(row => row.getAttribute("data-testid"))).toEqual(catalogPrograms.filter(item => Boolean(item.downloadUrl)).sort((a,b) => catalogCategories.findIndex(c => c.id === a.category) - catalogCategories.findIndex(c => c.id === b.category)).map(item => `program-card-${item.slug}`));
+    expect(rows()).toHaveLength(6);
+    expect(screen.getByRole("status")).toHaveTextContent("6 programas encontrados");
+    expect(screen.queryByTestId("program-card-dama-gestor-rh")).toBeNull();
+    expect(screen.getByText("Ferramentas independentes e não oficiais.")).toBeVisible();
+  });
+
+  it.each([undefined, "0", "true", "01", "<script>", ["1", "1"]])("ignora disponibilidade inválida ou ausente: %s", async (value) => {
+    render(await ProgramasPage({ searchParams: Promise.resolve({ disponiveis: value, desconhecido: "1" }) }));
+    expect(rows()).toHaveLength(10);
+    expect(screen.getByRole("checkbox")).not.toBeChecked();
+  });
+
+  it("deriva disponibilidade do download e não da etiqueta ou estágio", () => {
+    const original = catalogPrograms[0];
+    const fixtures = [
+      { ...original, slug: "sem-arquivo", access: "Download público" as const, downloadUrl: undefined },
+      { ...original, slug: "com-arquivo", access: "Sob consulta" as const, stage: "Base funcional", downloadUrl: "https://example.org/download-de-teste" },
+    ];
+    expect(filterCatalog(fixtures, "todos", "", true).map(item => item.slug)).toEqual(["com-arquivo"]);
+  });
+
+  it("combina disponibilidade, categoria e busca; desativa, limpa e fecha detalhes", async () => {
+    const user = userEvent.setup();
+    render(<ProgramsCatalog programs={catalogPrograms} initialOnlyAvailable />);
+    const checkbox = screen.getByRole("checkbox", { name: "Somente disponíveis para download" });
+    const input = screen.getByRole("searchbox", { name: "Buscar programa" });
+    await user.click(screen.getByRole("button", { name: "Documentos e automação" }));
+    expect(rows()).toHaveLength(2);
+    await user.type(input, "universal");
+    expect(screen.getByRole("heading", { name: "Nenhum programa encontrado" })).toBeVisible();
+    await user.click(checkbox);
+    expect(rows()).toHaveLength(1); expect(input).toHaveValue("universal");
+    await user.click(screen.getByRole("button", { name: "Limpar filtros" }));
+    expect(rows()).toHaveLength(10); expect(checkbox).not.toBeChecked(); expect(input).toHaveFocus();
+    const toggle = screen.getByRole("button", { name: "Mostrar detalhes de Dama Termos" });
+    await user.click(toggle); expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await user.click(checkbox); expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await user.click(screen.getByRole("button", { name: "Utilitários SIGO" }));
+    expect(rows()).toHaveLength(3);
+    await user.type(input, "BIOMETRÍA"); expect(rows()).toHaveLength(1);
+    await user.clear(input); await user.type(input, "inqueritos");
+    expect(screen.getByRole("status")).toHaveTextContent("0 programas encontrados");
+    await user.click(screen.getByRole("button", { name: "Mostrar todos os programas" }));
+    expect(rows()).toHaveLength(10); expect(checkbox).not.toBeChecked(); expect(input).toHaveValue(""); expect(input).toHaveFocus();
   });
 });

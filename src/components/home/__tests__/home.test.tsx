@@ -7,6 +7,7 @@ import { ConsentProvider } from "@/components/privacy/ConsentProvider";
 import { footerNavigation, primaryNavigation } from "@/data/navigation";
 import { damaFccTutorials } from "@/data/tutorials";
 import { updates } from "@/data/updates";
+import { getProgramBySlug } from "@/data/programs";
 
 function renderHome() {
   return render(<ConsentProvider><HomePage /></ConsentProvider>);
@@ -21,13 +22,34 @@ describe("DU-TSK-HOME-001", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Dama Universe");
     const hero = screen.getByRole("region", { name: "Dama Universe" });
     expect(hero).toHaveTextContent("projeto, marca e ecossistema autoral");
-    expect(within(hero).getAllByRole("link")).toHaveLength(2);
+    expect(within(hero).getAllByRole("link")).toHaveLength(5);
     expect(within(hero).getByRole("link", { name: /Explorar programas/ })).toHaveAttribute("href", "/programas");
     expect(within(hero).getByRole("link", { name: "Conhecer o projeto" })).toHaveAttribute("href", "/sobre");
     const panel = screen.getByRole("complementary", { name: "Ecossistema Dama" });
     expect(panel.querySelector("img")).toBeNull();
     expect(within(panel).queryByRole("button")).toBeNull();
-    expect(within(panel).queryByRole("link")).toBeNull();
+    expect(within(panel).getAllByRole("link")).toHaveLength(3);
+    for (const [name, href] of [["Projetos", "/programas"], ["Conteúdos", "/blog"], ["Ferramentas", "/programas?disponiveis=1"]]) {
+      const link = within(panel).getByRole("link", { name });
+      expect(link).toHaveAttribute("href", href);
+      expect(link.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
+    }
+  });
+
+  it("retira Explore por necessidade e segue da Hero diretamente aos programas", () => {
+    const { container } = renderHome();
+    for (const text of ["Explore por necessidade", "Gerar documentos", "Organizar informações", "Explorar IA", "Aprender"]) expect(screen.queryByText(text, { exact: true })).toBeNull();
+    const hero = screen.getByRole("region", { name: "Dama Universe" });
+    expect(hero.nextElementSibling).toBe(screen.getByRole("region", { name: "Programas em destaque" }));
+    expect(container.querySelector("#explore-title")).toBeNull();
+  });
+
+  it("identifica a autoria na ação Sobre Marco Barbosa, preservando seu destino e o contato", () => {
+    renderHome();
+    const closing = screen.getByRole("region", { name: "Quem está por trás do Dama Universe" });
+    expect(within(closing).getByRole("link", { name: "Sobre Marco Barbosa" })).toHaveAttribute("href", "/sobre");
+    expect(within(closing).queryByRole("link", { name: "Conhecer o criador" })).toBeNull();
+    expect(within(closing).getByRole("link", { name: "Conversar sobre o projeto" })).toHaveAttribute("href", "/contato");
   });
 
   it("expande por Enter/Espaço e mantém uma única região aberta e a ação principal", async () => {
@@ -62,6 +84,32 @@ describe("DU-TSK-HOME-001", () => {
       expect(download).toHaveAttribute("target", "_blank");
       expect(download).toHaveAttribute("rel", "noopener noreferrer");
     }
+  });
+
+  it.each(["dama-termos", "dama-biometria-sigo-fix", "dama-gerador-fcc"])("preserva os controles independentes do cartão linkado: %s", async (slug) => {
+    const program = getProgramBySlug(slug)!;
+    const user = userEvent.setup();
+    render(<FeaturedPrograms />);
+    const card = screen.getByTestId(`home-program-${slug}`);
+    const primary = within(card).getByRole("link", { name: `Conhecer ${program.name}` });
+    const download = within(card).getByRole("link", { name: `Baixar ${program.name}` });
+    const toggle = within(card).getByRole("button", { name: `Mostrar detalhes de ${program.name}` });
+    expect(card.tagName).toBe("ARTICLE");
+    expect(primary.closest("article")).toBe(card);
+    expect(primary).toHaveAttribute("href", program.detailsUrl);
+    expect(download).toHaveAttribute("href", program.downloadUrl);
+    expect(primary.contains(download) || primary.contains(toggle)).toBe(false);
+    let navigations = 0;
+    primary.addEventListener("click", (event) => { event.preventDefault(); navigations++; });
+    download.addEventListener("click", (event) => event.preventDefault());
+    toggle.focus(); await user.keyboard("{Enter}");
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+    expect(document.getElementById(toggle.getAttribute("aria-controls")!)).toBeVisible();
+    await user.click(download); expect(navigations).toBe(0);
+    toggle.focus(); await user.keyboard(" ");
+    expect(toggle).toHaveAttribute("aria-expanded", "false"); expect(toggle).toHaveFocus();
+    expect(navigations).toBe(0);
+    primary.focus(); await user.keyboard("{Enter}"); expect(navigations).toBe(1);
   });
 
   it("mostra três novidades com datas originais e conserva as demais fontes", () => {
