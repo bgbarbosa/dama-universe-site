@@ -4,6 +4,7 @@ const professionalUrl = (path: string) => new URL(path, contacts.professionalSit
 
 export const professionalEditorial = {
   home: contacts.professionalSite,
+  profile: professionalUrl("/perfil"),
   training: professionalUrl("/#capacitacoes"),
   trajectory: professionalUrl("/#sobre"),
   card: professionalUrl("/cartao"),

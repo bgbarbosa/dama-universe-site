@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { primaryNavigation } from "@/data";
 import { GlowButton } from "@/components/ui";
 import { contacts } from "@/data/contacts";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 
 function getHeaderCta(pathname: string) {
   if (pathname.startsWith("/programas/") && pathname !== "/programas") {
@@ -63,19 +64,8 @@ export function Header() {
       ref={headerRef}
       className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl"
     >
-      <div className="container-site flex min-h-20 flex-wrap items-center justify-between gap-3 py-3">
-        <Link href="/" className="flex min-w-0 items-center gap-3 rounded-xl focus-ring">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-borderSoft bg-surface text-sm font-black text-text shadow-chrome">
-            D
-          </div>
-
-          <div className="min-w-0 leading-tight [overflow-wrap:anywhere]">
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-text">
-              Dama
-            </p>
-            <p className="text-sm font-semibold text-muted">Universe</p>
-          </div>
-        </Link>
+      <div className="container-site flex min-h-20 flex-wrap items-center justify-between gap-3 py-3 xl:max-w-[1440px]">
+        <BrandLogo />
 
         <nav aria-label="Navegação principal" className="hidden min-w-0 flex-wrap items-center gap-0.5 xl:flex">
           {primaryNavigation.map((item) => {

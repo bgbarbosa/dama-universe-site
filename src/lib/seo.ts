@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Dama Universe",
   url: "https://damauniverse.com.br",
   locale: "pt_BR",
-  ogImage: "/images/og/dama-universe-og.png",
+  ogImage: "/images/og/dama-universe-marca-2026.png",
   defaultTitle: "Dama Universe — Programas, IA, dados e ferramentas em evolução",
   defaultDescription:
     "Dama Universe é um espaço dedicado a programas, ferramentas digitais, inteligência artificial, análise de dados, automação, downloads, versões e conteúdos técnicos.",

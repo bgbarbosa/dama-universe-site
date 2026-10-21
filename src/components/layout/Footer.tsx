@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { footerNavigation, socialLinks } from "@/data";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 
 function FooterLink({ href, children }: { href: string; children: ReactNode }) {
   const className =
@@ -37,23 +38,7 @@ export function Footer() {
     <footer className="border-t border-border/80 bg-backgroundSoft/80 text-text">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-12 md:px-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)_minmax(0,0.95fr)]">
         <div className="min-w-0 space-y-4">
-          <Link
-            href="/"
-            className="inline-flex max-w-full items-center gap-3 rounded-full focus-visible:dama-focus"
-          >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-chrome/35 bg-white/[0.04] text-lg font-black chrome-text shadow-chrome">
-              D
-            </span>
-
-            <span className="min-w-0 [overflow-wrap:anywhere]">
-              <span className="block text-lg font-semibold text-chromeLight">
-                Dama Universe
-              </span>
-              <span className="block text-sm text-muted">
-                Programas, IA, dados e ferramentas
-              </span>
-            </span>
-          </Link>
+          <BrandLogo placement="footer" />
 
           <p className="max-w-sm text-sm leading-7 text-muted">
             Programas, inteligência artificial, dados e ferramentas em evolução.
