@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { EditorialIntro, EditorialShell } from "@/components/editorial/EditorialIntro";
 import { ContentLibrary } from "@/components/editorial/ContentLibrary";
+import { ProfessionalPracticeLinks } from "@/components/editorial/ProfessionalEditorial";
 import styles from "@/components/editorial/editorial.module.css";
 import { posts } from "@/data/posts";
 import { damaFccTutorials } from "@/data/tutorials";
@@ -19,6 +20,7 @@ export default function BlogPage() {
       <ul className={styles.complementary}>{sorted.slice(1,3).map((post) => <li key={post.slug}><p className={styles.meta}>{post.category} · <time dateTime={post.date}>{formatDate(post.date)}</time></p><h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3><p>{post.summary}</p><Link className={styles.inlineLink} href={`/blog/${post.slug}`} aria-label={`Ler ${post.title}`}>Ler conteúdo</Link></li>)}</ul>
     </section>
     <ContentLibrary posts={sorted} />
+    <ProfessionalPracticeLinks />
     <nav className={styles.readingPath} aria-labelledby="reading-path-title"><h2 id="reading-path-title">Comece por aqui</h2><p className={styles.description}>Da motivação à aplicação: um percurso sobre automação documental com conferência humana.</p><ol><li><Link className={styles.inlineLink} href="/blog/por-que-criei-o-dama-gerador-fcc">Entenda a necessidade</Link><p>Leia a motivação do Gerador FCC.</p></li><li><Link className={styles.inlineLink} href="/programas/dama-gerador-fcc">Conheça o programa</Link><p>Consulte finalidade, requisitos e recursos.</p></li><li><a className={styles.inlineLink} href={damaFccTutorials[0].watchUrl} target="_blank" rel="noopener noreferrer">Veja o primeiro tutorial</a><p>Abra no YouTube o vídeo já cadastrado sobre os primeiros passos.</p></li></ol></nav>
     <p className={`${styles.notice} ${styles.section}`}>Os conteúdos documentam decisões e aprendizados do projeto. Os comentários permanecem desativados por enquanto.</p>
   </EditorialShell>;

@@ -22,7 +22,7 @@
 .inlineLink, .links a, .textButton { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; color: theme('colors.electricLight'); text-decoration: underline; text-underline-offset: .25rem; font-size: .9375rem; line-height: 1.6; }
 .links { display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; align-items: center; margin-top: .75rem; }
 .resourceList { margin-top: 1.5rem; }
-.resource { display: grid; gap: 1.1rem 2.5rem; padding: 1.65rem 0; border-top: 1px solid theme('colors.border'); }
+.resource { display: grid; gap: 1.1rem 2.5rem; padding: 1.65rem 0; border-top: 1px solid theme('colors.border'); scroll-margin-top: 10rem; }
 .resource p { color: theme('colors.muted'); line-height: 1.8; margin-top: .6rem; }
 .resourceActions { display: flex; flex-wrap: wrap; align-items: start; gap: .7rem; }
 .page details { min-width: 0; }

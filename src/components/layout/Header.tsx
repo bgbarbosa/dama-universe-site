@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { primaryNavigation } from "@/data";
 import { GlowButton } from "@/components/ui";
+import { contacts } from "@/data/contacts";
 
 function getHeaderCta(pathname: string) {
   if (pathname.startsWith("/programas/") && pathname !== "/programas") {
@@ -101,11 +102,14 @@ export function Header() {
           })}
         </nav>
 
-        {cta ? <div className="hidden xl:block">
+        <div className="hidden shrink-0 flex-col items-end gap-1 xl:flex" aria-label="Outros caminhos">
+          {cta ?
             <GlowButton href={cta.href} variant="secondary">
               {cta.label}
             </GlowButton>
-        </div> : null}
+          : null}
+          <a href={contacts.professionalSite} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 text-sm font-semibold text-electricLight hover:bg-white/5 focus-ring">Marco Barbosa <span aria-hidden="true">↗︎</span></a>
+        </div>
 
         <button
           ref={menuButtonRef}
@@ -146,6 +150,9 @@ export function Header() {
               {cta.label}
             </GlowButton> : null}
           </nav>
+          <div className="mx-auto mt-4 max-w-site border-t border-border pt-3">
+            <a href={contacts.professionalSite} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center gap-2 rounded-xl px-4 text-sm font-semibold text-electricLight hover:bg-white/5 focus-ring">Marco Barbosa <span aria-hidden="true">↗︎</span></a>
+          </div>
         </div>
       ) : null}
     </header>

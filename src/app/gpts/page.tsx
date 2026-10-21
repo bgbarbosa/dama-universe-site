@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { EditorialIntro, EditorialShell } from "@/components/editorial/EditorialIntro";
 import { AiDemo } from "@/components/editorial/AiDemo";
+import { ProfessionalLearningLinks } from "@/components/editorial/ProfessionalEditorial";
 import styles from "@/components/editorial/editorial.module.css";
 import { customGpts } from "@/data/gpts";
 import { contacts, mailto } from "@/data/contacts";
@@ -27,13 +28,14 @@ export default function GptsPage() {
     <section className={styles.section} aria-labelledby="tools-title">
       <h2 id="tools-title">Ferramentas para tarefas específicas</h2>
       <p className={styles.description}>Os recursos abaixo são GPTs no ChatGPT. O acesso depende das condições e dos limites da plataforma externa; não há promessa de uso gratuito ou ilimitado.</p>
-      <ul className={styles.resourceList}>{customGpts.map((gpt) => <li key={gpt.slug} className={styles.resource} data-testid={`ai-tool-${gpt.slug}`}>
-        <div><p className={styles.meta}>GPT · {gpt.status} · {gpt.category} · Autoria: {gpt.author}</p><h3>{gpt.name}</h3><p>{gpt.shortDescription}</p></div>
+      <ul className={styles.resourceList}>{customGpts.map((gpt) => <li key={gpt.slug} id={gpt.slug} className={styles.resource} data-testid={`ai-tool-${gpt.slug}`}>
+        <div><p className={styles.meta}>GPT · {gpt.status} · {gpt.category} · Autoria: {gpt.author}</p><h3>{gpt.name}</h3><p>{gpt.shortDescription}</p>{gpt.slug === "especialista-em-escrita-e-revisao" ? <p className={styles.small}>Revisão humana necessária. Preserve a intenção do autor e confira fatos, dados e referências. O acesso depende das condições e dos limites do ChatGPT.</p> : null}</div>
         <div className={styles.resourceActions}>{isPublicWebUrl(gpt.url) ? <a className={styles.primaryButton} href={gpt.url} target="_blank" rel="noopener noreferrer" aria-label={`Acessar ${gpt.name}`}>Acessar ferramenta <span aria-hidden="true">↗︎</span></a> : <p>Acesso não disponível.</p>}{gpt.slug === "especialista-em-escrita-e-revisao" ? <Link className={styles.inlineLink} href="#exemplo">Ver exemplo fictício</Link> : null}</div>
         <details><summary>Como começar<span className="sr-only">: {gpt.name}</span></summary><p>{gpt.purpose}</p><p>Acesse o recurso no ChatGPT, confira suas condições de acesso e formule instruções com objetivo e limites claros. Trabalhe somente com materiais apropriados e revise o resultado antes de qualquer uso formal.</p><div className={styles.detailColumns}><div><h4>Indicado para</h4><ul>{gpt.indicatedFor.map((item) => <li key={item}>{item}</li>)}</ul></div><div><h4>Cuidados específicos</h4><ul>{gpt.precautions.map((item) => <li key={item}>{item}</li>)}</ul></div></div></details>
       </li>)}</ul>
     </section>
     <AiDemo />
+    <ProfessionalLearningLinks />
     <section className={styles.section} aria-labelledby="concepts-title"><h2 id="concepts-title">Entenda antes de usar</h2><p className={styles.description}>Um GPT personalizado é um assistente no ChatGPT configurado com instruções para uma tarefa. Pode apoiar a organização ou a revisão de um texto; cada recurso tem indicação de uso e cuidados necessários.</p><dl className={styles.concepts}>{concepts.map(([title, text]) => <div key={title}><dt>{title}</dt><dd>{text}</dd></div>)}</dl><div className={styles.links}><Link href="/blog/inteligencia-artificial-como-ferramenta-de-apoio">Aprofundar nos conteúdos</Link><Link href="/programas/dama-gerador-fcc">Conhecer a automação FCC</Link></div><p className={styles.description}>Dúvidas sobre capacitação: <a className={styles.inlineLink} href={mailto(contacts.courses)}>{contacts.courses}</a>. Consulte possibilidades; não há anúncio de turmas nesta página.</p></section>
   </EditorialShell>;
 }
