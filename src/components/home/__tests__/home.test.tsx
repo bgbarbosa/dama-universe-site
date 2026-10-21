@@ -135,7 +135,7 @@ describe("DU-TSK-HOME-001", () => {
   });
 
   it("preserva a rota de IA e os destinos complementares no rodapé", () => {
-    expect(primaryNavigation).toHaveLength(8);
+    expect(primaryNavigation).toHaveLength(9);
     expect(primaryNavigation.find(item => item.href === "/referencias")?.label).toBe("Referências");
     expect(primaryNavigation.find(item => item.href === "/apoie")?.label).toBe("Participe");
     expect(primaryNavigation.find(item => item.href === "/gpts")?.label).toBe("IA aplicada");

@@ -76,7 +76,7 @@ export function Header() {
           </div>
         </Link>
 
-        <nav aria-label="Navegação principal" className="hidden min-w-0 flex-wrap items-center gap-1 xl:flex">
+        <nav aria-label="Navegação principal" className="hidden min-w-0 flex-wrap items-center gap-0.5 xl:flex">
           {primaryNavigation.map((item) => {
             const isActive =
               item.href === "/"

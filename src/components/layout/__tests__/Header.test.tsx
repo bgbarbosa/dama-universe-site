@@ -39,11 +39,12 @@ describe("Header", () => {
     route.pathname = "/";
   });
 
-  it("mantém Referências e os oito destinos no menu principal e no menu móvel", async () => {
+  it("mantém Referências e os nove destinos no menu principal e no menu móvel", async () => {
     route.pathname = "/referencias";
     const user = userEvent.setup(); render(<Header />);
     const desktop = screen.getByRole("navigation", {name:"Navegação principal"});
-    expect(within(desktop).getAllByRole("link")).toHaveLength(8);
+    expect(within(desktop).getAllByRole("link")).toHaveLength(9);
+    expect(within(desktop).getByRole("link", {name:"Utilidade Pública"})).toHaveAttribute("href", "/utilidade-publica");
     expect(within(desktop).getByRole("link",{name:"Referências"})).toHaveAttribute("aria-current","page");
     await user.click(screen.getByRole("button",{name:"Abrir menu"}));
     const mobile = screen.getByRole("navigation",{name:"Navegação móvel"});
@@ -57,6 +58,17 @@ describe("Header", () => {
     expect(screen.getByRole("link", { name: "IA aplicada" })).toHaveAttribute("href", "/gpts");
     expect(screen.getByRole("link", { name: "IA aplicada" })).toHaveAttribute("aria-current", "page");
     expect(screen.queryByRole("link", { name: "Conhecer criador" })).toBeNull();
+  });
+
+  it("destaca Utilidade Pública também na página detalhada e no menu móvel", async () => {
+    route.pathname = "/utilidade-publica/cabs";
+    const user = userEvent.setup();
+    render(<Header />);
+    const desktop = screen.getByRole("navigation", {name: "Navegação principal"});
+    expect(within(desktop).getByRole("link", {name: "Utilidade Pública"})).toHaveAttribute("aria-current", "page");
+    await user.click(screen.getByRole("button", {name: "Abrir menu"}));
+    const mobile = screen.getByRole("navigation", {name: "Navegação móvel"});
+    expect(within(mobile).getByRole("link", {name: "Utilidade Pública"})).toHaveAttribute("aria-current", "page");
   });
 
   it("preserva o retorno ao catálogo nas páginas dos programas", () => {

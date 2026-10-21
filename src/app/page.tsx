@@ -4,6 +4,7 @@ import { GptsPreview } from "@/components/home/GptsPreview";
 import { SiteUpdatesPreview } from "@/components/home/SiteUpdatesPreview";
 import { ContentPreview } from "@/components/home/ContentPreview";
 import { FinalCallToAction } from "@/components/home/FinalCallToAction";
+import { PublicUtilityPreview } from "@/components/home/PublicUtilityPreview";
 import { createPageMetadata } from "@/lib/seo";
 import styles from "@/components/home/home.module.css";
 
@@ -20,6 +21,7 @@ export default function HomePage() {
     <GptsPreview />
     <SiteUpdatesPreview />
     <ContentPreview />
+    <PublicUtilityPreview />
     <FinalCallToAction />
   </main>;
 }

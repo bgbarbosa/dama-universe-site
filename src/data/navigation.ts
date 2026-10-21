@@ -8,6 +8,7 @@ export const primaryNavigation: NavigationItem[] = [
   { href: "/programas", label: "Programas" },
   { href: "/gpts", label: "IA aplicada" },
   { href: "/blog", label: "Conteúdos" },
+  { href: "/utilidade-publica", label: "Utilidade Pública" },
   { href: "/referencias", label: "Referências" },
   { href: "/apoie", label: "Participe" },
   { href: "/sobre", label: "Sobre" },

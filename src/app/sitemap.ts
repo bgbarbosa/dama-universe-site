@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
 import { footerNavigation, posts, programs } from "@/data";
 import { siteConfig } from "@/lib/seo";
+import { publicServices } from "@/data/publicServices";
 
 const routeDates: Record<string, string> = {
-  "/": "2026-10-16",
+  "/": "2026-10-21",
+  "/utilidade-publica": "2026-10-21",
   "/programas": "2026-10-16",
   "/gpts": "2026-09-19",
   "/blog": "2026-09-19",
@@ -58,6 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticEntries,
     ...programEntries,
     ...postEntries,
+    ...publicServices.map(service => createEntry(service.detailsUrl, service.verifiedAt)),
     createEntry("/changelog/dama-gerador-fcc/v3.0.0", "2026-06-23", "yearly", 0.5),
   ];
 }

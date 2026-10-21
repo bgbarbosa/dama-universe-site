@@ -4,6 +4,7 @@ import robots from "@/app/robots";
 import sitemap from "@/app/sitemap";
 import { footerNavigation, posts, programs } from "@/data";
 import { siteConfig } from "@/lib/seo";
+import { publicServices } from "@/data/publicServices";
 
 describe("rotas de metadados", () => {
   it("gera robots coerente com o domínio", () => {
@@ -20,6 +21,7 @@ describe("rotas de metadados", () => {
       ...footerNavigation.map((item) => item.href),
       ...programs.map((program) => program.detailsUrl),
       ...posts.map((post) => `/blog/${post.slug}`),
+      ...publicServices.map(service => service.detailsUrl),
       "/changelog/dama-gerador-fcc/v3.0.0",
     ];
 
@@ -38,7 +40,7 @@ describe("rotas de metadados", () => {
   });
 
   it("usa datas válidas e não futuras", () => {
-    const auditDate = new Date("2026-10-16T23:59:59.999Z");
+    const auditDate = new Date("2026-10-21T23:59:59.999Z");
 
     for (const entry of sitemap()) {
       expect(entry.lastModified).toBeInstanceOf(Date);
