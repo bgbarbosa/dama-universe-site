@@ -16,16 +16,18 @@ export function PublicServiceImage({ service, caption = false }: { service: Publ
 
 export function PublicServiceCard({ service }: { service: PublicService }) {
   return (
-    <article className={styles.card}>
-      <PublicServiceImage service={service} />
-      <div className={styles.cardBody}>
-        <p className={styles.eyebrow}>Saúde e bem-estar · {service.responsible}</p>
-        <h3>{service.name}</h3>
-        <p className={styles.fullName}>{service.fullName}</p>
-        <p>{service.summary}</p>
-        <Link href={service.detailsUrl} className={styles.primaryLink}>Conhecer o {service.name} <span aria-hidden="true">→</span></Link>
-        <p className={styles.small}>Divulgação independente. Atendimento pela {service.responsible}.</p>
-      </div>
+    <article>
+      <Link href={service.detailsUrl} aria-label={`Conhecer o ${service.name}`} className={styles.card}>
+        <PublicServiceImage service={service} />
+        <div className={styles.cardBody}>
+          <p className={styles.eyebrow}>Saúde e bem-estar · {service.responsible}</p>
+          <h3>{service.name}</h3>
+          <p className={styles.fullName}>{service.fullName}</p>
+          <p>{service.summary}</p>
+          <span className={styles.primaryLink}>Conhecer o {service.name} <span aria-hidden="true">→</span></span>
+          <p className={styles.small}>Divulgação independente. Atendimento pela {service.responsible}.</p>
+        </div>
+      </Link>
     </article>
   );
 }

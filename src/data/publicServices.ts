@@ -30,7 +30,7 @@ export const cabs: PublicService = {
   responsible: "Sejusp/MS",
   detailsUrl: "/utilidade-publica/cabs",
   summary: "Cuidado e apoio biopsicossocial aos servidores da segurança pública de Mato Grosso do Sul.",
-  introduction: "O CABS é uma unidade da Sejusp/MS dedicada à saúde mental, ao bem-estar e ao apoio biopsicossocial dos servidores da segurança pública de Mato Grosso do Sul. Reunimos aqui uma síntese das informações divulgadas pela instituição e os caminhos para consultar a unidade diretamente.",
+  introduction: "O CABS é uma unidade da Sejusp/MS dedicada à saúde mental, ao bem-estar e ao apoio biopsicossocial dos servidores da segurança pública de Mato Grosso do Sul. Esta página apresenta uma síntese das informações publicadas pela Sejusp/MS e indica os canais oficiais para contato direto com o CABS.",
   audience: [
     "Policiais civis, militares e penais.",
     "Bombeiros militares.",
