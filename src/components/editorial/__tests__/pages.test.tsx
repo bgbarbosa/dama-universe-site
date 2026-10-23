@@ -22,10 +22,38 @@ import { damaFccTutorials } from "@/data/tutorials";
 import { filterPosts, sectionAnchor } from "@/lib/editorial";
 import { contactHref, parseContactContext } from "@/lib/contactContext";
 import { programs } from "@/data/programs";
+import { articleVisual, assistantThumbnail, assistantVisual, updateVisual } from "@/data/editorialVisuals";
 
 afterEach(() => vi.restoreAllMocks());
 
 describe("DU-TSK-PAGINAS-003 — interação e preservação", () => {
+  it("usa capas locais existentes e mantém um único link semântico por cartão do acervo", () => {
+    const { container } = render(<ContentLibrary posts={posts} />);
+    for (const post of posts) {
+      const card = screen.getByTestId(`archive-${post.slug}`);
+      const link = within(card).getByRole("link", { name: `Ler ${post.title}` });
+      expect(within(card).getAllByRole("link")).toHaveLength(1);
+      expect(link).toContainElement(within(card).getByRole("heading", { name: post.title }));
+      expect(link.querySelector("img")).toHaveAttribute("alt", "");
+      expect(readFileSync(`public${articleVisual(post.slug).src}`).length).toBeGreaterThan(0);
+    }
+    expect(container.querySelector("a a, a button")).toBeNull();
+  });
+
+  it("reutiliza identidades de programas e fornece ilustrações conceituais aos assistentes", () => {
+    for (const gpt of customGpts) {
+      const visual = assistantVisual(gpt.slug);
+      expect(readFileSync(`public${visual.src}`).length).toBeGreaterThan(0);
+      expect(visual.src).toMatch(/-v3\.webp$/);
+      const thumbnail = assistantThumbnail(gpt.slug);
+      expect(thumbnail.src).toMatch(/-mini-v3\.webp$/);
+      expect(readFileSync(`public${thumbnail.src}`).length).toBeGreaterThan(0);
+      expect(visual.kind).toBe("concept");
+    }
+    expect(updateVisual("/programas/dama-termos").src).toBe("/images/programs/dama-termos-interface.webp");
+    expect(updateVisual("/programas/dama-biometria-sigo-fix").kind).toBe("identity");
+    expect(readFileSync(`public${articleVisual("artigo-futuro").src}`).length).toBeGreaterThan(0);
+  });
   it("altera os três campos da demonstração fictícia, por teclado, sem rede nem entrada livre", async () => {
     const user = userEvent.setup(); const fetchMock = vi.spyOn(globalThis, "fetch");
     const { container } = render(<AiDemo />);
