@@ -61,6 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...programEntries,
     ...postEntries,
     ...publicServices.map(service => createEntry(service.detailsUrl, service.verifiedAt)),
+    createEntry("/gpts/dama-registro-de-ocorrencia", "2026-11-07"),
     createEntry("/changelog/dama-gerador-fcc/v3.0.0", "2026-06-23", "yearly", 0.5),
   ];
 }

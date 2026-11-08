@@ -6,8 +6,17 @@ const sections = [
   {
     title: "Responsável e escopo",
     paragraphs: [
-      "Esta política descreve o tratamento de dados realizado no site Dama Universe. Para dúvidas ou solicitações sobre informações enviadas ao projeto, utilize a página de contato.",
-      "Última atualização: 19 de setembro de 2026.",
+      "Esta política descreve o tratamento de dados no site Dama Universe e apresenta informações específicas sobre a demonstração do plugin DAMA Registro de Ocorrência. Para dúvidas ou solicitações sobre informações enviadas ao projeto, utilize a página de contato.",
+      "Última atualização: 7 de novembro de 2026.",
+    ],
+  },
+  {
+    title: "DAMA Registro de Ocorrência — demonstração",
+    paragraphs: [
+      "A versão pública demonstrativa destina-se exclusivamente a dados integralmente sintéticos, criados para teste e não derivados de ocorrências reais. Não envie dados reais, pessoais ou sigilosos, documentos de terceiros, senhas, credenciais ou informações de procedimentos restritos. Os filtros de formato não comprovam a origem sintética dos dados.",
+      "Quando uma ferramenta é acionada, a integração pode transmitir ao servidor MCP os campos necessários à conferência, conforme as instruções do plugin. O servidor é público, opera sem autenticação e recebe e processa os dados que lhe forem enviados; por isso, qualquer cliente que conheça o endereço pode acessá-lo dentro dos limites disponíveis.",
+      "O código demonstrativo não inclui armazenamento de ocorrências, e os registros de execução e rastreamento do Worker estão desativados na configuração atual. Isso não garante ausência de coleta ou retenção por provedores: Cloudflare e OpenAI podem processar dados e metadados técnicos conforme suas próprias configurações e políticas. O prazo de retenção e a existência de outros registros dos provedores não foram estabelecidos nesta página.",
+      "As conversas no ChatGPT e as solicitações ao servidor estão sujeitas também às políticas da OpenAI e da Cloudflare. Para dúvidas ou solicitações relacionadas ao projeto, utilize a página de contato sem incluir dados sensíveis.",
     ],
   },
   {

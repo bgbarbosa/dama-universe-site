@@ -11,6 +11,14 @@ const sections = [
     ]
   },
   {
+    title: "DAMA Registro de Ocorrência — demonstração",
+    paragraphs: [
+      "A versão pública do plugin é exclusivamente demonstrativa e admite apenas dados integralmente sintéticos, criados para teste e não derivados de ocorrências reais. É proibido enviar informações reais, pessoais ou sigilosas, documentos de terceiros ou credenciais. As verificações de formato não garantem que os dados sejam sintéticos.",
+      "A demonstração auxilia a elaborar e revisar minutas fictícias. Não possui vínculo institucional, não registra boletins oficialmente e não executa consultas ou atos policiais. Todos os resultados exigem conferência humana e não substituem avaliação profissional ou jurídica.",
+      "O servidor de conferência é acessível publicamente sem autenticação e sujeito a limites e disponibilidade dos provedores. A distribuição pretendida é gratuita para usuários elegíveis do ChatGPT no Brasil, sujeita à aprovação da OpenAI e às condições da plataforma.",
+    ],
+  },
+  {
     title: "Uso das ferramentas",
     paragraphs: [
       "As ferramentas disponibilizadas possuem finalidade de apoio, organização e automação. O usuário é responsável pela conferência final de todas as informações, documentos e resultados gerados.",
