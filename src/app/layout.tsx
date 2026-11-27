@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Footer, Header } from "@/components/layout";
+import { SiteMetrics } from "@/components/metrics/SiteMetrics";
 import { ConsentProvider } from "@/components/privacy";
 import { createPageMetadata, siteConfig } from "@/lib/seo";
+import { publicMetricPaths, resourceMetricLinks } from "@/lib/site-metrics-inventory";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Dama Universe" }],
   creator: "Dama Universe",
   publisher: "Dama Universe",
+  verification: { other: { "msvalidate.01": "49A6DAE93186FEC17D4BEB690DDF7B14" } },
   robots: {
     index: true,
     follow: true,
@@ -45,6 +48,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body>
         <ConsentProvider>
+          <SiteMetrics paths={publicMetricPaths} resources={resourceMetricLinks} />
           <div className="flex min-h-screen flex-col">
             <a href="#conteudo" className="sr-only fixed left-4 top-4 z-[100] rounded-xl bg-background px-5 py-3 text-text focus:not-sr-only focus-ring">Pular para o conteúdo</a>
             <Header />

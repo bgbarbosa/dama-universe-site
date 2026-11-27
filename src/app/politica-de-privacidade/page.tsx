@@ -30,8 +30,9 @@ const sections = [
   {
     title: "Ferramentas de análise utilizadas",
     paragraphs: [
-      "O Dama Universe mantém Vercel Analytics, Google Analytics e Microsoft Clarity para produzir métricas de audiência, desempenho, navegação e interação. Dependendo da ferramenta, podem ser tratados tipo de dispositivo e navegador, páginas visitadas, horários, referência de origem, localização aproximada, eventos de interação e identificadores técnicos.",
+      "O Dama Universe usa o painel Autoridade Digital, Vercel Analytics, Google Analytics e Microsoft Clarity para produzir métricas de audiência, desempenho, navegação e interação. Dependendo da ferramenta, podem ser tratados tipo de dispositivo e navegador, páginas visitadas, horários, referência de origem, localização aproximada, eventos de interação e identificadores técnicos.",
       "Essas ferramentas são classificadas neste site como análises opcionais. Elas somente são carregadas depois que o visitante aceita essa categoria no painel de privacidade. A recusa não impede o uso das páginas e pode ser alterada posteriormente pelo botão Privacidade.",
+      "A medição do painel Autoridade Digital registra de forma agregada a página canônica, a categoria de origem da visita e o tipo de interação. As métricas não contêm cookies, identificadores do visitante, parâmetros da URL ou dados do formulário de contato. A medição respeita a preferência de análises opcionais e os sinais Do Not Track e Global Privacy Control do navegador.",
       "O Vercel Analytics informa operar com dados agregados, sem cookies de terceiros e sem armazenar endereço IP. Google Analytics e Microsoft Clarity podem usar cookies próprios e tecnologias semelhantes quando carregados. Os dados seguem para os respectivos provedores, sujeitos às configurações do projeto, às políticas e aos períodos de retenção de cada serviço.",
       "Ao retirar a permissão, o site informa a revogação às ferramentas compatíveis e recarrega a página para remover os coletores já injetados. Cookies já mantidos por serviços ou pelo navegador também podem ser apagados nas configurações do navegador.",
     ],

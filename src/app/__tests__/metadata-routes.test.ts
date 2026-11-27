@@ -7,6 +7,8 @@ import { siteConfig } from "@/lib/seo";
 import { publicServices } from "@/data/publicServices";
 
 describe("rotas de metadados", () => {
+  const demoPath = "/gpts/dama-registro-de-ocorrencia";
+
   it("gera robots coerente com o domínio", () => {
     expect(robots()).toEqual({
       rules: { userAgent: "*", allow: "/" },
@@ -22,6 +24,7 @@ describe("rotas de metadados", () => {
       ...programs.map((program) => program.detailsUrl),
       ...posts.map((post) => `/blog/${post.slug}`),
       ...publicServices.map(service => service.detailsUrl),
+      demoPath,
       "/changelog/dama-gerador-fcc/v3.0.0",
     ];
 
@@ -40,13 +43,19 @@ describe("rotas de metadados", () => {
   });
 
   it("usa datas válidas e não futuras", () => {
-    const auditDate = new Date("2026-10-21T23:59:59.999Z");
+    const entries = sitemap();
+    const auditTimestamp = Date.now();
 
-    for (const entry of sitemap()) {
+    for (const entry of entries) {
       expect(entry.lastModified).toBeInstanceOf(Date);
       expect((entry.lastModified as Date).getTime()).toBeLessThanOrEqual(
-        auditDate.getTime()
+        auditTimestamp
       );
     }
+
+    const demo = entries.find(
+      (entry) => entry.url === new URL(demoPath, siteConfig.url).toString()
+    );
+    expect(demo?.lastModified).toEqual(new Date("2026-11-07T00:00:00.000Z"));
   });
 });
