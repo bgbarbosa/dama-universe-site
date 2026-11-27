@@ -32,6 +32,10 @@ type ConsentContextValue = {
 
 const ConsentContext = createContext<ConsentContextValue | null>(null);
 
+export function useConsentPreferences() {
+  return useContext(ConsentContext)?.preferences ?? null;
+}
+
 export function useConsent() {
   const context = useContext(ConsentContext);
 
@@ -146,8 +150,8 @@ function ConsentPanel({
       </div>
 
       <p className="mt-4 text-sm leading-7 text-muted">
-        Usamos Vercel Analytics, Google Analytics e Microsoft Clarity para
-        compreender o uso do site. Vídeos do YouTube e comentários Giscus só
+        Usamos o painel Autoridade Digital, Vercel Analytics, Google Analytics
+        e Microsoft Clarity para compreender o uso do site. Vídeos do YouTube e comentários Giscus só
         abrem conexão quando você permite conteúdo externo. A escolha fica salva
         neste navegador por 180 dias. Consulte a{" "}
         <Link href="/politica-de-cookies" className="text-electricLight underline">
@@ -175,7 +179,7 @@ function ConsentPanel({
             <span>
               <span className="block font-bold text-text">Análises opcionais</span>
               <span className="mt-1 block text-sm leading-6 text-muted">
-                Vercel Analytics, Google Analytics e Microsoft Clarity.
+                Autoridade Digital, Vercel Analytics, Google Analytics e Microsoft Clarity.
               </span>
             </span>
           </label>

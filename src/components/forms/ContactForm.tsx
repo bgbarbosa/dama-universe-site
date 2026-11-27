@@ -1,8 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useConsentPreferences } from "@/components/privacy/ConsentProvider";
 import { CONTACT_LIMITS, CONTACT_TYPES, validateContactPayload, type ContactPayload, type ContactType } from "@/lib/contact";
 import { contextualContactMessage, supportsProgramContext, type PublicProgramOption } from "@/lib/contactContext";
+import { canMeasure, metricsConsentHeader } from "@/lib/site-metrics";
 import styles from "@/components/editorial/editorial.module.css";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
@@ -23,6 +25,7 @@ function getFormValue(formData: FormData, key: keyof ContactPayload) {
 }
 
 export function ContactForm({ initialContactType = "", initialProgram = "", programOptions = [] }: Props) {
+  const preferences = useConsentPreferences();
   const validInitialType = CONTACT_TYPES.includes(initialContactType as ContactType) ? initialContactType : "";
   const validInitialProgram = programOptions.some((item) => item.slug === initialProgram) ? initialProgram : "";
   const [contactType, setContactType] = useState<ContactType | "">(validInitialType);
@@ -73,7 +76,11 @@ export function ContactForm({ initialContactType = "", initialProgram = "", prog
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { Accept: "application/json", "Content-Type": "application/json" },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          ...(canMeasure(preferences) ? { [metricsConsentHeader]: "1" } : {}),
+        },
         body: JSON.stringify(validation.data),
       });
       const result = (await response.json().catch(() => null)) as { message?: string } | null;

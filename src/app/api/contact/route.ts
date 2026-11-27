@@ -1,7 +1,8 @@
 import { createHash } from "node:crypto";
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 
 import { validateContactPayload, type ContactPayload } from "@/lib/contact";
+import { metricsRequestAllowed, metricsRequestOptOut, sendSiteMetric } from "@/lib/site-metrics-server";
 
 export const runtime = "nodejs";
 
@@ -143,6 +144,12 @@ export async function POST(request: Request) {
         status: response.status,
       });
       return json("Não foi possível enviar a mensagem neste momento.", 502);
+    }
+
+    if (metricsRequestAllowed(request) && !metricsRequestOptOut(request)) {
+      after(async () => {
+        await sendSiteMetric({ event: "contact_success", path: "/contato", source: "internal" });
+      });
     }
 
     return json("Mensagem enviada com sucesso. Obrigado pelo contato.", 200);

@@ -11,7 +11,7 @@ const categories = [
   {
     title: "Análises opcionais",
     description:
-      "Vercel Analytics, Google Analytics e Microsoft Clarity são carregados apenas quando esta categoria é aceita. O Vercel Analytics informa não usar cookies; Google Analytics e Microsoft Clarity podem gravar cookies próprios e usar identificadores técnicos conforme suas configurações e políticas.",
+      "O painel Autoridade Digital, Vercel Analytics, Google Analytics e Microsoft Clarity só recebem métricas quando esta categoria é aceita. A medição do painel agrega páginas e interações sem gravar cookies ou identificadores do visitante. O Vercel Analytics informa não usar cookies. Google Analytics e Microsoft Clarity podem gravar cookies próprios e usar identificadores técnicos conforme suas configurações e políticas.",
   },
   {
     title: "Conteúdo externo opcional",
